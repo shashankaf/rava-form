@@ -23,20 +23,20 @@ const Lectures = () => {
     },
     {
       id: 4,
-      value: "رێبین سابیر",
-      teacher: "فیزیا",
+      value: "گۆڤەند ئەبوبەکر",
+      teacher: "ئینگلیزی",
       photo: "/assets/teacher_4.png",
     },
     {
       id: 5,
-      value: "ئالان حەمەسەعید",
+      value: "رێبین سابیر",
       teacher: "فیزیا",
       photo: "/assets/teacher_5.png",
     },
     {
       id: 6,
-      value: "گۆڤەند ئەبوبەکر",
-      teacher: "ئینگلیزی",
+      value: "ئالان حەمەسەعید",
+      teacher: "فیزیا",
       photo: "/assets/teacher_6.png",
     },
     {
@@ -49,13 +49,13 @@ const Lectures = () => {
       id: 8,
       value: "مەریوان سەعید",
       teacher: "عەرەبی",
-      photo: "/assets/teacher_8.png",
+      photo: "/assets/teacher_9.png",
     },
     {
       id: 9,
       value: "زرار سەردار",
       teacher: "کوردی",
-      photo: "/assets/teacher_9.png",
+      photo: "/assets/teacher_8.png",
     },
   ];
   return (
