@@ -13,8 +13,8 @@ export default function Home() {
   const [school, setSchool] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
-  const [firstPay, setFirstPay] = useState("");
-  const [secondPay, setSecondPay] = useState("");
+  // const [firstPay, setFirstPay] = useState("");
+  // const [secondPay, setSecondPay] = useState("");
   const [health, setHealth] = useState("");
   return (
     <>
