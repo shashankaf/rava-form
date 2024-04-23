@@ -18,7 +18,7 @@ const MultiSelectComponent = ({ options, text }) => {
     <div>
       <h3 className="text-lg font-bold text-right">{text}</h3>
       <div className="grid grid-cols-2 gap-2">
-        {options.map((option) => (
+        {options?.map((option) => (
           <div key={option.id} className="flex items-center bg-gray-100 p-2 rounded-md">
             <input
               type="checkbox"
@@ -45,8 +45,7 @@ const MultiSelectComponent = ({ options, text }) => {
       <div>
         <p>
           بژاردەکانت:{" "}
-          {selectedOptions
-            .map((id) => options.find((option) => option.id === id).value)
+          {selectedOptions?.map((id) => options.find((option) => option.id === id).value)
             .join("، ")}
         </p>
       </div>

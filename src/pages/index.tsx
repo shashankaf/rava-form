@@ -29,7 +29,7 @@ export default function Home() {
       </Head>
       <main className="flex items-center justify-center">
         <div className="w-full max-w-lg px-4 py-8 bg-white shadow-lg rounded-lg">
-          <Title text="فۆرمی تۆمارکردنی خوێندکار لە راڤە" />
+          <Title text="فۆرمی تۆمارکردنی خوێندکار لە پەیمانگای راڤە" />
           <div className="flex flex-col items-end space-y-4">
             <InputCmp
               label="ناوی بەشداربوو"
@@ -54,12 +54,12 @@ export default function Home() {
             />
             <InputCmp
               label="ناونیشان"
-              placeholder="ناونیشانەکەت چیە؟"
+              placeholder="ناونیشان - گەڕەک کوێیە؟"
               state={address}
               setState={setAddress}
             />
             <Travel />
-            <InputCmp
+{/*             <InputCmp
               label="بڕی واسڵکراو \ ١"
               placeholder="یەکەم بڕی پارەی واسڵکراو"
               state={firstPay}
@@ -70,7 +70,7 @@ export default function Home() {
               placeholder="دووەم بڕی پارەی واسڵکراو"
               state={secondPay}
               setState={setSecondPay}
-            />
+            /> */}
             <InputCmp
               label="کێشەی تەندروستی"
               placeholder="گەر کێشەیەکی تەندروستیت هەیە بینووسە"

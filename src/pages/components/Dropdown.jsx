@@ -25,7 +25,7 @@ const Dropdown = ({options, text}) => {
       </button>
       {isOpen && (
         <div className="absolute top-full left-0 mt-1 bg-white border border-gray-300 shadow-lg rounded-md z-10">
-          {options.map((option) => (
+          {options?.map((option) => (
             <div
               key={option.id}
               onClick={() => handleOptionSelect(option)}
