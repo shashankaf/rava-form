@@ -1,18 +1,11 @@
 
 import React, { useState } from 'react';
 
-const Dropdown = ({options, text}) => {
+const Dropdown = ({options, text, handleSelect}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
-  };
-
-  const handleOptionSelect = (option) => {
-    console.log('Selected option:', option);
-    setIsOpen(!isOpen)
-    // Perform any action when an option is selected
-    // For example, you can update state or call a function
   };
 
   return (
@@ -28,7 +21,7 @@ const Dropdown = ({options, text}) => {
           {options?.map((option) => (
             <div
               key={option.id}
-              onClick={() => handleOptionSelect(option)}
+              onClick={() => handleSelect(option)}
               className="px-4 py-2 cursor-pointer hover:bg-gray-100"
             >
               <p className="text-center min-w-28">{option.name}</p>

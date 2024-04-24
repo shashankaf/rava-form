@@ -1,25 +1,34 @@
 import React, { useState } from "react";
 import Image from "next/image";
+import { useAtom } from "jotai";
+import { teacherAtom } from "../lib/store";
 
 const MultiSelectComponent = ({ options, text }) => {
-  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useAtom(teacherAtom);
 
   const handleOptionToggle = (optionId) => {
     const isSelected = selectedOptions.includes(optionId);
 
     if (isSelected) {
+      // If the option is already selected, remove it
       setSelectedOptions(selectedOptions.filter((id) => id !== optionId));
     } else {
-      setSelectedOptions([...selectedOptions, optionId]);
+      // Check if the option is unique before adding it
+      if (!selectedOptions.includes(optionId)) {
+        setSelectedOptions([...selectedOptions, optionId]);
+      }
     }
   };
 
   return (
     <div>
       <h3 className="text-lg font-bold text-right">{text}</h3>
-      <div className="grid grid-cols-2 gap-2">
+      <div className="grid sm:grid-cols-2 grid-cols-1 gap-2">
         {options?.map((option) => (
-          <div key={option.id} className="flex items-center bg-gray-100 p-2 rounded-md">
+          <div
+            key={option.id}
+            className="flex items-center bg-gray-100 p-2 rounded-md"
+          >
             <input
               type="checkbox"
               id={`option-${option.id}`}
@@ -45,7 +54,8 @@ const MultiSelectComponent = ({ options, text }) => {
       <div>
         <p>
           بژاردەکانت:{" "}
-          {selectedOptions?.map((id) => options.find((option) => option.id === id).value)
+          {selectedOptions
+            ?.map((id) => options.find((option) => option.id === id).value)
             .join("، ")}
         </p>
       </div>

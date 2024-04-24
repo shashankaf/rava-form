@@ -1,7 +1,10 @@
 import React from "react";
 import MultiSelectComponent from "./MultiSelectComponent";
+import { useAtom } from "jotai";
+import { teacherAtom } from "../lib/store";
 
 const Lectures = () => {
+
   const options = [
     {
       id: 1,

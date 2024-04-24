@@ -1,7 +1,13 @@
 import React from "react";
 import Dropdown from "./Dropdown"
+import { useAtom } from "jotai";
+import { classAtom } from "../lib/store";
 
 const Classes = () => {
+  const [clas, setClas] = useAtom(classAtom)
+  const handleSelect = (option) => {
+    setClas(option)
+  }
   const options = [
     {id: 1, name: "پۆلی ١"},
     {id: 2, name: "پۆلی ٢"},
@@ -18,7 +24,7 @@ const Classes = () => {
   ]
   return (
     <>
-     <Dropdown options={options} text="پۆلەکەت دیاری بکە" /> 
+     <Dropdown options={options} text="پۆلەکەت دیاری بکە" handleSelect={handleSelect} /> 
     </>
   );
 };
