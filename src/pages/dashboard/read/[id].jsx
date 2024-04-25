@@ -70,7 +70,7 @@ const ReadPage = () => {
               <p>{student?.second_pay}</p>
             </div>
             <div>
-              <h2 className="text-lg font-semibold mb-2">بەش</h2>
+              <h2 className="text-lg font-semibold mb-2">خول</h2>
               <p>{student?.cohort?.title}</p>
             </div>
             <div>
