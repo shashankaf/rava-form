@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import Head from "next/head";
-import InputCmp from "./components/InputCmp";
-import Classes from "./components/Classes";
-import Ragaz from "./components/Ragaz";
-import Blood from "./components/Blood";
-import Travel from "./components/Travel";
-import Lectures from "./components/Lectures";
-import Title from "./components/Title";
+import InputCmp from "../components/InputCmp";
+import Classes from "../components/Classes";
+import Ragaz from "../components/Ragaz";
+import Blood from "../components/Blood";
+import Travel from "../components/Travel";
+import Lectures from "../components/Lectures";
+import Title from "../components/Title";
 import { useAtom } from "jotai";
-import { bloodAtom, classAtom, ragazAtom, teacherAtom, travelAtom } from "./lib/store";
-import { supabase } from "./lib/supabase"
+import { bloodAtom, classAtom, ragazAtom, teacherAtom, travelAtom } from "../lib/store";
+import { supabase } from "../lib/supabase"
 
 
 export default function Home() {
