@@ -29,6 +29,30 @@ const Dashboard = () => {
     fetcher();
   }, []);
 
+  const [isDeleted, setIsDeleted] = useState(false); // State to track deletion completion
+
+  const handleDelete = async (id) => {
+    try {
+      const { error } = await supabase
+        .from("student")
+        .delete()
+        .eq("id", id);
+
+      if (error) {
+        throw error;
+      }
+      setIsDeleted(true); // Set state to indicate deletion is done
+    } catch (error) {
+      console.error("Error deleting student:", error.message);
+    }
+  };
+
+  useEffect(() => {
+    if (isDeleted) {
+      setIsDeleted(false); // Reset state
+      window.location.reload(); // Refresh the page
+    }
+  }, [isDeleted]);
   return (
     <>
       <Head>
@@ -72,7 +96,10 @@ const Dashboard = () => {
           <tbody className="bg-white divide-y divide-gray-200">
             {students.map((student) => (
               <tr key={student.id}>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                <td
+                  onClick={() => handleDelete(student.id)}
+                  className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 cursor-pointer hover:bg-gray-200 transition-300"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -104,7 +131,10 @@ const Dashboard = () => {
                     />
                   </svg>
                 </td>
-                <td onClick={() => handleClick(student.id)} className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 cursor-pointer hover:bg-gray-200 transition-300">
+                <td
+                  onClick={() => handleClick(student.id)}
+                  className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 cursor-pointer hover:bg-gray-200 transition-300"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
