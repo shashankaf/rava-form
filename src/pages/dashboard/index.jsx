@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { supabase } from "../../lib/supabase";
 import Title from "../../components/Title";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 const Dashboard = () => {
   const [students, setStudents] = useState([]);
@@ -16,6 +17,12 @@ const Dashboard = () => {
     } catch (error) {
       console.log(error.message);
     }
+  };
+
+  const router = useRouter();
+
+  const handleClick = (studentId) => {
+    router.push(`/dashboard/read/${studentId}`);
   };
 
   useEffect(() => {
@@ -97,7 +104,7 @@ const Dashboard = () => {
                     />
                   </svg>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                <td onClick={() => handleClick(student.id)} className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 cursor-pointer hover:bg-gray-200 transition-300">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
