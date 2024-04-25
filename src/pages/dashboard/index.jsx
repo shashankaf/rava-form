@@ -25,6 +25,10 @@ const Dashboard = () => {
     router.push(`/dashboard/read/${studentId}`);
   };
 
+  const handleEdit = (studentId) => {
+    router.push(`/dashboard/edit/${studentId}`);
+  };
+
   useEffect(() => {
     fetcher();
   }, []);
@@ -115,7 +119,7 @@ const Dashboard = () => {
                     />
                   </svg>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                <td onClick={() => handleEdit(student.id)} className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 cursor-pointer hover:bg-gray-100">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
