@@ -27,14 +27,14 @@ export default function Home() {
   const handleSave = async () => {
     const info = {
       name,
-      class: clas.id,
+      class: clas?.id,
       school,
-      blood: blood.id,
+      blood: blood?.id,
       phone,
       address,
-      travel: travel.id,
+      travel: travel?.id,
       health,
-      ragaz: ragaz.id,
+      ragaz: ragaz?.id,
       teachers: teacher,
     }
 
