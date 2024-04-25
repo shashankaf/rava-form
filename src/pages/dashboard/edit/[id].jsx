@@ -5,10 +5,6 @@ import { supabase } from "../../../lib/supabase";
 const UpdatePage = () => {
   const router = useRouter();
   const [student, setStudent] = useState(null);
-  const [name, setName] = useState("");
-  const [classVal, setClass] = useState("");
-  const [school, setSchool] = useState("");
-  // Add state variables for other fields as needed
 
   const { id } = router.query;
 
@@ -23,11 +19,6 @@ const UpdatePage = () => {
         throw error;
       }
       setStudent(studentData);
-      // Set initial values for input fields
-      setName(studentData.name);
-      setClass(studentData.class);
-      setSchool(studentData.school);
-      // Set initial values for other fields
     } catch (error) {
       console.log(error.message);
     }
@@ -44,9 +35,9 @@ const UpdatePage = () => {
       const { data, error } = await supabase
         .from("student")
         .update({
-          name,
-          class: classVal,
-          school,
+          name: studentData.name,
+          class: studentData.class,
+          school: studentData.school,
           // Update other fields as needed
         })
         .eq("id", id);
@@ -54,7 +45,6 @@ const UpdatePage = () => {
       if (error) {
         throw error;
       }
-      console.log("Updated student:", data);
       router.push(`/dashboard/read/${id}`); // Redirect to read page after update
     } catch (error) {
       console.error("Error updating student:", error.message);
@@ -74,14 +64,14 @@ const UpdatePage = () => {
         <div className="p-6">
           <input
             type="text"
-            value={name}
+            value={studentData.name}
             onChange={(e) => setName(e.target.value)}
             className="border border-gray-300 rounded-lg px-4 py-2 mb-4 w-full"
             placeholder="ناوی خوێندکار"
           />
           <input
             type="text"
-            value={classVal}
+            value={studentData.class}
             onChange={(e) => setClass(e.target.value)}
             className="border border-gray-300 rounded-lg px-4 py-2 mb-4 w-full"
             placeholder="پۆل"

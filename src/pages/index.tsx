@@ -35,7 +35,7 @@ export default function Home() {
       travel: travel?.id,
       health,
       ragaz: ragaz?.id,
-      teachers: teacher,
+      teacher: teacher,
     }
 
     const { data, error } = await supabase.from('student').insert(info)
