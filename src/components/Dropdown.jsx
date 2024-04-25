@@ -1,8 +1,10 @@
 
+import { isOpenClass } from '@/lib/store';
+import { useAtom } from 'jotai';
 import React, { useState } from 'react';
 
 const Dropdown = ({options, text, handleSelect}) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useAtom(isOpenClass)
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -24,7 +26,7 @@ const Dropdown = ({options, text, handleSelect}) => {
               onClick={() => handleSelect(option)}
               className="px-4 py-2 cursor-pointer hover:bg-gray-100"
             >
-              <p className="text-center min-w-28">{option.name}</p>
+              <p className="text-center min-w-28">{option.title}</p>
             </div>
           ))}
         </div>

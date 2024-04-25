@@ -39,13 +39,13 @@ const MultiSelectComponent = ({ options, text }) => {
             <div className="flex items-center">
               <Image
                 src={option.photo}
-                alt={`Teacher: ${option.teacher}`}
+                alt={`Teacher: ${option.name}`}
                 width={48}
                 height={48}
                 className="rounded-full mr-2"
               />
               <label htmlFor={`option-${option.id}`}>
-                {option.teacher} - {option.value}
+                {option.name} - {option.specialty}
               </label>
             </div>
           </div>
@@ -55,7 +55,7 @@ const MultiSelectComponent = ({ options, text }) => {
         <p>
           بژاردەکانت:{" "}
           {selectedOptions
-            ?.map((id) => options.find((option) => option.id === id).value)
+            ?.map((id) => options.find((option) => option.id === id).name)
             .join("، ")}
         </p>
       </div>

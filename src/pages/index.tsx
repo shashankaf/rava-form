@@ -17,8 +17,6 @@ export default function Home() {
   const [school, setSchool] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
-  // const [firstPay, setFirstPay] = useState("");
-  // const [secondPay, setSecondPay] = useState("");
   const [health, setHealth] = useState("");
   const [blood] = useAtom(bloodAtom)
   const [travel] = useAtom(travelAtom)
@@ -29,14 +27,14 @@ export default function Home() {
   const handleSave = async () => {
     const info = {
       name,
-      class: clas,
+      class: clas.id,
       school,
-      blood,
+      blood: blood.id,
       phone,
       address,
-      travel,
+      travel: travel.id,
       health,
-      ragaz,
+      ragaz: ragaz.id,
       teachers: teacher,
     }
 
@@ -90,18 +88,6 @@ export default function Home() {
               setState={setAddress}
             />
             <Travel />
-            {/*             <InputCmp
-              label="بڕی واسڵکراو \ ١"
-              placeholder="یەکەم بڕی پارەی واسڵکراو"
-              state={firstPay}
-              setState={setFirstPay}
-            />
-            <InputCmp
-              label="بڕی واسڵکراو \ ٢"
-              placeholder="دووەم بڕی پارەی واسڵکراو"
-              state={secondPay}
-              setState={setSecondPay}
-            /> */}
             <InputCmp
               label="کێشەی تەندروستی"
               placeholder="گەر کێشەیەکی تەندروستیت هەیە بینووسە"
@@ -110,7 +96,7 @@ export default function Home() {
             />
             <Lectures />
             <button onClick={handleSave} className="m-auto bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 border border-blue-700 rounded">
-              ناردن
+              تۆمارکردن
             </button>
           </div>
         </div>

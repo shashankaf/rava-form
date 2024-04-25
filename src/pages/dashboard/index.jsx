@@ -155,7 +155,7 @@ const Dashboard = () => {
                   </svg>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  {student.teachers.map(
+                  {student?.teachers?.map(
                     (item) => `\[${item.name} - ${item.profession}]\ `,
                   )}
                 </td>

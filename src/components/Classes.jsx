@@ -1,30 +1,55 @@
-import React from "react";
-import Dropdown from "./Dropdown"
+import React, { useEffect, useState } from "react";
 import { useAtom } from "jotai";
 import { classAtom } from "../lib/store";
+import { supabase } from "@/lib/supabase";
 
 const Classes = () => {
-  const [clas, setClas] = useAtom(classAtom)
+  const [clas, setClas] = useAtom(classAtom);
+  const [isOpen, setIsOpen] = useState(false);
+  const [classes, setClasses] = useState([]);
   const handleSelect = (option) => {
-    setClas(option)
-  }
-  const options = [
-    {id: 1, name: "پۆلی ١"},
-    {id: 2, name: "پۆلی ٢"},
-    {id: 3, name: "پۆلی ٣"},
-    {id: 4, name: "پۆلی ٤"},
-    {id: 5, name: "پۆلی ٥"},
-    {id: 6, name: "پۆلی ٦"},
-    {id: 7, name: "پۆلی ٧"},
-    {id: 8, name: "پۆلی ٨"},
-    {id: 9, name: "پۆلی ٩"},
-    {id: 10, name: "پۆلی ١٠"},
-    {id: 11, name: "پۆلی ١١"},
-    {id: 12, name: "پۆلی ١٢"},
-  ]
+    setClas(option);
+    setIsOpen(false); // Close the dropdown after selecting an option
+  };
+  const fetcher = async () => {
+    try {
+      const { data, error } = await supabase.from("class").select();
+      if (error) throw Error;
+      setClasses(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    fetcher();
+  }, []);
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <>
-     <Dropdown options={options} text="پۆلەکەت دیاری بکە" handleSelect={handleSelect} /> 
+      <div className="relative">
+        <button
+          onClick={toggleDropdown}
+          className="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-400 min-w-48"
+        >
+          {clas.title ? clas.title : "لە پۆلی چەندیت؟"}
+        </button>
+        {isOpen && (
+          <div className="absolute top-full left-0 mt-1 bg-white border border-gray-300 shadow-lg rounded-md z-10">
+            {classes?.map((option) => (
+              <div
+                key={option.id}
+                onClick={() => handleSelect(option)}
+                className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+              >
+                <p className="text-center min-w-28">{option.title}</p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </>
   );
 };

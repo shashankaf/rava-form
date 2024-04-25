@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import MultiSelectComponent from "./MultiSelectComponent";
-import { useAtom } from "jotai";
-import { teacherAtom } from "../lib/store";
+import { supabase } from "@/lib/supabase";
+
 
 const Lectures = () => {
+  const [teachers, setTeachers] = useState([])
+  const fetcher = async () => {
+    try {
+      const { data, error } = await supabase.from("teacher").select();
+      if (error) throw Error;
+      setTeachers(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    fetcher();
+  }, []);
 
   const options = [
     {
@@ -62,7 +75,7 @@ const Lectures = () => {
     },
   ];
   return (
-    <MultiSelectComponent options={options} text="وانە و مامۆستا هەڵبژێرە" />
+    <MultiSelectComponent options={teachers} text="وانە و مامۆستا هەڵبژێرە" />
   );
 };
 

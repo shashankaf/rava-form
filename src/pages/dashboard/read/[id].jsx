@@ -74,7 +74,7 @@ const ReadPage = () => {
           <div className="mb-6">
             <h2 className="text-lg font-semibold mb-2">مامۆستایان: </h2>
             <ul>
-              {student.teachers.map((teacher, index) => (
+              {student?.teachers?.map((teacher, index) => (
                 <li key={index}>
                   <p>{teacher.name}</p>
                   <p>{teacher.profession}</p>
