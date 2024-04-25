@@ -51,7 +51,7 @@ const ReadPage = () => {
     >
       <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
         <div className="p-6">
-          <h1 className="text-2xl font-semibold mb-4">{student.name}</h1>
+          <h1 className="text-2xl font-semibold mb-4">{student?.name}</h1>
           <div className="grid grid-cols-2 gap-4 mb-6">
             <div>
               <h2 className="text-lg font-semibold mb-2">پۆل: </h2>
@@ -59,46 +59,46 @@ const ReadPage = () => {
             </div>
             <div>
               <h2 className="text-lg font-semibold mb-2">خوێندنگە:</h2>
-              <p>{student.school.title}</p>
+              <p>{student?.school?.title}</p>
             </div>
             <div>
               <h2 className="text-lg font-semibold mb-2">بڕی پارەی یەکەم</h2>
-              <p>{student.first_pay}</p>
+              <p>{student?.first_pay}</p>
             </div>
             <div>
               <h2 className="text-lg font-semibold mb-2">بڕی پارەی دووەم</h2>
-              <p>{student.second_pay}</p>
+              <p>{student?.second_pay}</p>
             </div>
             <div>
               <h2 className="text-lg font-semibold mb-2">بەش</h2>
-              <p>{student.cohort.title}</p>
+              <p>{student?.cohort?.title}</p>
             </div>
             <div>
               <h2 className="text-lg font-semibold mb-2">جۆری خوێن: </h2>
-              <p>{student.blood.title}</p>
+              <p>{student?.blood?.title}</p>
             </div>
             <div>
               <h2 className="text-lg font-semibold mb-2">تەلەفۆن: </h2>
-              <p>{student.phone}</p>
+              <p>{student?.phone}</p>
             </div>
             <div>
               <h2 className="text-lg font-semibold mb-2">ناونیشان: </h2>
-              <p>{student.address}</p>
+              <p>{student?.address}</p>
             </div>
             <div>
               <h2 className="text-lg font-semibold mb-2">هاتووچۆ: </h2>
-              <p>{student.travel.title}</p>
+              <p>{student?.travel?.title}</p>
             </div>
             <div>
               <h2 className="text-lg font-semibold mb-2">باری تەندروستی: </h2>
-              <p>{student.health}</p>
+              <p>{student?.health}</p>
             </div>
           </div>
           <div className="mb-6">
             <h2 className="text-lg font-semibold mb-2">مامۆستایان: </h2>
             <ul>
               {teachers?.map((teacher) => (
-                <li key={teacher.id}>
+                <li key={teacher?.id}>
                   <p>{teacher?.name} - {teacher?.specialty}</p>
                 </li>
               ))}
@@ -106,7 +106,7 @@ const ReadPage = () => {
           </div>
           <div>
             <h2 className="text-lg font-semibold mb-2">بڵاوکراوەتەوە؟</h2>
-            <p>{student.publish ? "بەڵێ" : "نەخێر"}</p>
+            <p>{student?.publish ? "بەڵێ" : "نەخێر"}</p>
           </div>
         </div>
       </div>
