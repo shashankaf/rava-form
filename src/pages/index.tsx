@@ -24,6 +24,8 @@ export default function Home() {
   const [clas] = useAtom(classAtom)
   const [teacher] = useAtom(teacherAtom)
   const logo = "https://grocviikgcjxaxnkdvrv.supabase.co/storage/v1/object/public/general/paimangai_rava.jpg"
+  const [errorSubmit, setErrorSubmit] = useState(false)
+  const [success, setSuccess] = useState(false)
 
   const handleSave = async () => {
     const info = {
@@ -40,12 +42,20 @@ export default function Home() {
     }
 
     const { data, error } = await supabase.from('student').insert(info)
+
     if(error) {
       console.log(error)
+      setErrorSubmit(true)
     } else {
-      console.log(data)
+      setSuccess(true)
     }
   };
+  if(errorSubmit) {
+    return <Title text="ببورە هەڵەیەک روویداوە، تکایە هەوڵبدەرەوە" />  
+  }
+  if(success) {
+    return <Title text="زۆر سوپاس، فۆرمەکەت گەیشت" />
+  }
   return (
     <>
       <Head>
