@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { supabase } from "../../../lib/supabase";
+import Heading from "../../../components/Heading";
+import Title from "../../../components/Title";
+import SelectedClass from "../../../components/SelectedClass";
+import BloodSelect from "../../../components/BloodSelect";
+import TravelSelect from "../../../components/TravelSelect";
+import RagazSelect from "../../../components/RagazSelect";
 
 const UpdatePage = () => {
   const router = useRouter();
   const [student, setStudent] = useState(null);
-
   const { id } = router.query;
-
   const fetcher = async () => {
     try {
       let { data: studentData, error } = await supabase
@@ -35,9 +39,9 @@ const UpdatePage = () => {
       const { data, error } = await supabase
         .from("student")
         .update({
-          name: studentData.name,
-          class: studentData.class,
-          school: studentData.school,
+          name: student.name,
+          class: student.class,
+          school: student.school,
           // Update other fields as needed
         })
         .eq("id", id);
@@ -61,28 +65,51 @@ const UpdatePage = () => {
       dir="rtl"
     >
       <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
+        <Title text="نوێکردنەوەی تۆماری فێرخواز" />
         <div className="p-6">
+          <Heading text="ناو" />
           <input
             type="text"
-            value={studentData.name}
+            value={student.name}
             onChange={(e) => setName(e.target.value)}
             className="border border-gray-300 rounded-lg px-4 py-2 mb-4 w-full"
-            placeholder="ناوی خوێندکار"
-          />
-          <input
-            type="text"
-            value={studentData.class}
-            onChange={(e) => setClass(e.target.value)}
-            className="border border-gray-300 rounded-lg px-4 py-2 mb-4 w-full"
-            placeholder="پۆل"
           />
 
+          <Heading text="پۆل" />
+          <SelectedClass student={student} />
+          <Heading text="جۆری خوێن" />
+          <BloodSelect student={student} />
+          <Heading text="جۆری هاتووچۆ" />
+          <TravelSelect student={student} />
+          <Heading text="جۆری رەگەز" />
+          <RagazSelect student={student} />
+          <Heading text="خوێندنگە" />
           <input
             type="text"
-            value={school}
-            onChange={(e) => setSchool(e.target.value)}
+            value={student.school}
+            // onChange={}
             className="border border-gray-300 rounded-lg px-4 py-2 mb-4 w-full"
-            placeholder="خوێندنگە"
+          />
+          <Heading text="ژمارەی تەلەفۆن" />
+          <input
+            type="text"
+            value={student.phone}
+            // onChange={}
+            className="border border-gray-300 rounded-lg px-4 py-2 mb-4 w-full"
+          />
+          <Heading text="ناونیشان" />
+          <input
+            type="text"
+            value={student.address}
+            // onChange={}
+            className="border border-gray-300 rounded-lg px-4 py-2 mb-4 w-full"
+          />
+          <Heading text="کێشەی تەندروستی" />
+          <input
+            type="text"
+            value={student.health}
+            // onChange={}
+            className="border border-gray-300 rounded-lg px-4 py-2 mb-4 w-full"
           />
           <button
             onClick={handleUpdate}
