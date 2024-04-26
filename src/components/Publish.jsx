@@ -1,19 +1,19 @@
 import React, {useState, useEffect} from "react";
 import { useAtom } from "jotai";
-import { ragazAtom } from "../lib/store";
+import { publishAtom } from "../lib/store";
 import { supabase } from "@/lib/supabase";
 
 const Publish = ({student}) => {
-  const [ragaz, setRagaz] = useAtom(ragazAtom)
+  const [published, setPublished] = useAtom(publishAtom)
   const [isOpen, setIsOpen] = useState(false);
-  const [ragazakan, setRagazakan] = useState([]);
+  const [options, setOptions] = useState([]);
   const handleSelect = (option) => {
-    setRagaz(option);
+    setPublished(option);
     setIsOpen(false); // Close the dropdown after selecting an option
   };
   const fetcher = async () => {
     try {
-      const { data, error } = await supabase.from("ragaz").select();
+      const { data, error } = await supabase.from("student").select();
       if (error) throw Error;
       setRagazakan(data);
     } catch (error) {

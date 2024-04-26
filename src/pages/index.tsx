@@ -10,7 +10,7 @@ import Title from "../components/Title";
 import { useAtom } from "jotai";
 import { bloodAtom, classAtom, ragazAtom, teacherAtom, travelAtom } from "../lib/store";
 import { supabase } from "../lib/supabase"
-
+import Image from "next/image";
 
 export default function Home() {
   const [name, setName] = useState("");
@@ -23,6 +23,7 @@ export default function Home() {
   const [ragaz] = useAtom(ragazAtom)
   const [clas] = useAtom(classAtom)
   const [teacher] = useAtom(teacherAtom)
+  const logo = "https://grocviikgcjxaxnkdvrv.supabase.co/storage/v1/object/public/general/paimangai_rava.jpg"
 
   const handleSave = async () => {
     const info = {
@@ -58,6 +59,13 @@ export default function Home() {
       </Head>
       <main className="flex items-center justify-center">
         <div className="w-full max-w-2xl px-4 py-8 bg-white shadow-lg rounded-lg">
+              <Image
+                src={logo}
+                alt={`Rava Institute`}
+                width={160}
+                height={160}
+                className="rounded-full m-auto"
+              />
           <Title text="فۆرمی تۆمارکردنی خوێندکار لە پەیمانگای راڤە" />
           <div className="flex flex-col items-end space-y-4">
             <InputCmp
