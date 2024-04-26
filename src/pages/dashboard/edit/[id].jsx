@@ -12,6 +12,8 @@ const UpdatePage = () => {
   const router = useRouter();
   const [student, setStudent] = useState(null);
   const { id } = router.query;
+  const [published, setPublished] = useState(student?.publish);
+
   const fetcher = async () => {
     try {
       let { data: studentData, error } = await supabase
@@ -34,16 +36,19 @@ const UpdatePage = () => {
     }
   }, [id]);
 
+  const handleChange = (e, propertyName) => {
+    const value = e.target.value;
+    setStudent((prevStudent) => ({
+      ...prevStudent,
+      [propertyName]: value,
+    }));
+  };
+
   const handleUpdate = async () => {
     try {
       const { data, error } = await supabase
         .from("student")
-        .update({
-          name: student.name,
-          class: student.class,
-          school: student.school,
-          // Update other fields as needed
-        })
+        .update(student)
         .eq("id", id);
 
       if (error) {
@@ -56,7 +61,7 @@ const UpdatePage = () => {
   };
 
   if (!student) {
-    return <div>Loading...</div>; // You can replace this with a loading spinner or any other loading indicator
+    return <div>Loading...</div>;
   }
 
   return (
@@ -67,14 +72,21 @@ const UpdatePage = () => {
       <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
         <Title text="نوێکردنەوەی تۆماری فێرخواز" />
         <div className="p-6">
+          <div className="flex justify-center">
+            <button onClick={() => setPublished(false)} className={`${published !== true ? 'bg-blue-900' : 'bg-gray-400'} text-white px-4 py-2 rounded-r-md`}>
+              بڵاونەکراوەتەوە
+            </button>
+            <button onClick={() => setPublished(true)} className={`${published === true ? 'bg-blue-900' : 'bg-gray-400'} text-white px-4 py-2 rounded-l-md`}>
+              بڵاوکراوەتەوە
+            </button>
+          </div>
           <Heading text="ناو" />
           <input
             type="text"
             value={student.name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => handleChange(e, "name")}
             className="border border-gray-300 rounded-lg px-4 py-2 mb-4 w-full"
           />
-
           <Heading text="پۆل" />
           <SelectedClass student={student} />
           <Heading text="جۆری خوێن" />
@@ -87,30 +99,44 @@ const UpdatePage = () => {
           <input
             type="text"
             value={student.school}
-            // onChange={}
+            onChange={(e) => handleChange(e, "school")}
             className="border border-gray-300 rounded-lg px-4 py-2 mb-4 w-full"
           />
           <Heading text="ژمارەی تەلەفۆن" />
           <input
             type="text"
             value={student.phone}
-            // onChange={}
+            onChange={(e) => handleChange(e, "phone")}
             className="border border-gray-300 rounded-lg px-4 py-2 mb-4 w-full"
           />
           <Heading text="ناونیشان" />
           <input
             type="text"
             value={student.address}
-            // onChange={}
+            onChange={(e) => handleChange(e, "address")}
             className="border border-gray-300 rounded-lg px-4 py-2 mb-4 w-full"
           />
           <Heading text="کێشەی تەندروستی" />
           <input
             type="text"
             value={student.health}
-            // onChange={}
+            onChange={(e) => handleChange(e, "health")}
             className="border border-gray-300 rounded-lg px-4 py-2 mb-4 w-full"
           />
+          <Heading text="بڕی پارەی یەکەم" />
+          <input
+            type="text"
+            value={student.first_pay}
+            onChange={(e) => handleChange(e, "first_pay")}
+            className="border border-gray-300 rounded-lg px-4 py-2 mb-4 w-full"
+          />
+          <Heading text="بڕی پارەی دووەم" />
+          <input
+            type="text"
+            value={student.second_pay}
+            onChange={(e) => handleChange(e, "second_pay")}
+            className="border border-gray-300 rounded-lg px-4 py-2 mb-4 w-full"
+          />{" "}
           <button
             onClick={handleUpdate}
             className="bg-blue-500 text-white px-4 py-2 rounded-lg font-bold"
