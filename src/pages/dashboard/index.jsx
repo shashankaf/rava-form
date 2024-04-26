@@ -6,6 +6,21 @@ import { useRouter } from "next/router";
 
 const Dashboard = () => {
   const [students, setStudents] = useState([]);
+  const [text, setText] = useState("");
+
+  const handleSearch = () => {
+    if(text.length === 0) {
+      fetcher()    
+    }
+    const filtered = students.filter(
+      (item) =>
+        item.name.includes(text) ||
+        item.school.includes(text) ||
+        item.address.includes(text) ||
+        item.health.includes(text),
+    );
+    setStudents(filtered);
+  };
 
   const fetcher = async () => {
     try {
@@ -37,10 +52,7 @@ const Dashboard = () => {
 
   const handleDelete = async (id) => {
     try {
-      const { error } = await supabase
-        .from("student")
-        .delete()
-        .eq("id", id);
+      const { error } = await supabase.from("student").delete().eq("id", id);
 
       if (error) {
         throw error;
@@ -67,6 +79,18 @@ const Dashboard = () => {
       </Head>
 
       <Title text="لیستی خوێندکارانی پەیمانگای راڤە" />
+      <div className="flex justify-center items-center">
+        <button onClick={handleSearch} className="text-3xl">
+          🔍
+        </button>
+        <input
+          type="text"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          className="border-2 border-gray-300 rounded-md px-4 py-2 m-2 outline-none focus:border-indigo-400 focus:border-2 text-right"
+          placeholder="گەڕان بەدوای خوێندکاردا"
+        />
+      </div>
       <div className="overflow-x-auto">
         <table className="min-w-full divide-y divide-gray-200 text-right">
           <thead className="bg-gray-50">
@@ -119,7 +143,10 @@ const Dashboard = () => {
                     />
                   </svg>
                 </td>
-                <td onClick={() => handleEdit(student.id)} className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 cursor-pointer hover:bg-gray-100">
+                <td
+                  onClick={() => handleEdit(student.id)}
+                  className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 cursor-pointer hover:bg-gray-100"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"

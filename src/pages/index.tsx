@@ -68,6 +68,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex items-center justify-center">
+
+
         <div className="w-full max-w-2xl px-4 py-8 bg-white shadow-lg rounded-lg">
               <Image
                 src={logo}
