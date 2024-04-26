@@ -3,21 +3,26 @@ import { supabase } from "../../lib/supabase";
 import Title from "../../components/Title";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { useAtom } from "jotai";
+import { studentsAtom } from "../../lib/store";
+import Filtering from "../../components/Filtering";
+import Heading from "../../components/Heading";
 
 const Dashboard = () => {
-  const [students, setStudents] = useState([]);
+  const [students, setStudents] = useAtom(studentsAtom);
   const [text, setText] = useState("");
 
   const handleSearch = () => {
-    if(text.length === 0) {
-      fetcher()    
+    if (text.length === 0) {
+      fetcher();
     }
     const filtered = students.filter(
       (item) =>
         item.name.includes(text) ||
         item.school.includes(text) ||
         item.address.includes(text) ||
-        item.health.includes(text),
+        item.health.includes(text) ||
+        item.phone.includes(text),
     );
     setStudents(filtered);
   };
@@ -90,6 +95,11 @@ const Dashboard = () => {
           className="border-2 border-gray-300 rounded-md px-4 py-2 m-2 outline-none focus:border-indigo-400 focus:border-2 text-right"
           placeholder="گەڕان بەدوای خوێندکاردا"
         />
+        <Heading text="گەڕان" />
+      </div>
+      <div className="flex justify-center items-center">
+        <Filtering />
+        <Heading text="فلتەرکردن" />
       </div>
       <div className="overflow-x-auto">
         <table className="min-w-full divide-y divide-gray-200 text-right">

@@ -1,9 +1,14 @@
-import React from 'react'
+import React from "react";
 
-function Button() {
+function Button({ text, handleClick }) {
   return (
-    <div>Button</div>
-  )
+    <button
+      onClick={handleClick}
+      class="px-4 py-2 bg-indigo-500 hover:bg-indigo-800 text-white rounded-md outline-none"
+    >
+      {text}
+    </button>
+  );
 }
 
-export default Button
+export default Button;
