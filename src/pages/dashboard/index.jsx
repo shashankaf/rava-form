@@ -82,7 +82,6 @@ const Dashboard = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <Title text="لیستی خوێندکارانی پەیمانگای راڤە" />
       <div className="flex justify-center items-center">
         <button onClick={handleSearch} className="text-3xl">
@@ -105,6 +104,9 @@ const Dashboard = () => {
         <table className="min-w-full divide-y divide-gray-200 text-right">
           <thead className="bg-gray-50">
             <tr>
+              <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">
+                فۆرم
+              </th>
               <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">
                 سڕینەوە
               </th>
@@ -134,6 +136,25 @@ const Dashboard = () => {
           <tbody className="bg-white divide-y divide-gray-200">
             {students.map((student) => (
               <tr key={student.id}>
+                <td>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    strokeWidth={0}
+                    className="w-10 h-10 m-auto"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M3.5 8H3V7h.5a.5.5 0 010 1zM7 10V7h.5a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H7z"
+                    />
+                    <path
+                      fill="currentColor"
+                      fillRule="evenodd"
+                      d="M1 1.5A1.5 1.5 0 012.5 0h8.207L14 3.293V13.5a1.5 1.5 0 01-1.5 1.5h-10A1.5 1.5 0 011 13.5v-12zM3.5 6H2v5h1V9h.5a1.5 1.5 0 100-3zm4 0H6v5h1.5A1.5 1.5 0 009 9.5v-2A1.5 1.5 0 007.5 6zm2.5 5V6h3v1h-2v1h1v1h-1v2h-1z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </td>
                 <td
                   onClick={() => handleDelete(student.id)}
                   className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 cursor-pointer hover:bg-gray-200 transition-300"
