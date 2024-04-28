@@ -7,10 +7,20 @@ import { useAtom } from "jotai";
 import { studentsAtom } from "../../lib/store";
 import Filtering from "../../components/Filtering";
 import Heading from "../../components/Heading";
+// import html2pdf from "html2pdf.js/dist/html2pdf.min";
+// import ReactDOMServer from "react-dom/server";
 
 const Dashboard = () => {
   const [students, setStudents] = useAtom(studentsAtom);
   const [text, setText] = useState("");
+  
+  const handleForm = (studentId) => {
+    router.push(`/dashboard/form/${studentId}`);
+    // const printElement = ReactDOMServer.renderToString(pdfJSX());
+    // const printElement = pdfJSX();
+    // html2pdf().from(printElement).save();
+    console.log(studentId)
+  };
 
   const handleSearch = () => {
     if (text.length === 0) {
@@ -136,7 +146,10 @@ const Dashboard = () => {
           <tbody className="bg-white divide-y divide-gray-200">
             {students.map((student) => (
               <tr key={student.id}>
-                <td>
+                <td
+                  onClick={() => handleForm(student.id)}
+                  className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 cursor-pointer hover:bg-gray-200 transition-300"
+                >
                   <svg
                     viewBox="0 0 24 24"
                     fill="none"

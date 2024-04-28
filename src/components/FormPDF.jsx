@@ -1,9 +1,11 @@
-import html2pdf from "html2pdf.js/dist/html2pdf.min";
-import ReactDOMServer from "react-dom/server";
 import Image from "next/image";
 import FormTable from "./FormTable";
+import Instructions from "./Instructions";
+import html2pdf from "html2pdf.js/dist/html2pdf.min";
+import ReactDOMServer from "react-dom/server";
+import Signatures from "./Signatures";
 
-function FormPDF() {
+function FormPDF({student, teachers}) {
   const pdfJSX = () => {
     return (
       <div className="p-4">
@@ -32,7 +34,11 @@ function FormPDF() {
           <h1 className="font-black text-2xl text-center">فۆرمی بەشداریکردنی پۆلی ١٢</h1>
         </div>
         <div>
-          <FormTable />
+          <FormTable student={student} teachers={teachers} />
+        </div>
+        <Instructions />
+        <div>
+          <Signatures />
         </div>
       </div>
     );
@@ -46,8 +52,8 @@ function FormPDF() {
   };
 
   return (
-    <div className="App">
-      <button onClick={printHandler}>Print</button>
+    <div className="flex justify-center lg:w-2/3 sm:w-full m-auto items-center my-4 px-10 py-16 shadow-md rounded-md border-gray-100 border-1">
+      <button className="bg-indigo-500 hover:bg-indigo-800 transition-300 text-white px-6 py-2 rounded-md" onClick={printHandler}>خەزنکردنی فۆرم</button>
     </div>
   );
 }
