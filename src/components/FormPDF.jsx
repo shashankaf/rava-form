@@ -3,14 +3,12 @@ import FormTable from "./FormTable";
 import Instructions from "./Instructions";
 import ReactDOMServer from "react-dom/server";
 import Signatures from "./Signatures";
-import localFont from "@next/font/local"
 
-const rudaw = localFont({src: "../lib/rudawbold.woff"})
 
 function FormPDF({student, teachers}) {
   const pdfJSX = () => {
     return (
-      <div style={{fontFamily: 'rudaw'}} className="p-4">
+      <div  className="p-4">
         <div className="flex flex-row justify-around">
           <Image src="/krg.png" height={200} width={200} alt="KRG Logo" />
           <Image
@@ -21,19 +19,19 @@ function FormPDF({student, teachers}) {
           />
         </div>
         <div className="flex flex-col items-center my-6">
-          <h1 style={{fontFamily: 'rudaw'}} className="text-2xl font-bold">
+          <h1  className="text-2xl font-bold">
             حکومەتی هەرێمی کوردستان - وەزارەتی پەروەردە
           </h1>
-          <h2 style={{fontFamily: 'rudaw'}} className="text-xl">بەڕێوەبەرایەتی گشتی پەروەردەی سلێمانی</h2>
-          <h2 style={{fontFamily: 'rudaw'}} className="text-xl">بەڕێوەبەرایەتی گشتی پەروەردەی سلێمانی</h2>
-          <h2 style={{fontFamily: 'rudaw'}} className="text-xl font-bold">پەیمانگای راڤە</h2>
+          <h2  className="text-xl">بەڕێوەبەرایەتی گشتی پەروەردەی سلێمانی</h2>
+          <h2  className="text-xl">بەڕێوەبەرایەتی گشتی پەروەردەی سلێمانی</h2>
+          <h2  className="text-xl font-bold">پەیمانگای راڤە</h2>
         </div>
         <div className="flex flex-row justify-between w-2/3 m-auto">
-          <p style={{fontFamily: 'rudaw'}}>بەروار - </p>
-          <p style={{fontFamily: 'rudaw'}}>ژمارە - </p>
+          <p >بەروار - </p>
+          <p >ژمارە - </p>
         </div>
         <div>
-          <h1 style={{fontFamily: 'rudaw'}} className="font-black text-2xl text-center">فۆرمی بەشداریکردنی پۆلی ١٢</h1>
+          <h1  className="font-black text-2xl text-center">فۆرمی بەشداریکردنی پۆلی ١٢</h1>
         </div>
         <div>
           <FormTable student={student} teachers={teachers} />

@@ -3,7 +3,6 @@ import Head from "next/head";
 import Link from "next/link";
 import localFont from 'next/font/local';
 
-const rudawFont = localFont({ src: './fonts/rudaw.ttf' })
 const goran = localFont({ src: './fonts/goran.ttf' })
 const shasenem = localFont({src: './fonts/shasenem.ttf'})
 
