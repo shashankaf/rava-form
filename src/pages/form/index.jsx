@@ -11,6 +11,9 @@ import { useAtom } from "jotai";
 import { bloodAtom, classAtom, ragazAtom, teacherAtom, travelAtom } from "../../lib/store";
 import { supabase } from "../../lib/supabase"
 import Image from "next/image";
+import localFont from 'next/font/local';
+
+const shasenem = localFont({src: '../fonts/shasenem.ttf'})
 
 export default function Home() {
   const [name, setName] = useState("");
@@ -115,7 +118,7 @@ export default function Home() {
               setState={setHealth}
             />
             <Lectures />
-            <button onClick={handleSave} className="m-auto bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 border border-blue-700 rounded">
+            <button onClick={handleSave} className={`${shasenem.className} m-auto bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 border border-blue-700 rounded text-xl`}>
               تۆمارکردن
             </button>
           </div>

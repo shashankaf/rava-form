@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import MultiSelectComponent from "./MultiSelectComponent";
 import { supabase } from "@/lib/supabase";
 
-
 const Lectures = () => {
   const [teachers, setTeachers] = useState([])
   const fetcher = async () => {

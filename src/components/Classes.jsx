@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useAtom } from "jotai";
 import { classAtom } from "../lib/store";
 import { supabase } from "@/lib/supabase";
+import localFont from 'next/font/local';
+
+const shasenem = localFont({src: '../pages/fonts/shasenem.ttf'})
 
 const Classes = () => {
   const [clas, setClas] = useAtom(classAtom);
@@ -29,7 +32,7 @@ const Classes = () => {
 
   return (
     <>
-      <div className="relative">
+      <div className={`${shasenem.className} relative text-xl`}>
         <button
           onClick={toggleDropdown}
           className="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-400 min-w-48"

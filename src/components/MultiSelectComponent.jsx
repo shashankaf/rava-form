@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { useAtom } from "jotai";
 import { teacherAtom } from "../lib/store";
+import localFont from 'next/font/local';
+
+const shasenem = localFont({src: '../pages/fonts/shasenem.ttf'})
 
 const MultiSelectComponent = ({ options, text }) => {
   const [selectedOptions, setSelectedOptions] = useAtom(teacherAtom);
@@ -21,8 +24,8 @@ const MultiSelectComponent = ({ options, text }) => {
   };
 
   return (
-    <div>
-      <h3 className="text-lg font-bold text-right">{text}</h3>
+      <div className={`${shasenem.className} text-xl relative`}>
+      <h3 className="text-xl font-bold text-right">{text}</h3>
       <div className="grid sm:grid-cols-2 grid-cols-1 gap-2">
         {options?.map((option) => (
           <div
@@ -51,9 +54,9 @@ const MultiSelectComponent = ({ options, text }) => {
           </div>
         ))}
       </div>
-      <div>
+      <div className="text-right text-xl">
         <p>
-          بژاردەکانت:{" "}
+          بژاردەکانت{" "}
           {selectedOptions
             ?.map((id) => options.find((option) => option.id === id).name)
             .join("، ")}

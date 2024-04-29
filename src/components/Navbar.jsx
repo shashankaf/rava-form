@@ -1,13 +1,16 @@
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import localFont from 'next/font/local';
+
+const shasenem = localFont({src: '../pages/fonts/shasenem.ttf'})
 
 const Navbar = ({ children }) => {
   const imgUrl =
     "https://grocviikgcjxaxnkdvrv.supabase.co/storage/v1/object/public/general/rava-removebg-preview.png?t=2024-04-29T11%3A16%3A12.305Z";
   return (
     <>
-      <nav className="bg-white">
+      <nav className={`${shasenem.className} text-xl bg-white`}>
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <Link href="/" className="flex items-center">
             <Image

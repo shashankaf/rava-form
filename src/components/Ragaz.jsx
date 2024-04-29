@@ -2,6 +2,9 @@ import React, {useState, useEffect} from "react";
 import { useAtom } from "jotai";
 import { ragazAtom } from "../lib/store";
 import { supabase } from "@/lib/supabase";
+import localFont from 'next/font/local';
+
+const shasenem = localFont({src: '../pages/fonts/shasenem.ttf'})
 
 const Ragaz = () => {
   const [ragaz, setRagaz] = useAtom(ragazAtom)
@@ -28,7 +31,7 @@ const Ragaz = () => {
   };
   return (
     <>
-      <div className="relative">
+      <div className={`${shasenem.className} text-xl relative`}>
         <button
           onClick={toggleDropdown}
           className="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-400 min-w-48"

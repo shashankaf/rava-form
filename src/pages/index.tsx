@@ -1,6 +1,11 @@
 import React from "react";
 import Head from "next/head";
 import Link from "next/link";
+import localFont from 'next/font/local';
+
+const rudawFont = localFont({ src: './fonts/rudaw.ttf' })
+const goran = localFont({ src: './fonts/goran.ttf' })
+const shasenem = localFont({src: './fonts/shasenem.ttf'})
 
 export default function Home() {
   return (
@@ -11,7 +16,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main  className="p-4 m-4" style={{fontFamily: "rudaw"}}>
+      <main  className={`${shasenem.className} m-4 p-4`} >
         <div className="relative" id="home">
           <div
             aria-hidden="true"
@@ -22,11 +27,11 @@ export default function Home() {
           </div>
           <div className="relative pt-36 ml-auto">
             <div className="lg:w-2/3 text-center mx-auto">
-              <h1 className="text-gray-900 font-bold text-5xl md:text-6xl xl:text-7xl font-bold">
+              <h1 className={` text-gray-900 font-bold text-5xl md:text-6xl xl:text-7xl font-bold`}>
                 پەروەردەیەکی شیاو، بۆ نەوەیەکی{" "}
                 <span className="text-indigo-800">سەرکەوتوو</span>
               </h1>
-              <p className="mt-8 text-gray-700">
+              <p className={`${goran.className} text-xl mt-8 text-gray-700`}>
                 پەیمانگای راڤە وانەی فێرکاریی بە فێرخوازان پێشکەش دەکات. باشترین
                 و بەناوبانگترین مامۆستایان لە کەشێکی شیاوو بە هاوکاریی
                 تەکنەلۆژیای پێشکەوتوو وانەکان دەڵێنەوەو تا دڵنیابن لە تێگەیشتن و
@@ -38,7 +43,7 @@ export default function Home() {
                   href="/form"
                   className="relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:border before:border-transparent before:bg-primary/10 before:bg-gradient-to-b before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 dark:before:border-gray-700 dark:before:bg-gray-800 sm:w-max"
                 >
-                  <span className="relative text-base font-semibold text-primary dark:text-white">
+                  <span className="relative text-xl font-semibold text-primary dark:text-white">
                     فۆرمی فێربوون
                   </span>
                 </Link>
