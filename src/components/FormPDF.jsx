@@ -1,28 +1,13 @@
 import Image from "next/image";
 import FormTable from "./FormTable";
 import Instructions from "./Instructions";
-import html2pdf from 'html2pdf.js/dist/html2pdf.min.js';
 import ReactDOMServer from "react-dom/server";
 import Signatures from "./Signatures";
 import localFont from "@next/font/local"
-import { useEffect } from "react";
 
 const rudaw = localFont({src: "../lib/rudawbold.woff"})
 
 function FormPDF({student, teachers}) {
-  useEffect(() => {
-    import('html2pdf.js/dist/html2pdf.min.js')
-      .then((html2pdf) => {
-        const printHandler = () => {
-          const printElement = ReactDOMServer.renderToString(pdfJSX());
-          html2pdf().from(printElement).save();
-        };
-        document.getElementById('printButton').addEventListener('click', printHandler);
-      })
-      .catch((error) => {
-        console.error('Error loading html2pdf:', error);
-      });
-  }, []);
   const pdfJSX = () => {
     return (
       <div style={{fontFamily: 'rudaw'}} className="p-4">
@@ -61,11 +46,10 @@ function FormPDF({student, teachers}) {
     );
   };
 
-  const printHandler = () => {
-    const printElement = ReactDOMServer.renderToString(pdfJSX());
-    // const printElement = pdfJSX();
-
-    html2pdf().from(printElement).save();
+  const printHandler = async () => {
+    const html2pdf = (await import("html2pdf.js/dist/html2pdf.min.js")).default;
+    const printContent = ReactDOMServer.renderToString(pdfJSX());
+    html2pdf().set().from(printContent).save();
   };
 
   return (
