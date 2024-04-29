@@ -27,7 +27,7 @@ const Contact = () => {
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke-width="2"
-                            stroke="currentColor"
+                            stroke="#FFFFFF"
                             class="h-6 w-6"
                           >
                             <path
@@ -40,10 +40,7 @@ const Contact = () => {
                       </div>
                       <div className="ml-6 grow">
                         <p className="mb-2 font-bold dark:text-white">
-                          Technical support
-                        </p>
-                        <p className="text-neutral-500 dark:text-neutral-200">
-                          support@example.com
+                         تەلەفۆن
                         </p>
                         <p className="text-neutral-500 dark:text-neutral-200">
                           +1 234-567-89
@@ -60,7 +57,7 @@ const Contact = () => {
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke-width="2"
-                            stroke="currentColor"
+                            stroke="#FFFFFF"
                             class="h-6 w-6"
                           >
                             <path
@@ -73,13 +70,10 @@ const Contact = () => {
                       </div>
                       <div className="ml-6 grow">
                         <p className="mb-2 font-bold dark:text-white">
-                          Sales questions
+                         فەیسبووک
                         </p>
                         <p className="text-neutral-500 dark:text-neutral-200">
                           sales@example.com
-                        </p>
-                        <p className="text-neutral-500 dark:text-neutral-200">
-                          +1 234-567-89
                         </p>
                       </div>
                     </div>
@@ -93,7 +87,7 @@ const Contact = () => {
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke-width="2"
-                            stroke="currentColor"
+                            stroke="#FFFFFF"
                             class="h-6 w-6"
                           >
                             <path
@@ -105,12 +99,9 @@ const Contact = () => {
                         </div>
                       </div>
                       <div className="ml-6 grow">
-                        <p className="mb-2 font-bold dark:text-white">Press</p>
+                        <p className="mb-2 font-bold dark:text-white">ئیمەیل</p>
                         <p className="text-neutral-500 dark:text-neutral-200">
                           press@example.com
-                        </p>
-                        <p className="text-neutral-500 dark:text-neutral-200">
-                          +1 234-567-89
                         </p>
                       </div>
                     </div>
@@ -124,7 +115,7 @@ const Contact = () => {
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke-width="2"
-                            stroke="currentColor"
+                            stroke="#FFFFFF"
                             class="h-6 w-6"
                           >
                             <path
@@ -137,13 +128,10 @@ const Contact = () => {
                       </div>
                       <div className="ml-6 grow">
                         <p className="mb-2 font-bold dark:text-white">
-                          Bug report
+                          ئینستاگرام
                         </p>
                         <p className="text-neutral-500 dark:text-neutral-200">
                           bugs@example.com
-                        </p>
-                        <p className="text-neutral-500 dark:text-neutral-200">
-                          +1 234-567-89
                         </p>
                       </div>
                     </div>
