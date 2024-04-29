@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Head from "next/head";
 import Link from "next/link";
 
@@ -11,7 +11,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main style={{ fontFamily: "rudaw" }} className="p-4 m-4">
+      <main  className="p-4 m-4" style={{fontFamily: "rudaw"}}>
         <div className="relative" id="home">
           <div
             aria-hidden="true"
@@ -45,26 +45,23 @@ export default function Home() {
               </div>
               <div className="hidden py-8 mt-16 border-y border-gray-100 dark:border-gray-800 sm:flex justify-between">
                 <div className="text-left">
-                  <h6 className="text-lg font-semibold text-gray-700 dark:text-white">
+                  <h6 className="text-lg font-semibold text-gray-700">
                     گونجاوترین نرخ
                   </h6>
-                  <p className="mt-2 text-gray-500">گونجاترین نرخ</p>
                 </div>
                 <div className="text-left">
-                  <h6 className="text-lg font-semibold text-gray-700 dark:text-white">
+                  <h6 className="text-lg font-semibold text-gray-700">
                     باشترین کوالیتی{" "}
                   </h6>
-                  <p className="mt-2 text-gray-500">باشترین کوالیتی</p>
                 </div>
                 <div className="text-left">
-                  <h6 className="text-lg font-semibold text-gray-700 dark:text-white">
+                  <h6 className="text-lg font-semibold text-gray-700">
                     خوازراوترین پەیمانگا{" "}
                   </h6>
-                  <p className="mt-2 text-gray-500">خوازراوترون پەیمانگا</p>
-                </div>
               </div>
             </div>
             <div className="mt-12 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6"></div>
+          </div>
           </div>
         </div>
       </main>
