@@ -28,7 +28,7 @@ export default function Home() {
             <div className="lg:w-2/3 text-center mx-auto">
               <h1 className={` text-gray-900 font-bold text-5xl md:text-6xl xl:text-7xl font-bold`}>
                 پەروەردەیەکی شیاو، بۆ نەوەیەکی{" "}
-                <span className="text-indigo-800">سەرکەوتوو</span>
+                <span className="text-indigo-800 block">سەرکەوتوو</span>
               </h1>
               <p className={`${goran.className} text-xl mt-8 text-gray-700`}>
                 پەیمانگای راڤە وانەی فێرکاریی بە فێرخوازان پێشکەش دەکات. باشترین
