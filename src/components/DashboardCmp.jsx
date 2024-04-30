@@ -6,12 +6,11 @@ import { useAtom } from "jotai";
 import { studentsAtom } from "../lib/store";
 import Filtering from "./Filtering";
 import Heading from "./Heading";
-import { redirect } from "next/dist/server/api-utils";
 
 const DashboardCmp = () => {
   const [students, setStudents] = useAtom(studentsAtom);
   const [text, setText] = useState("");
-  const [errMsg, setErrMsg] = useState("")
+  const [errMsg, setErrMsg] = useState("");
 
   const handleForm = (studentId) => {
     router.push(`/dashboard/form/${studentId}`);
@@ -83,11 +82,12 @@ const DashboardCmp = () => {
 
   const signOut = async () => {
     const { error } = await supabase.auth.signOut();
-    if(error) {
-      setErrMsg("ببورە هەڵەیەک روویداوە")
-      console.log(error)
+    if (error) {
+      setErrMsg("ببورە هەڵەیەک روویداوە");
+      console.log(error);
+    } else {
+      router.reload();
     }
-    redirect("https//rava.neltify.app")
   };
 
   return (

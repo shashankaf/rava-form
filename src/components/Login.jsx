@@ -23,8 +23,8 @@ const Login = () => {
     redirect('https://rava.netlify.app/dashboard')
   }
   return (
-    <section className="bg-gray-50">
-      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+    <section className="bg-gray-50 py-10">
+      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
         <p>{errorMsg}</p>
         <Link
           href="/"
@@ -85,7 +85,7 @@ const Login = () => {
                   type="submit"
                   onClick={signInWithEmail}
                   className="w-full text-white bg-indigo-600 
-                             rounded-lg px-5 py-2.5 text-center">
+                             rounded-lg px-5 py-2.5 text-center mt-8">
                   چوونە ژوورەوە
                 </button>
               </div>
