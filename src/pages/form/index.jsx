@@ -32,6 +32,7 @@ export default function Home() {
   const [ragaz] = useAtom(ragazAtom);
   const [clas] = useAtom(classAtom);
   const [teacher] = useAtom(teacherAtom);
+  const [errors, setErrors] = useState([]);
   const logo =
     "https://grocviikgcjxaxnkdvrv.supabase.co/storage/v1/object/public/general/paimangai_rava.jpg";
   const [errorSubmit, setErrorSubmit] = useState(false);
@@ -50,6 +51,17 @@ export default function Home() {
       ragaz: ragaz?.id,
       teacher: teacher,
     };
+
+    // Push error messages into the errors array
+    if (!name || name.length < 2 || name.length > 50)
+      setErrors([...errors, "تکایە ناوێکی گونجاو هەڵبژێرە"]);
+    if (!clas.id) setErrors([...errors, "تکایە پۆلەکەت هەڵبژێرە"]);
+    if (!teacher.length)
+      setErrors([...errors, "تکایە مامۆستایەک یان زیاتر هەڵبژێرە"]);
+    if (!ragaz.id) setErrors([...errors, "تکایە رەگەزت هەڵبژێرە"]);
+    if (!name || !clas.id || !teacher.length || !ragaz.id) {
+      return; // Exit the function if validation fails
+    }
 
     const { error } = await supabase.from("student").insert(info);
 
@@ -77,7 +89,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex items-center justify-center">
+      <main className="flex items-center justify-center mb-12">
         <div className="w-full max-w-2xl px-4 py-8 bg-white shadow-lg rounded-lg">
           <Image
             src={logo}
@@ -130,6 +142,11 @@ export default function Home() {
               تۆمارکردن
             </button>
           </div>
+          {errors.map((item, index) => (
+            <p key={index} className="block text-orange-900 font-bold text-xl text-center my-4">
+              {item}
+            </p>
+          ))}
         </div>
       </main>
     </>
