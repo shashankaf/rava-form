@@ -1,29 +1,34 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { redirect } from 'next/navigation'
+import { redirect } from "next/navigation";
 import { supabase } from "../lib/supabase";
+import localFont from 'next/font/local';
+
+const shasenem = localFont({src: '../pages/fonts/shasenem.ttf'})
 
 const Login = () => {
-
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [errorMsg, setErrorMsg] = useState("")
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
   async function signInWithEmail(e) {
-    e.preventDefault()
+    e.preventDefault();
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
-      password
-    })
+      password,
+    });
     if (error) {
-      setErrorMsg("هەڵەیەک روویداوە")
+      setErrorMsg("هەڵەیەک روویداوە");
     }
-    console.log(data)
-    redirect('https://rava.netlify.app/dashboard')
+    console.log(data);
+    redirect("https://rava.netlify.app/dashboard");
   }
   return (
-    <section className="bg-gray-50 py-10">
+    <section
+      style={{ fontFamily: shasenem.className }}
+      className="bg-gray-50 py-10 text-right"
+    >
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
         <p>{errorMsg}</p>
         <Link
@@ -42,14 +47,16 @@ const Login = () => {
         <div className="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
-              بچۆ ناو ئەکاونتەکەتەوە            </h1>
+              بچۆ ناو ئەکاونتەکەتەوە{" "}
+            </h1>
             <form className="space-y-4 md:space-y-6" onSubmit={signInWithEmail}>
               <div>
                 <label
                   htmlFor="email"
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  ئیمەیل                </label>
+                  ئیمەیل{" "}
+                </label>
                 <input
                   type="email"
                   name="email"
@@ -60,7 +67,8 @@ const Login = () => {
                              sm:text-sm rounded-lg focus:ring-primary-600 
                              focus:border-primary-600 block w-full p-2.5"
                   placeholder="name@company.com"
-                  required />
+                  required
+                />
               </div>
               <div>
                 <label
@@ -80,12 +88,14 @@ const Login = () => {
                              text-gray-900 sm:text-sm rounded-lg 
                              focus:ring-primary-600 focus:border-primary-600 
                              block w-full p-2.5"
-                  required />
+                  required
+                />
                 <button
                   type="submit"
                   onClick={signInWithEmail}
                   className="w-full text-white bg-indigo-600 
-                             rounded-lg px-5 py-2.5 text-center mt-8">
+                             rounded-lg px-5 py-2.5 text-center mt-8"
+                >
                   چوونە ژوورەوە
                 </button>
               </div>
@@ -97,5 +107,4 @@ const Login = () => {
   );
 };
 
-export default Login
-
+export default Login;
