@@ -6,14 +6,16 @@ import { useAtom } from "jotai";
 import { studentsAtom } from "../lib/store";
 import Filtering from "./Filtering";
 import Heading from "./Heading";
+import { redirect } from "next/dist/server/api-utils";
 
 const DashboardCmp = () => {
   const [students, setStudents] = useAtom(studentsAtom);
   const [text, setText] = useState("");
-  
+  const [errMsg, setErrMsg] = useState("")
+
   const handleForm = (studentId) => {
     router.push(`/dashboard/form/${studentId}`);
-    console.log(studentId)
+    console.log(studentId);
   };
 
   const handleSearch = () => {
@@ -78,8 +80,29 @@ const DashboardCmp = () => {
       window.location.reload(); // Refresh the page
     }
   }, [isDeleted]);
+
+  const signOut = async () => {
+    const { error } = await supabase.auth.signOut();
+    if(error) {
+      setErrMsg("ببورە هەڵەیەک روویداوە")
+      console.log(error)
+    }
+    redirect("https//rava.neltify.app")
+  };
+
   return (
-  <>
+    <>
+      <div className="flex justify-center">
+        {errMsg}
+        <button
+          type="submit"
+          onClick={signOut}
+          className="text-white bg-indigo-600 hover:bg-indigo-900 transition-400
+                             rounded-lg px-5 py-2.5 text-center"
+        >
+          چوونە دەرەوە لە ئەکاونت
+        </button>
+      </div>
       <Title text="لیستی خوێندکارانی پەیمانگای راڤە" />
       <div className="flex justify-center items-center">
         <button onClick={handleSearch} className="text-3xl">
@@ -235,8 +258,8 @@ const DashboardCmp = () => {
           </tbody>
         </table>
       </div>
-  </>
-  )
-}
+    </>
+  );
+};
 
-export default DashboardCmp
+export default DashboardCmp;
