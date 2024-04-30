@@ -8,12 +8,18 @@ import Travel from "../../components/Travel";
 import Lectures from "../../components/Lectures";
 import Title from "../../components/Title";
 import { useAtom } from "jotai";
-import { bloodAtom, classAtom, ragazAtom, teacherAtom, travelAtom } from "../../lib/store";
-import { supabase } from "../../lib/supabase"
+import {
+  bloodAtom,
+  classAtom,
+  ragazAtom,
+  teacherAtom,
+  travelAtom,
+} from "../../lib/store";
+import { supabase } from "../../lib/supabase";
 import Image from "next/image";
-import localFont from 'next/font/local';
+import localFont from "next/font/local";
 
-const shasenem = localFont({src: '../fonts/shasenem.ttf'})
+const shasenem = localFont({ src: "../fonts/shasenem.ttf" });
 
 export default function Home() {
   const [name, setName] = useState("");
@@ -21,14 +27,15 @@ export default function Home() {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [health, setHealth] = useState("");
-  const [blood] = useAtom(bloodAtom)
-  const [travel] = useAtom(travelAtom)
-  const [ragaz] = useAtom(ragazAtom)
-  const [clas] = useAtom(classAtom)
-  const [teacher] = useAtom(teacherAtom)
-  const logo = "https://grocviikgcjxaxnkdvrv.supabase.co/storage/v1/object/public/general/paimangai_rava.jpg"
-  const [errorSubmit, setErrorSubmit] = useState(false)
-  const [success, setSuccess] = useState(false)
+  const [blood] = useAtom(bloodAtom);
+  const [travel] = useAtom(travelAtom);
+  const [ragaz] = useAtom(ragazAtom);
+  const [clas] = useAtom(classAtom);
+  const [teacher] = useAtom(teacherAtom);
+  const logo =
+    "https://grocviikgcjxaxnkdvrv.supabase.co/storage/v1/object/public/general/paimangai_rava.jpg";
+  const [errorSubmit, setErrorSubmit] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const handleSave = async () => {
     const info = {
@@ -42,22 +49,22 @@ export default function Home() {
       health,
       ragaz: ragaz?.id,
       teacher: teacher,
-    }
+    };
 
-    const { data, error } = await supabase.from('student').insert(info)
+    const { error } = await supabase.from("student").insert(info);
 
-    if(error) {
-      console.log(error)
-      setErrorSubmit(true)
+    if (error) {
+      console.log(error);
+      setErrorSubmit(true);
     } else {
-      setSuccess(true)
+      setSuccess(true);
     }
   };
-  if(errorSubmit) {
-    return <Title text="ببورە هەڵەیەک روویداوە، تکایە هەوڵبدەرەوە" />  
+  if (errorSubmit) {
+    return <Title text="ببورە هەڵەیەک روویداوە، تکایە هەوڵبدەرەوە" />;
   }
-  if(success) {
-    return <Title text="زۆر سوپاس، فۆرمەکەت گەیشت" />
+  if (success) {
+    return <Title text="زۆر سوپاس، فۆرمەکەت گەیشت" />;
   }
   return (
     <>
@@ -71,16 +78,14 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex items-center justify-center">
-
-
         <div className="w-full max-w-2xl px-4 py-8 bg-white shadow-lg rounded-lg">
-              <Image
-                src={logo}
-                alt={`Rava Institute`}
-                width={160}
-                height={160}
-                className="rounded-full m-auto"
-              />
+          <Image
+            src={logo}
+            alt={`Rava Institute`}
+            width={160}
+            height={160}
+            className="rounded-full m-auto"
+          />
           <Title text="فۆرمی تۆمارکردنی خوێندکار لە پەیمانگای راڤە" />
           <div className="flex flex-col items-end space-y-4">
             <InputCmp
@@ -118,7 +123,10 @@ export default function Home() {
               setState={setHealth}
             />
             <Lectures />
-            <button onClick={handleSave} className={`${shasenem.className} m-auto bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 border border-blue-700 rounded text-xl`}>
+            <button
+              onClick={handleSave}
+              className={`${shasenem.className} m-auto bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 border border-blue-700 rounded text-xl`}
+            >
               تۆمارکردن
             </button>
           </div>

@@ -1,12 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Head from "next/head";
 import Link from "next/link";
-import localFont from 'next/font/local';
+import localFont from "next/font/local";
+import { useAtom } from "jotai";
+import { sessionAtom } from "../lib/store";
+import { supabase } from "../lib/supabase";
 
-const goran = localFont({ src: './fonts/goran.ttf' })
-const shasenem = localFont({src: './fonts/shasenem.ttf'})
+const goran = localFont({ src: "./fonts/goran.ttf" });
+const shasenem = localFont({ src: "./fonts/shasenem.ttf" });
 
 export default function Home() {
+  const [session, setSession] = useAtom(sessionAtom);
+
+  const fetchSession = async () => {
+    const { data, error } = await supabase.auth.getSession();
+    if(error) {
+      console.log(error)
+    }
+    console.log(data)
+    setSession(data.session);
+  };
+  useEffect(() => {
+    fetchSession();
+  }, []);
+
   return (
     <>
       <Head>
@@ -15,7 +32,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main  className={`${shasenem.className} m-4 p-4`} >
+      <main className={`${shasenem.className} m-4 p-4`}>
         <div className="relative" id="home">
           <div
             aria-hidden="true"
@@ -26,7 +43,9 @@ export default function Home() {
           </div>
           <div className="relative pt-36 ml-auto">
             <div className="lg:w-2/3 text-center mx-auto">
-              <h1 className={` text-gray-900 font-bold text-5xl md:text-6xl xl:text-7xl font-bold`}>
+              <h1
+                className={` text-gray-900 font-bold text-5xl md:text-6xl xl:text-7xl font-bold`}
+              >
                 پەروەردەیەکی شیاو، بۆ نەوەیەکی{" "}
                 <span className="text-indigo-800 block">سەرکەوتوو</span>
               </h1>
@@ -62,10 +81,10 @@ export default function Home() {
                   <h6 className="text-lg font-semibold text-gray-700">
                     خوازراوترین پەیمانگا{" "}
                   </h6>
+                </div>
               </div>
+              <div className="mt-12 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6"></div>
             </div>
-            <div className="mt-12 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6"></div>
-          </div>
           </div>
         </div>
       </main>
