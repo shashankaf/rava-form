@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import { supabase } from "../lib/supabase";
 import localFont from 'next/font/local';
+import { useRouter } from "next/router";
 
 const shasenem = localFont({src: '../pages/fonts/shasenem.ttf'})
 
@@ -11,6 +11,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+  const router = useRouter()
 
   async function signInWithEmail(e) {
     e.preventDefault();
@@ -22,7 +23,7 @@ const Login = () => {
       setErrorMsg("هەڵەیەک روویداوە");
     }
     console.log(data);
-    redirect("https://rava.netlify.app/dashboard");
+    router.reload()
   }
   return (
     <section
