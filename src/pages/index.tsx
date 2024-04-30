@@ -1,28 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import localFont from "next/font/local";
-import { useAtom } from "jotai";
-import { sessionAtom } from "../lib/store";
-import { supabase } from "../lib/supabase";
 
 const goran = localFont({ src: "./fonts/goran.ttf" });
 const shasenem = localFont({ src: "./fonts/shasenem.ttf" });
 
 export default function Home() {
-  const [session, setSession] = useAtom(sessionAtom);
-
-  const fetchSession = async () => {
-    const { data, error } = await supabase.auth.getSession();
-    if(error) {
-      console.log(error)
-    }
-    console.log(data)
-    setSession(data.session);
-  };
-  useEffect(() => {
-    fetchSession();
-  }, []);
 
   return (
     <>
