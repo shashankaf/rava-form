@@ -143,7 +143,7 @@ export default function Home() {
             </button>
           </div>
           {errors.map((item, index) => (
-            <p key={index} className="block text-orange-900 font-bold text-xl text-center my-4">
+            <p key={index} style={{fontFamily: shasenem.className}} className="block text-orange-900 font-bold text-xl text-center my-4">
               {item}
             </p>
           ))}
