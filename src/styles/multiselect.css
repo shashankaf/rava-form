@@ -25,8 +25,9 @@
   background: black;
   border-radius: 50px;
   transition: all 0.7s;
-  --spread: 20px;
-  margin-left: 200%;
+  --spread: 15px;
+  margin-right: 200%;
+  margin-top: -450%;
   z-index: 2;
 }
 

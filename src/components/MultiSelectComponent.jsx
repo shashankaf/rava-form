@@ -30,7 +30,7 @@ const MultiSelectComponent = ({ options, text }) => {
   };
 
   return (
-    <div className={`${shasenem.className} text-xl relative`}>
+    <div dir="rtl" className={`${shasenem.className} text-xl relative m-auto`}>
       <h3 className="text-xl font-bold text-right">{text}</h3>
       <div className="grid sm:grid-cols-2 grid-cols-1 gap-2">
         {options?.map((option) => (
