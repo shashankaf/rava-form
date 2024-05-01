@@ -34,17 +34,18 @@ const MultiSelectComponent = ({ options, text }) => {
       <h3 className="text-xl font-bold text-right">{text}</h3>
       <div className="grid sm:grid-cols-2 grid-cols-1 gap-2">
         {options?.map((option) => (
-          <div
-            key={option.id}
-            className="flex items-center"
-          >
-            <input
-              type="checkbox"
-              id={`option-${option.id}`}
-              checked={selectedOptions.includes(option.id)}
-              onChange={() => handleOptionToggle(option.id)}
-              className="mr-2 text-right hidden"
-            />
+          <div key={option.id} className="flex items-center">
+            <label class="checkbox-container">
+              <input
+                type="checkbox"
+                id={`option-${option.id}`}
+                checked={selectedOptions.includes(option.id)}
+                onChange={() => handleOptionToggle(option.id)}
+                className="mr-2 text-right hidden"
+              />
+
+              <div class="checkmark"></div>
+            </label>
             <Teacher
               name={option.name}
               specialty={option.specialty}
