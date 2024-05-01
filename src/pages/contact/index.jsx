@@ -1,14 +1,19 @@
-import React from 'react'
-import localFont from 'next/font/local';
+import React from "react";
+import localFont from "next/font/local";
 
-const goran = localFont({ src: '../fonts/goran.ttf' })
-const shasenem = localFont({src: '../fonts/shasenem.ttf'})
+const goran = localFont({ src: "../fonts/goran.ttf" });
+const shasenem = localFont({ src: "../fonts/shasenem.ttf" });
 
 const Contact = () => {
-  const rava_map = "https://maps.google.com/maps?q=rava+institute&t=&z=13&ie=UTF8&iwloc=&output=embed"
+  const insta_link = "https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.instagram.com%2Frava_institute%3Figsh%3DNXpkaGQweGZvZDZ4%26fbclid%3DIwZXh0bgNhZW0CMTAAAR28UQlXb9yY0o6k0XW68O5jB4vbltzNexlVzw00lmTPjGsfoMjGnGAsiZM_aem_Ad5HpPTMNk15DVDMBT_5C9iOqNcvEKra5wXL2xa1GwdL8b_vo-kJEmGpOzsxs9sC1Lih0TSsYooUx_rqCA1Hz873&h=AT2cXvq6WzE4YaqI1ss8nb_SWFx3WstFERAOsjXrh795tpYZUyiZfzXIKHRvlFu1mmnfNVhQbyZ6q9Frg4TRqbQh8kEnfhM1hUGshuVJBq_6krfbKVfy8vz7fBTMOhv9p9Zrz6q9"
+  const rava_map =
+    "https://maps.google.com/maps?q=rava+institute&t=&z=13&ie=UTF8&iwloc=&output=embed";
+  const face_link = "https://www.facebook.com/rava.institute"
   return (
     <div>
-      <div className={`${shasenem.className} container my-24 text-xl mx-auto md:px-6`}>
+      <div
+        className={`${shasenem.className} container my-24 text-xl mx-auto md:px-6`}
+      >
         <section className="mb-32">
           <div className="block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
             <div className="flex flex-wrap items-center">
@@ -46,10 +51,15 @@ const Contact = () => {
                       </div>
                       <div className="ml-6 grow">
                         <p className="mb-2 font-bold dark:text-white">
-                         تەلەفۆن
+                          تەلەفۆن
                         </p>
                         <p className="text-neutral-500 dark:text-neutral-200">
-                          +1 234-567-89
+                          <span className="block">
+                          (+964) 07709746664 
+                          </span>
+                          <span className="block">
+                          (+964) 07509746664
+                          </span>
                         </p>
                       </div>
                     </div>
@@ -76,11 +86,11 @@ const Contact = () => {
                       </div>
                       <div className="ml-6 grow">
                         <p className="mb-2 font-bold dark:text-white">
-                         فەیسبووک
+                          فەیسبووک
                         </p>
-                        <p className="text-neutral-500 dark:text-neutral-200">
-                          sales@example.com
-                        </p>
+                        <a href={face_link} target="_blank" className="text-neutral-500 dark:text-neutral-200">
+                          @rava.institute
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -106,9 +116,9 @@ const Contact = () => {
                       </div>
                       <div className="ml-6 grow">
                         <p className="mb-2 font-bold dark:text-white">ئیمەیل</p>
-                        <p className="text-neutral-500 dark:text-neutral-200">
-                          press@example.com
-                        </p>
+                        <a href="mailto:rava.institute@gmail.com" className="text-neutral-500 dark:text-neutral-200">
+                          rava.institute@gmail.com
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -136,9 +146,9 @@ const Contact = () => {
                         <p className="mb-2 font-bold dark:text-white">
                           ئینستاگرام
                         </p>
-                        <p className="text-neutral-500 dark:text-neutral-200">
-                          bugs@example.com
-                        </p>
+                        <a href={insta_link} target="_blank" className="text-neutral-500 dark:text-neutral-200">
+                          @rava_institute
+                        </a>
                       </div>
                     </div>
                   </div>
