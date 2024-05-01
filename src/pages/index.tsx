@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import localFont from "next/font/local";
+import Image from "next/image";
 
 const goran = localFont({ src: "./fonts/goran.ttf" });
 const shasenem = localFont({ src: "./fonts/shasenem.ttf" });
@@ -33,6 +34,13 @@ export default function Home() {
                 پەروەردەیەکی شیاو، بۆ نەوەیەکی{" "}
                 <span className="text-indigo-800 block">سەرکەوتوو</span>
               </h1>
+              <Image
+                src={`/gl.webp`}
+                alt={"illustration"}
+                height={400}
+                width={400}
+                className="mx-auto"
+                />
               <p className={`${goran.className} text-xl mt-8 text-gray-700`}>
                 پەیمانگای راڤە وانەی فێرکاریی بە فێرخوازان پێشکەش دەکات. باشترین
                 و بەناوبانگترین مامۆستایان لە کەشێکی شیاوو بە هاوکاریی
