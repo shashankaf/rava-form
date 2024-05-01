@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { useAtom } from "jotai";
 import { teacherAtom } from "../lib/store";
-import localFont from 'next/font/local';
+import localFont from "next/font/local";
+import Teacher from "./Teacher";
 
-const shasenem = localFont({src: '../pages/fonts/shasenem.ttf'})
+const shasenem = localFont({ src: "../pages/fonts/shasenem.ttf" });
 
 const MultiSelectComponent = ({ options, text }) => {
   const [selectedOptions, setSelectedOptions] = useAtom(teacherAtom);
@@ -23,34 +24,33 @@ const MultiSelectComponent = ({ options, text }) => {
     }
   };
 
+  const handleTeacherClick = (optionId) => {
+    // Toggle the checkbox when the Teacher component is clicked
+    handleOptionToggle(optionId);
+  };
+
   return (
-      <div className={`${shasenem.className} text-xl relative`}>
+    <div className={`${shasenem.className} text-xl relative`}>
       <h3 className="text-xl font-bold text-right">{text}</h3>
       <div className="grid sm:grid-cols-2 grid-cols-1 gap-2">
         {options?.map((option) => (
           <div
             key={option.id}
-            className="flex items-center bg-gray-100 p-2 rounded-md"
+            className="flex items-center"
           >
             <input
               type="checkbox"
               id={`option-${option.id}`}
               checked={selectedOptions.includes(option.id)}
               onChange={() => handleOptionToggle(option.id)}
-              className="mr-2 text-right"
+              className="mr-2 text-right hidden"
             />
-            <div className="flex items-center">
-              <Image
-                src={option.photo}
-                alt={`Teacher: ${option.name}`}
-                width={48}
-                height={48}
-                className="rounded-full mr-2"
-              />
-              <label htmlFor={`option-${option.id}`}>
-                {option.name} - {option.specialty}
-              </label>
-            </div>
+            <Teacher
+              name={option.name}
+              specialty={option.specialty}
+              image={option.photo}
+              onClick={() => handleTeacherClick(option.id)}
+            />
           </div>
         ))}
       </div>
