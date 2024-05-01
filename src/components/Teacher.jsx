@@ -12,7 +12,7 @@ const Teacher = ({image, specialty, name, onClick}) => {
       <div  className="relative grid h-[20rem] w-full 
                        max-w-[16rem] flex-col items-end 
                        justify-center overflow-hidden rounded-xl 
-                       bg-white text-center 
+                       bg-white text-center
                        text-gray-700 m-4 shadow-lg shadow-black 
                        hover:shadow-indigo-500 transition-600 cursor-pointer"
         onClick={handleClick}

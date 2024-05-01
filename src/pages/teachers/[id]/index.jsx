@@ -31,9 +31,9 @@ const SingleTeacher = () => {
   return (
     <>
       <section  className="pt-10 overflow-hidden text-right">
-        <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
+        <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl ">
           <div className="grid items-center grid-cols-1 md:grid-cols-2">
-            <div>
+            <div className="m-4">
               <h2 className={`${shasenem.className} text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl`}>
                 <br className="block sm:hidden" />
                 👋
@@ -56,7 +56,7 @@ const SingleTeacher = () => {
 
             <div className="relative">
               <Image
-                className="relative h-full"
+                className="relative h-full rounded-lg"
                 src={teacher?.photo}
                 alt={teacher.name}
                 width={1000}
