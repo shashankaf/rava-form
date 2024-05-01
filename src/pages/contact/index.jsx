@@ -1,5 +1,6 @@
 import React from "react";
 import localFont from "next/font/local";
+import Head from "next/head";
 
 const goran = localFont({ src: "../fonts/goran.ttf" });
 const shasenem = localFont({ src: "../fonts/shasenem.ttf" });
@@ -10,6 +11,12 @@ const Contact = () => {
     "https://maps.google.com/maps?q=rava+institute&t=&z=13&ie=UTF8&iwloc=&output=embed";
   const face_link = "https://www.facebook.com/rava.institute"
   return (
+    <>
+      <Head>
+        <title>Rava Institute - Contact Page</title>
+        <meta name="description" content="Rava Institute" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
     <div>
       <div
         className={`${shasenem.className} container my-24 text-xl mx-auto md:px-6`}
@@ -159,6 +166,7 @@ const Contact = () => {
         </section>
       </div>
     </div>
+    </>
   );
 };
 
