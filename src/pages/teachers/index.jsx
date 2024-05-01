@@ -2,6 +2,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { supabase } from "../../lib/supabase";
 import localFont from 'next/font/local';
+import Head from "next/head";
 
 const goran = localFont({ src: '../fonts/goran.ttf' })
 const shasenem = localFont({src: '../fonts/shasenem.ttf'})
@@ -24,6 +25,11 @@ const Teachers = () => {
   }, []);
   return (
     <>
+      <Head>
+        <title>Rava Institute - Teachers</title>
+        <meta name="description" content="Rava Institute" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
       <div className={`${goran.className} bg-white py-24 sm:py-32`}>
         <div className="mx-auto grid max-w-7xl gap-x-8 gap-y-20 px-6 lg:px-8 xl:grid-cols-3">
           <ul

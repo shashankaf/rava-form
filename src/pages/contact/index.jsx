@@ -2,7 +2,6 @@ import React from "react";
 import localFont from "next/font/local";
 import Head from "next/head";
 
-const goran = localFont({ src: "../fonts/goran.ttf" });
 const shasenem = localFont({ src: "../fonts/shasenem.ttf" });
 
 const Contact = () => {
