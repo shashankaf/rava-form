@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { supabase } from "../../lib/supabase";
 import localFont from 'next/font/local';
 import Head from "next/head";
+import Link from "next/link";
 
 const goran = localFont({ src: '../fonts/goran.ttf' })
 const shasenem = localFont({src: '../fonts/shasenem.ttf'})
@@ -23,6 +24,11 @@ const Teachers = () => {
   useEffect(() => {
     fetcher();
   }, []);
+
+  const handleTeacher = (teacherId) => {
+    router.push(`/teachers/${teacherId}`);
+  };
+
   return (
     <>
       <Head>
@@ -38,9 +44,9 @@ const Teachers = () => {
           >
             {teachers?.map((item) => {
               return (
-                <>
+                <Link key={item.id} href={`/teachers/${item.id}`}>
                   <li>
-                    <div className="flex items-center gap-x-6">
+                    <div className="flex border-[1px] border-gray-100 items-center gap-x-6 hover:shadow-sm hover:shadow-black rounded-lg transition-600 p-4">
                       <Image
                         className="h-16 w-16 rounded-full"
                         src={item?.photo}
@@ -57,7 +63,7 @@ const Teachers = () => {
                       </div>
                     </div>
                   </li>
-                </>
+                </Link>
               );
             })}
           </ul>
