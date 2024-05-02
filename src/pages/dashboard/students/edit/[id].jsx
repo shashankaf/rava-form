@@ -6,7 +6,6 @@ import Classes from "../../../../components/Classes";
 import Ragaz from "../../../../components/Ragaz";
 import Blood from "../../../../components/Blood";
 import Travel from "../../../../components/Travel";
-import Lectures from "../../../../components/Lectures";
 import DashCmp from "../../../../components/DashCmp";
 import localFont from "next/font/local";
 import { useAtom } from "jotai";
@@ -19,14 +18,15 @@ import {
   teacherAtom,
   travelAtom,
 } from "../../../../lib/store";
+import Heading from "../../../../components/Heading";
 
 const shasenem = localFont({ src: "../../../fonts/shasenem.ttf" });
 
 const StudentEdit = () => {
   const router = useRouter();
   const [student, setStudent] = useState(null);
-  const [teacherIds, setTeacherIds] = useState([]);
-  const [teachers, setTeachers] = useAtom(teacherAtom);
+  const [teacherIds, setTeacherIds] = useAtom(teacherAtom);
+  const [allTeachers, setAllTeachers] = useState([]);
   const { id } = router.query;
 
   // STUDENT UPDATE
@@ -42,6 +42,7 @@ const StudentEdit = () => {
   const [firstPay, setFirstPay] = useAtom(firstPayAtom);
   const [secondPay, setSecondPay] = useAtom(secondPayAtom);
   const [publish, setPublish] = useState(false);
+  const [selectedTeachers, setSelectedTeachers] = useState([]);
 
   const fetcher = async () => {
     try {
@@ -71,33 +72,26 @@ const StudentEdit = () => {
       console.log(error.message);
     }
   };
-
+  useEffect(() => {
+    fetcher();
+  }, [id]);
   const teacherFetcher = async () => {
     try {
-      const { data, error } = await supabase
-        .from("teacher")
-        .select()
-        .in("id", teacherIds);
+      const { data, error } = await supabase.from("teacher").select();
       if (error) throw Error;
-      setTeachers(data);
+      setSelectedTeachers(teacherIds);
+      setAllTeachers(data);
     } catch (e) {
       console.log(e);
     }
   };
 
   useEffect(() => {
-    fetcher();
-  }, [id]);
-
-  useEffect(() => {
     teacherFetcher();
   }, [teacherIds]);
 
-  if (!student) {
-    return <div></div>;
-  }
-
   const handleUpdate = async () => {
+    const selected = selectedTeachers.map((item) => item.id);
     try {
       const { data, error } = supabase
         .from("student")
@@ -114,6 +108,7 @@ const StudentEdit = () => {
           first_pay: firstPay,
           second_pay: secondPay,
           publish,
+          teacher: selected,
         })
         .eq("id", id);
       if (error) throw Error;
@@ -122,6 +117,37 @@ const StudentEdit = () => {
       console.log(e);
     }
   };
+
+  // Function to handle selection changes
+  const handleTeacherSelect = (teacherId) => {
+    setSelectedTeachers((prevSelected) => {
+      if (prevSelected.includes(teacherId)) {
+        return prevSelected.filter((id) => id !== teacherId);
+      } else {
+        return [...prevSelected, teacherId];
+      }
+    });
+  };
+
+  // Function to check if a teacher is selected
+  const isTeacherSelected = (teacherId) => {
+    return selectedTeachers.includes(teacherId);
+  };
+
+  const teacherCheckboxes = allTeachers.map((teacher) => (
+    <label key={teacher.id} className="flex items-center space-x-2">
+      <input
+        type="checkbox"
+        checked={isTeacherSelected(teacher.id)}
+        onChange={() => handleTeacherSelect(teacher.id)}
+        className="form-checkbox h-5 w-5 text-blue-600 m-2"
+      />
+      <span className="text-lg">{teacher.name}</span>
+    </label>
+  ));
+
+  // JSX for rendering teacher checkboxes
+  const checkboxInput = <div>{teacherCheckboxes}</div>;
 
   return (
     <>
@@ -186,7 +212,8 @@ const StudentEdit = () => {
               نەخێر
             </p>
           </div>
-          {/* <Lectures /> */}
+          <Heading text="مامۆستایانی هەڵبژێردراو" />
+          {checkboxInput}
           <button
             onClick={handleUpdate}
             className={`${shasenem.className} m-auto bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 border border-blue-700 rounded text-xl`}
