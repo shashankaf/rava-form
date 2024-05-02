@@ -4,7 +4,6 @@ import Instructions from "./Instructions";
 import ReactDOMServer from "react-dom/server";
 import Signatures from "./Signatures";
 import localFont from "next/font/local";
-import { useState } from "react";
 import { useAtom } from "jotai";
 import { studentsAtom } from "../lib/store";
 

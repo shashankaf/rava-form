@@ -139,7 +139,7 @@ const TableTeachers = () => {
                     height={30}
                     width={30}
                     alt={teacher.name}
-                    className="rounded-lg"
+                    className="rounded-full w-10 h-10 border-[1px] border-gray-800"
                     />)}
                     </td>
                   <td

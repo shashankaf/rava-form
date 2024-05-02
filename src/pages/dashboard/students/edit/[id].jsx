@@ -1,18 +1,51 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { supabase } from "../../../../lib/supabase";
-import FormPDF from "../../../../components/FormPDF";
+import InputCmp from "../../../../components/InputCmp";
+import Classes from "../../../../components/Classes";
+import Ragaz from "../../../../components/Ragaz";
+import Blood from "../../../../components/Blood";
+import Travel from "../../../../components/Travel";
+import Lectures from "../../../../components/Lectures";
+import DashCmp from "../../../../components/DashCmp";
+import localFont from "next/font/local";
+import { useAtom } from "jotai";
+import {
+  bloodAtom,
+  classAtom,
+  firstPayAtom,
+  ragazAtom,
+  secondPayAtom,
+  teacherAtom,
+  travelAtom,
+} from "../../../../lib/store";
 
-const PDFView = () => {
+const shasenem = localFont({ src: "../../../fonts/shasenem.ttf" });
+
+const StudentEdit = () => {
   const router = useRouter();
   const [student, setStudent] = useState(null);
-  const [teacherIds, setTeacherIds] = useState([])
-  const [teachers, setTeachers] = useState([])
+  const [teacherIds, setTeacherIds] = useState([]);
+  const [teachers, setTeachers] = useAtom(teacherAtom);
   const { id } = router.query;
+
+  // STUDENT UPDATE
+  const [name, setName] = useState("");
+  const [school, setSchool] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const [health, setHealth] = useState("");
+  const [blood, setBlood] = useAtom(bloodAtom);
+  const [travel, setTravel] = useAtom(travelAtom);
+  const [ragaz, setRagaz] = useAtom(ragazAtom);
+  const [clas, setClas] = useAtom(classAtom);
+  const [firstPay, setFirstPay] = useAtom(firstPayAtom);
+  const [secondPay, setSecondPay] = useAtom(secondPayAtom);
+  const [publish, setPublish] = useState(false);
 
   const fetcher = async () => {
     try {
-      let { data: studentData, error } = await supabase
+      let { data: student, error } = await supabase
         .from("student")
         .select(`*, class(*), blood(*), travel(*), ragaz(*), cohort(*)`)
         .eq("id", id)
@@ -20,38 +53,150 @@ const PDFView = () => {
       if (error) {
         throw error;
       }
-      setStudent(studentData);
-      setTeacherIds(student.teacher)
+      setStudent(student);
+      setTeacherIds(student.teacher);
+      setName(student.name || "");
+      setSchool(student.school || "");
+      setPhone(student.phone || "");
+      setAddress(student.address || "");
+      setHealth(student.health || "");
+      setBlood(student.blood || "");
+      setTravel(student.travel || "");
+      setRagaz(student.ragaz || "");
+      setClas(student.class || "");
+      setFirstPay(student.first_pay || "");
+      setSecondPay(student.second_pay || "");
+      setPublish(student.publish || false);
     } catch (error) {
       console.log(error.message);
     }
   };
 
-  useEffect(() => {
-    if (id) {
-      fetcher();
+  const teacherFetcher = async () => {
+    try {
+      const { data, error } = await supabase
+        .from("teacher")
+        .select()
+        .in("id", teacherIds);
+      if (error) throw Error;
+      setTeachers(data);
+    } catch (e) {
+      console.log(e);
     }
+  };
+
+  useEffect(() => {
+    fetcher();
   }, [id]);
 
-  const teacherFetcher = async() => {
-    try {
-      const {data, error} = await supabase.from('teacher').select().in('id', teacherIds)
-      if(error) throw Error;
-      setTeachers(data)
-    } catch(e) {
-      console.log(e)
-    }
-  }
-  console.log(teachers)
   useEffect(() => {
-    teacherFetcher()
-  }, [teacherIds])
-  if(!student) {
-    return <p>Loading...</p>
+    teacherFetcher();
+  }, [teacherIds]);
+
+  if (!student) {
+    return <div></div>;
   }
-  return <>
-    <FormPDF student={student} teachers={teachers} />
-  </>;
+
+  const handleUpdate = async () => {
+    try {
+      const { data, error } = supabase
+        .from("student")
+        .update({
+          name,
+          school,
+          phone,
+          address,
+          health,
+          blood: blood.id,
+          travel: travel.id,
+          ragaz: ragaz.id,
+          class: clas.id,
+          first_pay: firstPay,
+          second_pay: secondPay,
+          publish,
+        })
+        .eq("id", id);
+      if (error) throw Error;
+      router.push("/");
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  return (
+    <>
+      <DashCmp>
+        <div dir="rtl" className="flex flex-col space-y-4 w-2/3">
+          <InputCmp
+            label="ناوی بەشداربوو"
+            placeholder="ناوی سیانییت بنووسە"
+            state={name}
+            setState={setName}
+          />
+          <Classes />
+          <InputCmp
+            label="خوێندنگە"
+            placeholder="ناوی خوێندنگەکەت چیە؟"
+            state={school}
+            setState={setSchool}
+          />
+          <Ragaz />
+          <Blood />
+          <InputCmp
+            label="ژمارەی تەلەفۆن"
+            placeholder="ژمارەی تەلەفۆنەکەت چەندە؟"
+            state={phone}
+            setState={setPhone}
+          />
+          <InputCmp
+            label="ناونیشان"
+            placeholder="ناونیشان - گەڕەک کوێیە؟"
+            state={address}
+            setState={setAddress}
+          />
+          <Travel />
+          <InputCmp
+            label="کێشەی تەندروستی"
+            placeholder="گەر کێشەیەکی تەندروستیت هەیە بینووسە"
+            state={health}
+            setState={setHealth}
+          />
+          <InputCmp
+            label="بڕی پارەی یەکەم"
+            state={firstPay}
+            setState={setFirstPay}
+          />
+          <InputCmp
+            label="بڕی پارەی دووەم"
+            state={secondPay}
+            setState={setSecondPay}
+          />
+          <label>بڵاوکراوەتەوە؟</label>
+          <div className="flex justify-start items-center flex-row flex-wrap">
+            <p
+              onClick={() => setPublish(true)}
+              className={`${publish === true ? "bg-indigo-600" : "bg-gray-400"} ${shasenem.className} hover:bg-indigo-400 transition-400 cursor-pointer text-white py-1 px-6 rounded-lg rounded-tl-none rounded-bl-none text-2xl`}
+            >
+              بەڵێ
+            </p>
+            <p
+              onClick={() => setPublish(false)}
+              className={`${publish === false ? "bg-indigo-600" : "bg-gray-400"} ${shasenem.className} hover:bg-indigo-400 transition-400 cursor-pointer text-white py-1 px-6 rounded-lg rounded-tr-none rounded-br-none text-2xl`}
+            >
+              نەخێر
+            </p>
+          </div>
+          {/* <Lectures /> */}
+          <button
+            onClick={handleUpdate}
+            className={`${shasenem.className} m-auto bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 border border-blue-700 rounded text-xl`}
+          >
+            نوێکردنەوە
+          </button>
+        </div>
+      </DashCmp>
+    </>
+  );
 };
 
-export default PDFView;
+export default StudentEdit;

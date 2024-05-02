@@ -39,7 +39,7 @@ const Ragaz = () => {
           {ragaz.title ? ragaz.title : "رەگەزت چیە؟"}
         </button>
         {isOpen && (
-          <div className="absolute top-full left-0 mt-1 bg-white border border-gray-300 shadow-lg rounded-md z-10">
+          <div className="absolute top-full right-0 mt-1 bg-white border border-gray-300 shadow-lg rounded-md z-10">
             {ragazakan?.map((option) => (
               <div
                 key={option.id}

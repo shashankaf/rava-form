@@ -39,7 +39,7 @@ const Travel = () => {
           {travel.title ? travel.title : "جۆری هاتووچۆکردن"}
         </button>
         {isOpen && (
-          <div className="absolute top-full left-0 mt-1 bg-white border border-gray-300 shadow-lg rounded-md z-10">
+          <div className="absolute top-full right-0 mt-1 bg-white border border-gray-300 shadow-lg rounded-md z-10">
             {travels?.map((option) => (
               <div
                 key={option.id}
