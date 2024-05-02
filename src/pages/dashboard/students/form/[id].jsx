@@ -12,7 +12,7 @@ const PDFView = () => {
 
   const fetcher = async () => {
     try {
-      let { data: studentData, error } = await supabase
+      let { data: student, error } = await supabase
         .from("student")
         .select(`*, class(*), blood(*), travel(*), ragaz(*), cohort(*)`)
         .eq("id", id)
@@ -20,19 +20,12 @@ const PDFView = () => {
       if (error) {
         throw error;
       }
-      setStudent(studentData);
+      setStudent(student);
       setTeacherIds(student.teacher)
     } catch (error) {
       console.log(error.message);
     }
   };
-
-  useEffect(() => {
-    if (id) {
-      fetcher();
-    }
-  }, [id]);
-
   const teacherFetcher = async() => {
     try {
       const {data, error} = await supabase.from('teacher').select().in('id', teacherIds)
@@ -45,6 +38,13 @@ const PDFView = () => {
   useEffect(() => {
     teacherFetcher()
   }, [teacherIds])
+
+  useEffect(() => {
+    fetcher();
+  }, [id]);
+  if (!student) {
+    return <div></div>;
+  }
   return <>
     <FormPDF student={student} teachers={teachers} />
   </>;

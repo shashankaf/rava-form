@@ -40,9 +40,9 @@ const FormTable = ({student, teachers}) => {
           </tr>
           <tr className="bg-white text-right">
             <td className={`${goran.className} border px-4 py-2`}>{teachers?.map((teacher) => (
-                <li key={teacher?.id}>
+                <div key={teacher?.id}>
                   <p className={`${goran.className}`}>{teacher?.name} - {teacher?.specialty}</p>
-                </li>
+                </div>
               ))}</td>
             <td  className={`${goran.className} border px-4 py-2`}>مامۆستای خوازراو</td>
             <td  className={`${goran.className} border px-4 py-2`}>{student?.health}</td>

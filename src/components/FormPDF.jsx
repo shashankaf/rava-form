@@ -19,11 +19,11 @@ function FormPDF({ student, teachers }) {
     return (
       <div className={`${shasenem.className} p-4`}>
         <div className="flex flex-row justify-around">
-          <Image src="/krg.png" height={150} width={150} alt="KRG Logo" />
+          <Image src="/krg.png" height={100} width={100} alt="KRG Logo" />
           <Image
             src="/rava.png"
-            height={150}
-            width={150}
+            height={100}
+            width={100}
             alt="Rava Institute Logo"
           />
         </div>

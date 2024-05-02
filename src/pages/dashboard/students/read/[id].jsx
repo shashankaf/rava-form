@@ -42,7 +42,7 @@ const ReadPage = () => {
     fetcher();
   }, [id]);
   if (!student) {
-    return <div></div>; // You can replace this with a loading spinner or any other loading indicator
+    return <div></div>;
   }
   return (
     <div

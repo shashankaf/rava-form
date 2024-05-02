@@ -42,9 +42,13 @@ const PDFView = () => {
       console.log(e)
     }
   }
+  console.log(teachers)
   useEffect(() => {
     teacherFetcher()
   }, [teacherIds])
+  if(!student) {
+    return <p>Loading...</p>
+  }
   return <>
     <FormPDF student={student} teachers={teachers} />
   </>;
