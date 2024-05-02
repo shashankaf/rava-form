@@ -37,7 +37,7 @@ function FormPDF({ student, teachers }) {
           <h2 className={`${shasenem.className} text-xl font-bold`}>
             بەڕێوەبەرایەتی گشتی پەروەردەی سلێمانی
           </h2>
-          <h2 className={`${shasenem.className} text-xl font-bold`}>
+          <h2 className={`${shasenem.className} text-2xl font-black text-orange-800`}>
             پەیمانگای راڤە
           </h2>
         </div>
