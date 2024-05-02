@@ -17,7 +17,7 @@ function FormPDF({ student, teachers }) {
   const formattedDate = `${today.getFullYear()}/${today.getMonth() + 1}/${today.getDate()}`;
   const pdfJSX = () => {
     return (
-      <div className={`${shasenem.className} p-4`}>
+      <div className={`${shasenem.className} p-4`} style={{backgroundImage: `url(/bgcover.png)`, backgroundSize: '60%', backgroundRepeat: "no-repeat", backgroundPosition: "top right"}}>
         <div className="flex flex-row justify-around">
           <Image src="/krg.png" height={100} width={100} alt="KRG Logo" />
           <Image
@@ -77,7 +77,7 @@ function FormPDF({ student, teachers }) {
       >
         خەزنکردنی فۆرم
       </button>
-    </div>
+      </div>
   );
 }
 
