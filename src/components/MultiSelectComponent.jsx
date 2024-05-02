@@ -59,7 +59,7 @@ const MultiSelectComponent = ({ options, text }) => {
         <p>
           بژاردەکانت{" "}
           {selectedOptions
-            ?.map((id) => options.find((option) => option.id === id).name)
+            ?.map((id) => options.find((option) => option.id === id)?.name)
             .join("، ")}
         </p>
       </div>
