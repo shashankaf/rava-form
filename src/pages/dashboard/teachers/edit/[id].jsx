@@ -1,10 +1,10 @@
 import React from 'react'
 
-const Cohorts = () => {
+const EditTeacher = () => {
   return (
   <>
   </>
   )
 }
 
-export default Cohorts
+export default EditTeacher;
