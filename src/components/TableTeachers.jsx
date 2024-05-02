@@ -23,7 +23,7 @@ const TableTeachers = () => {
     if (text.length === 0) {
       fetcher();
     }
-    const filtered = students.filter(
+    const filtered = teachers.filter(
       (item) =>
         item.name.includes(text) ||
         item.specialty.includes(text),
@@ -108,7 +108,7 @@ const TableTeachers = () => {
                   ناو
                 </th>
                 <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider ">
-                  تایبەتمەندیی
+                  پسپۆڕیی
                 </th>
                 <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider ">
                   وێنە
