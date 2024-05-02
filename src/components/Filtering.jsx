@@ -44,12 +44,12 @@ const Filtering = () => {
   };
 
   return (
-    <div className="flex justify-center gap-1 flex-wrap">
-      <Button text="فلتەرکردن" handleClick={handleClick} />
-      <Classes />
-      <Blood />
-      <Travel />
+    <div dir="rtl" className="flex justify-center gap-1 flex-wrap">
       <Ragaz />
+      <Travel />
+      <Blood />
+      <Classes />
+      <Button text="فلتەرکردن" handleClick={handleClick} />
     </div>
   );
 };

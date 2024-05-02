@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { supabase } from "../../../lib/supabase";
-import FormPDF from "../../../components/FormPDF";
+import { supabase } from "../../../../lib/supabase";
+import FormPDF from "../../../../components/FormPDF";
 
 const PDFView = () => {
   const router = useRouter();

@@ -1,36 +1,15 @@
-import React, { useEffect } from "react";
-import Head from "next/head";
-import DashboardCmp from "../../components/DashboardCmp";
-import Login from "../../components/Login";
-import Signup from "../../components/Signup";
-import { useAtom } from "jotai";
-import { supabase } from "../../lib/supabase";
-import { sessionAtom } from "../../lib/store";
+// pages/dashboard.js
+
+import React from "react";
+import DashCmp from "../../components/DashCmp";
 
 const Dashboard = () => {
-  const [session, setSession] = useAtom(sessionAtom);
-
-  const fetchSession = async () => {
-    const { data, error } = await supabase.auth.getSession();
-    if(error) {
-      console.log(error)
-    }
-    console.log(data)
-    setSession(data.session);
-  };
-  useEffect(() => {
-    fetchSession();
-  }, []);
   return (
     <>
-      <Head>
-        <title>Rava Registeration Form</title>
-        <meta name="description" content="Learner Dashboard - Rava Institute" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      {session === null ? <Login /> : <DashboardCmp />}
-      {/* <Signup /> */}
+      <h1 className={` text-2xl font-bold text-center`}>
+        بەخێربێیت بۆ داشبۆردی راڤە
+      </h1>
+      <DashCmp />
     </>
   );
 };

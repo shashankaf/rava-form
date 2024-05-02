@@ -2,20 +2,21 @@ import React, { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
 import Title from "./Title";
 import { useRouter } from "next/router";
-import { useAtom } from "jotai";
-import { studentsAtom } from "../lib/store";
 import Filtering from "./Filtering";
 import Heading from "./Heading";
 import DashCmp from "./DashCmp";
+import Image from "next/image";
+import CreatePlus from "./CreatePlus";
 
-const DashboardCmp = () => {
-  const [students, setStudents] = useAtom(studentsAtom);
+const TableTeachers = () => {
+  const [teachers, setTeachers] = useState([]);
   const [text, setText] = useState("");
   const [errMsg, setErrMsg] = useState("");
 
-  const handleForm = (studentId) => {
-    router.push(`/dashboard/students/form/${studentId}`);
-    console.log(studentId);
+  const router = useRouter()
+
+  const handleCreate = () => {
+    router.push(`/dashboard/teachers/create`);
   };
 
   const handleSearch = () => {
@@ -25,34 +26,29 @@ const DashboardCmp = () => {
     const filtered = students.filter(
       (item) =>
         item.name.includes(text) ||
-        item.school.includes(text) ||
-        item.address.includes(text) ||
-        item.health.includes(text) ||
-        item.phone.includes(text),
+        item.specialty.includes(text),
     );
-    setStudents(filtered);
+    setTeachers(filtered);
   };
 
   const fetcher = async () => {
     try {
-      let { data: student, error } = await supabase.from("student").select("*");
+      let { data, error } = await supabase.from("teacher").select("*");
       if (error) {
         throw error;
       }
-      setStudents(student);
+      setTeachers(data);
     } catch (error) {
       console.log(error.message);
     }
   };
 
-  const router = useRouter();
-
-  const handleClick = (studentId) => {
-    router.push(`/dashboard/students/read/${studentId}`);
+  const handleClick = (teacherId) => {
+    router.push(`/dashboard/teachers/read/${teacherId}`);
   };
 
-  const handleEdit = (studentId) => {
-    router.push(`/dashboard/students/edit/${studentId}`);
+  const handleEdit = (teacherId) => {
+    router.push(`/dashboard/teachers/edit/${teacherId}`);
   };
 
   useEffect(() => {
@@ -63,21 +59,21 @@ const DashboardCmp = () => {
 
   const handleDelete = async (id) => {
     try {
-      const { error } = await supabase.from("student").delete().eq("id", id);
+      const { error } = await supabase.from("teacher").delete().eq("id", id);
 
       if (error) {
         throw error;
       }
       setIsDeleted(true); // Set state to indicate deletion is done
     } catch (error) {
-      console.error("Error deleting student:", error.message);
+      console.error("Error deleting teacher:", error.message);
     }
   };
 
   useEffect(() => {
     if (isDeleted) {
       setIsDeleted(false); // Reset state
-      window.location.reload(); // Refresh the page
+      router.reload(); // Refresh the page
     }
   }, [isDeleted]);
 
@@ -87,7 +83,7 @@ const DashboardCmp = () => {
         <div dir="rtl" className="flex justify-center">
           {errMsg}
         </div>
-        <Title text="لیستی خوێندکارانی پەیمانگای راڤە" />
+        <Title text="لیستی مامۆستایانی پەیمانگای راڤە" />
         <div className="flex justify-center items-center">
           <button onClick={handleSearch} className="text-3xl">
             🔍
@@ -97,69 +93,57 @@ const DashboardCmp = () => {
             value={text}
             onChange={(e) => setText(e.target.value)}
             className="border-2 border-gray-300 rounded-md px-4 py-2 m-2 outline-none focus:border-indigo-400 focus:border-2 text-right"
-            placeholder="گەڕان بەدوای خوێندکاردا"
+            placeholder="گەڕان بەدوای مامۆستایان"
           />
           <Heading text="گەڕان" />
         </div>
-        <div className="flex justify-center items-center">
-          <Heading text="فلتەرکردن" />
-          <Filtering />
+        <div className="">
+        <CreatePlus handleClick={handleCreate} />
         </div>
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200 text-right">
             <thead className="bg-gray-50">
               <tr>
-                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">
+                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider ">
                   ناو
                 </th>
-                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">
-                  پۆل
+                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider ">
+                  تایبەتمەندیی
+                </th>
+                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider ">
+                  وێنە
                 </th>
                 <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">
-                  خوێندنگە
-                </th>
-                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">
-                  تەلەفۆن
-                </th>
-                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">
-                  مامۆستایانی خوازراو
-                </th>
-                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
                   بینین
                 </th>
-                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">
                   نوێکردنەوە
                 </th>
-                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">
                   سڕینەوە
-                </th>
-                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  فۆرم
                 </th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {students.map((student) => (
-                <tr key={student.id}>
+              {teachers?.map((teacher) => (
+                <tr key={teacher?.id}>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {student.name}
+                    {teacher?.name}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {student.class}
+                    {teacher?.specialty}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {student.school}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {student.phone}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {student?.teachers?.map(
-                      (item) => `\[${item.name} - ${item.profession}]\ `,
-                    )}
-                  </td>
+                    {teacher.photo && (<Image
+                    src={teacher?.photo}
+                    height={30}
+                    width={30}
+                    alt={teacher.name}
+                    className="rounded-lg"
+                    />)}
+                    </td>
                   <td
-                    onClick={() => handleClick(student.id)}
+                    onClick={() => handleClick(teacher?.id)}
                     className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 cursor-pointer hover:bg-gray-200 transition-300"
                   >
                     <svg
@@ -178,7 +162,7 @@ const DashboardCmp = () => {
                     </svg>
                   </td>
                   <td
-                    onClick={() => handleEdit(student.id)}
+                    onClick={() => handleEdit(teacher.id)}
                     className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 cursor-pointer hover:bg-gray-100"
                   >
                     <svg
@@ -197,7 +181,7 @@ const DashboardCmp = () => {
                     </svg>
                   </td>
                   <td
-                    onClick={() => handleDelete(student.id)}
+                    onClick={() => handleDelete(teacher.id)}
                     className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 cursor-pointer hover:bg-gray-200 transition-300"
                   >
                     <svg
@@ -215,29 +199,7 @@ const DashboardCmp = () => {
                       />
                     </svg>
                   </td>
-                  <td
-                    onClick={() => handleForm(student.id)}
-                    className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 cursor-pointer hover:bg-gray-200 transition-300"
-                  >
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      strokeWidth={0}
-                      className="w-10 h-10 m-auto"
-                    >
-                      <path
-                        fill="currentColor"
-                        d="M3.5 8H3V7h.5a.5.5 0 010 1zM7 10V7h.5a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H7z"
-                      />
-                      <path
-                        fill="currentColor"
-                        fillRule="evenodd"
-                        d="M1 1.5A1.5 1.5 0 012.5 0h8.207L14 3.293V13.5a1.5 1.5 0 01-1.5 1.5h-10A1.5 1.5 0 011 13.5v-12zM3.5 6H2v5h1V9h.5a1.5 1.5 0 100-3zm4 0H6v5h1.5A1.5 1.5 0 009 9.5v-2A1.5 1.5 0 007.5 6zm2.5 5V6h3v1h-2v1h1v1h-1v2h-1z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </td>
-                </tr>
+                 </tr>
               ))}
             </tbody>
           </table>
@@ -247,4 +209,4 @@ const DashboardCmp = () => {
   );
 };
 
-export default DashboardCmp;
+export default TableTeachers;
