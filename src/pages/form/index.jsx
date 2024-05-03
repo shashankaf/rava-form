@@ -11,7 +11,7 @@ import { useAtom } from "jotai";
 import {
   bloodAtom,
   classAtom,
-  isOpenClass,
+  modalOpenAtom,
   ragazAtom,
   teacherAtom,
   travelAtom,
@@ -19,6 +19,9 @@ import {
 import { supabase } from "../../lib/supabase";
 import Image from "next/image";
 import localFont from "next/font/local";
+import Heading from "../../components/Heading";
+import Modal from "../../components/Modal";
+import Link from "next/link";
 
 const shasenem = localFont({ src: "../fonts/shasenem.ttf" });
 
@@ -26,7 +29,7 @@ export default function Home() {
   const [name, setName] = useState("");
   const [school, setSchool] = useState("");
   const [phone, setPhone] = useState("");
-  const [secondPhone, setSecondPhone] = useState("")
+  const [secondPhone, setSecondPhone] = useState("");
   const [address, setAddress] = useState("");
   const [health, setHealth] = useState("");
   const [blood] = useAtom(bloodAtom);
@@ -39,6 +42,7 @@ export default function Home() {
     "https://grocviikgcjxaxnkdvrv.supabase.co/storage/v1/object/public/general/paimangai_rava.jpg";
   const [errorSubmit, setErrorSubmit] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [modalOpen, setModalOpen] = useAtom(modalOpenAtom);
 
   const handleSave = async () => {
     const info = {
@@ -59,7 +63,8 @@ export default function Home() {
     if (!name || name.length < 2 || name.length > 50)
       setErrors([...errors, "تکایە ناوێکی گونجاو هەڵبژێرە"]);
     if (!clas.id) setErrors([...errors, "تکایە پۆلەکەت هەڵبژێرە"]);
-    if(phone.length < 3) setErrors([...errors, "تکایە ژمارەی مۆبایل داخڵ بکە"])
+    if (phone.length < 3)
+      setErrors([...errors, "تکایە ژمارەی مۆبایل داخڵ بکە"]);
     if (!teacher.length)
       setErrors([...errors, "تکایە مامۆستایەک یان زیاتر هەڵبژێرە"]);
     if (!ragaz.id) setErrors([...errors, "تکایە رەگەزت هەڵبژێرە"]);
@@ -70,17 +75,23 @@ export default function Home() {
     const { error } = await supabase.from("student").insert(info);
 
     if (error) {
-      console.log(error);
       setErrorSubmit(true);
     } else {
       setSuccess(true);
     }
   };
   if (errorSubmit) {
-    return <Title text="ببورە هەڵەیەک روویداوە، تکایە هەوڵبدەرەوە" />;
+    return (
+      <>
+        <div>
+          <Link href="/form">گەڕانەوە</Link>
+          <Title text="ببورە هەڵەیەک روویداوە، تکایە هەوڵبدەرەوە" />
+        </div>
+      </>
+    );
   }
   if (success) {
-    return <Title text="زۆر سوپاس، فۆرمەکەت گەیشت" />;
+    setModalOpen(true);
   }
   return (
     <>
@@ -93,7 +104,10 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex items-center justify-center mb-12" >
+      <Modal title="فۆرمەکەت گەیشت">
+        <Heading text="سوپاس، بە زووترین کات وەڵامت دەدرێتەوە" />
+      </Modal>
+      <main className="flex items-center justify-center mb-12">
         <div className="w-full max-w-2xl px-4 py-8 bg-white shadow-lg rounded-lg">
           <Image
             src={logo}
@@ -153,7 +167,11 @@ export default function Home() {
             </button>
           </div>
           {errors.map((item, index) => (
-            <p key={index} style={{fontFamily: shasenem.className}} className="block text-orange-900 font-bold text-xl text-center my-4">
+            <p
+              key={index}
+              style={{ fontFamily: shasenem.className }}
+              className="block text-orange-900 font-bold text-xl text-center my-4"
+            >
               {item}
             </p>
           ))}
