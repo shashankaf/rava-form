@@ -21,7 +21,7 @@ const Signup = () => {
     if(error) {
       setErrorMsg("هەڵەیەک روویداوە")
     }
-    return <Modal title="ئیمەیلێکت بەدەست گەیشت"><Heading text="تکایە پشتڕاستی خاوەندارێتی ئیمەیلەکەت بکەرەوە"></Modal>
+    return <Modal title="ئیمەیلێکت بەدەست گەیشت"><Heading text="تکایە پشتڕاستی خاوەندارێتی ئیمەیلەکەت بکەرەوە" /></Modal>
   }
 
   return (
