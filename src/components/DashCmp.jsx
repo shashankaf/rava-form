@@ -54,6 +54,12 @@ const Dashboard = ({ children }) => {
         >
           خولەکان
         </Link>
+        <Link
+          className={`${shasenem.className} block py-4 px-6 hover:bg-gray-200 transition-400`}
+          href="/dashboard/expenses"
+        >
+          سندوق
+        </Link>
         <div
           className={`${shasenem.className} cursor-pointer block py-4 px-6 hover:bg-gray-300 transition-400`}
           onClick={signOut}
