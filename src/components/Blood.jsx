@@ -29,11 +29,19 @@ const Blood = () => {
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
+
+  const blurEffect = () => {
+    setTimeout(() => {
+      setIsOpen(false)
+    }, 100)
+  }
+
   return (
     <>
       <div className={`${shasenem.className} text-xl relative`}>
         <button
           onClick={toggleDropdown}
+          onBlur={blurEffect}
           className="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-400 min-w-48"
         >
           {blood.title ? blood.title : "جۆری خوێنەکەت چیە؟"}

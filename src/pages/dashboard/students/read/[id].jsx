@@ -25,6 +25,7 @@ const ReadPage = () => {
       console.log(error.message);
     }
   };
+
   const teacherFetcher = async() => {
     try {
       const {data, error} = await supabase.from('teacher').select().in('id', teacherIds)
@@ -41,6 +42,7 @@ const ReadPage = () => {
   useEffect(() => {
     fetcher();
   }, [id]);
+
   if (!student) {
     return <div></div>;
   }
@@ -59,7 +61,7 @@ const ReadPage = () => {
             </div>
             <div>
               <h2 className="text-lg font-semibold mb-2">خوێندنگە:</h2>
-              <p>{student?.school?.title}</p>
+              <p>{student?.school}</p>
             </div>
             <div>
               <h2 className="text-lg font-semibold mb-2">بڕی پارەی یەکەم</h2>
@@ -80,6 +82,10 @@ const ReadPage = () => {
             <div>
               <h2 className="text-lg font-semibold mb-2">تەلەفۆن: </h2>
               <p>{student?.phone}</p>
+            </div>
+            <div>
+              <h2 className="text-lg font-semibold mb-2">تەلەفۆنی ماڵەوە: </h2>
+              <p>{student?.second_phone}</p>
             </div>
             <div>
               <h2 className="text-lg font-semibold mb-2">ناونیشان: </h2>

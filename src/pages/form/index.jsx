@@ -11,6 +11,7 @@ import { useAtom } from "jotai";
 import {
   bloodAtom,
   classAtom,
+  isOpenClass,
   ragazAtom,
   teacherAtom,
   travelAtom,
@@ -25,6 +26,7 @@ export default function Home() {
   const [name, setName] = useState("");
   const [school, setSchool] = useState("");
   const [phone, setPhone] = useState("");
+  const [secondPhone, setSecondPhone] = useState("")
   const [address, setAddress] = useState("");
   const [health, setHealth] = useState("");
   const [blood] = useAtom(bloodAtom);
@@ -45,6 +47,7 @@ export default function Home() {
       school,
       blood: blood?.id,
       phone,
+      second_phone: secondPhone,
       address,
       travel: travel?.id,
       health,
@@ -56,6 +59,7 @@ export default function Home() {
     if (!name || name.length < 2 || name.length > 50)
       setErrors([...errors, "تکایە ناوێکی گونجاو هەڵبژێرە"]);
     if (!clas.id) setErrors([...errors, "تکایە پۆلەکەت هەڵبژێرە"]);
+    if(phone.length < 3) setErrors([...errors, "تکایە ژمارەی مۆبایل داخڵ بکە"])
     if (!teacher.length)
       setErrors([...errors, "تکایە مامۆستایەک یان زیاتر هەڵبژێرە"]);
     if (!ragaz.id) setErrors([...errors, "تکایە رەگەزت هەڵبژێرە"]);
@@ -89,7 +93,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex items-center justify-center mb-12">
+      <main className="flex items-center justify-center mb-12" >
         <div className="w-full max-w-2xl px-4 py-8 bg-white shadow-lg rounded-lg">
           <Image
             src={logo}
@@ -120,6 +124,12 @@ export default function Home() {
               placeholder="ژمارەی تەلەفۆنەکەت چەندە؟"
               state={phone}
               setState={setPhone}
+            />
+            <InputCmp
+              label="ژمارەی تەلەفۆنی ماڵەوە"
+              placeholder="ژمارەی تەلەفۆنی ماڵەوەتان چەندە؟"
+              state={secondPhone}
+              setState={setSecondPhone}
             />
             <InputCmp
               label="ناونیشان"

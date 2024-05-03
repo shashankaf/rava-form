@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAtom } from "jotai";
-import { classAtom } from "../lib/store";
+import { classAtom, isOpenClass } from "../lib/store";
 import { supabase } from "@/lib/supabase";
 import localFont from 'next/font/local';
 
@@ -8,7 +8,7 @@ const shasenem = localFont({src: '../pages/fonts/shasenem.ttf'})
 
 const Classes = () => {
   const [clas, setClas] = useAtom(classAtom);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useAtom(isOpenClass);
   const [classes, setClasses] = useState([]);
   const handleSelect = (option) => {
     setClas(option);
@@ -30,11 +30,18 @@ const Classes = () => {
     setIsOpen(!isOpen);
   };
 
+  const blurEffect = () => {
+    setTimeout(() => {
+      setIsOpen(false)
+    }, 100)
+  }
+
   return (
     <>
-      <div className={`${shasenem.className} relative text-xl`}>
+      <div className={`${shasenem.className} relative text-xl`} >
         <button
           onClick={toggleDropdown}
+          onBlur={blurEffect}
           className="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-400 min-w-48"
         >
           {clas.title ? clas.title : "لە پۆلی چەندیت؟"}

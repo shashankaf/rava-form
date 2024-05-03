@@ -1,10 +1,9 @@
+import { isOpenClass } from "@/lib/store";
+import { useAtom } from "jotai";
+import React from "react";
 
-import { isOpenClass } from '@/lib/store';
-import { useAtom } from 'jotai';
-import React, { useState } from 'react';
-
-const Dropdown = ({options, text, handleSelect}) => {
-  const [isOpen, setIsOpen] = useAtom(isOpenClass)
+const Dropdown = ({ options, text, handleSelect }) => {
+  const [isOpen, setIsOpen] = useAtom(isOpenClass);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);

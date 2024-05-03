@@ -33,6 +33,7 @@ const StudentEdit = () => {
   const [name, setName] = useState("");
   const [school, setSchool] = useState("");
   const [phone, setPhone] = useState("");
+  const [secondPhone, setSecondPhone] = useState("");
   const [address, setAddress] = useState("");
   const [health, setHealth] = useState("");
   const [blood, setBlood] = useAtom(bloodAtom);
@@ -59,6 +60,7 @@ const StudentEdit = () => {
       setName(student.name || "");
       setSchool(student.school || "");
       setPhone(student.phone || "");
+      setSecondPhone(student.second_phone || "");
       setAddress(student.address || "");
       setHealth(student.health || "");
       setBlood(student.blood || "");
@@ -99,6 +101,7 @@ const StudentEdit = () => {
           name,
           school,
           phone,
+          second_phone: secondPhone,
           address,
           health,
           blood: blood.id,
@@ -173,6 +176,12 @@ const StudentEdit = () => {
             placeholder="ژمارەی تەلەفۆنەکەت چەندە؟"
             state={phone}
             setState={setPhone}
+          />
+          <InputCmp
+            label="ژمارەی تەلەفۆنی ماڵەوە"
+            placeholder="ژمارەی تەلەفۆنی ماڵەوە چەندە؟"
+            state={secondPhone}
+            setState={setSecondPhone}
           />
           <InputCmp
             label="ناونیشان"
