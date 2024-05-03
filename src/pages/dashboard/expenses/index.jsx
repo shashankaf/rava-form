@@ -1,12 +1,13 @@
 import React from "react";
 import AuthLayout from "../../../components/AuthLayout";
 import DashCmp from "../../../components/DashCmp";
+import IncomeForm from "../../../components/expenses/IncomeForm";
 
 const Expenses = () => {
   return (
     <AuthLayout>
       <DashCmp>
-        <p>snduq</p>
+        <IncomeForm />
       </DashCmp>
     </AuthLayout>
   );

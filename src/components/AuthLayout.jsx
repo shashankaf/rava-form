@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
 import { useRouter } from "next/router";
+import Navbar from "./Navbar";
 
 const AuthLayout = ({ children }) => {
   const router = useRouter();
@@ -19,14 +20,13 @@ const AuthLayout = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    // Only execute router.push on the client side and when loading is false
     if (typeof window !== 'undefined' && !loading && !user) {
       router.push("/login");
     }
   }, [loading, user]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div dir="rtl"><Navbar><div className="flex justify-center items-center"><p className="m-10 text-2xl">چاوەڕوانکە...</p></div></Navbar></div>;
   }
 
   return <>{children}</>;
