@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Head from "next/head";
 import Link from "next/link";
 import localFont from "next/font/local";
@@ -60,9 +60,9 @@ export default function Home() {
               </div>
               <div className="hidden py-8 mt-16 border-y border-gray-100 dark:border-gray-800 sm:flex justify-between">
                 <div className="text-left">
-                  <h6 className="text-lg font-semibold text-gray-700">
+                  <Link href="/dashboard" className="text-lg font-semibold text-gray-700">
                     گونجاوترین نرخ
-                  </h6>
+                  </Link>
                 </div>
                 <div className="text-left">
                   <h6 className="text-lg font-semibold text-gray-700">

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
 import Title from "./Title";
 import { useRouter } from "next/router";
-import Filtering from "./Filtering";
 import Heading from "./Heading";
 import DashCmp from "./DashCmp";
 import Image from "next/image";

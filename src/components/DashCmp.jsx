@@ -4,7 +4,6 @@
 import React from 'react';
 import Link from 'next/link';
 import localFont from "next/font/local";
-import Head from "next/head";
 
 const shasenem = localFont({ src: "../pages/fonts/shasenem.ttf" });
 
