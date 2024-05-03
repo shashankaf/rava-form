@@ -58,7 +58,7 @@ export default function Home() {
                   </span>
                 </Link>
               </div>
-              <div className="hidden py-8 mt-16 border-y border-gray-100 dark:border-gray-800 sm:flex justify-between">
+              <div className="py-8 mt-16 border-y border-gray-100 dark:border-gray-800 sm:flex justify-between">
                 <div className="text-left">
                   <Link href="/dashboard" className="text-lg font-semibold text-gray-700">
                     گونجاوترین نرخ
