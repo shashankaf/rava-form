@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { supabase } from "../lib/supabase";
-import localFont from 'next/font/local';
+import localFont from "next/font/local";
 import { useRouter } from "next/router";
 
-const shasenem = localFont({src: '../pages/fonts/shasenem.ttf'})
+const shasenem = localFont({ src: "../pages/fonts/shasenem.ttf" });
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
-  const router = useRouter()
+  const router = useRouter();
 
   async function signInWithEmail(e) {
     e.preventDefault();
@@ -20,11 +20,12 @@ const Login = () => {
       password,
     });
     if (error) {
-      setErrorMsg("هەڵەیەک روویداوە");
+      setErrorMsg(error.message);
+    } else {
+      router.push("/dashboard");
     }
-    console.log(data);
-    router.reload()
   }
+
   return (
     <section
       style={{ fontFamily: shasenem.className }}
@@ -93,7 +94,6 @@ const Login = () => {
                 />
                 <button
                   type="submit"
-                  onClick={signInWithEmail}
                   className="w-full text-white bg-indigo-600 
                              rounded-lg px-5 py-2.5 text-center mt-8"
                 >

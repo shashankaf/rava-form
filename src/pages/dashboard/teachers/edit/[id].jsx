@@ -5,6 +5,7 @@ import InputCmp from "../../../../components/InputCmp";
 import DashCmp from "../../../../components/DashCmp";
 import Title from "../../../../components/Title";
 import Image from "next/image";
+import AuthLayout from "../../../../components/AuthLayout";
 
 const EditTeacher = () => {
   const router = useRouter();
@@ -87,7 +88,7 @@ const EditTeacher = () => {
     return <p>...</p>;
   }
   return (
-    <>
+    <AuthLayout>
       <DashCmp>
         <Title text="نوێکردنەوەی مامۆستا" />
         <InputCmp label="ناوی مامۆستا" state={name} setState={setName} />
@@ -116,7 +117,7 @@ const EditTeacher = () => {
           </div>
         </div>
       </DashCmp>
-    </>
+    </AuthLayout>
   );
 };
 

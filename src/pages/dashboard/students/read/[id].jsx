@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { supabase } from "../../../../lib/supabase";
+import AuthLayout from "../../../../components/AuthLayout";
 
 const ReadPage = () => {
   const router = useRouter();
@@ -47,6 +48,7 @@ const ReadPage = () => {
     return <div></div>;
   }
   return (
+    <AuthLayout>
     <div
       className="min-h-screen bg-gray-100 py-6 sm:py-12 px-4 sm:px-6 lg:px-8"
       dir="rtl"
@@ -117,6 +119,7 @@ const ReadPage = () => {
         </div>
       </div>
     </div>
+    </AuthLayout>
   );
 };
 

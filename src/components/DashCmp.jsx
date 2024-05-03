@@ -1,21 +1,20 @@
 
-// pages/dashboard.js
-
 import React from 'react';
 import Link from 'next/link';
 import localFont from "next/font/local";
+import { supabase } from '../lib/supabase';
+import { useRouter } from 'next/router';
 
 const shasenem = localFont({ src: "../pages/fonts/shasenem.ttf" });
 
 const Dashboard = ({children}) => {
-
+const router = useRouter()
   const signOut = async () => {
     const { error } = await supabase.auth.signOut();
     if (error) {
       setErrMsg("ببورە هەڵەیەک روویداوە");
-      console.log(error);
     } else {
-      router.reload();
+      router.reload()
     }
   };
 

@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Head from "next/head";
-import DashCmp from "../../../components/DashCmp";
 import TableTeachers from "../../../components/TableTeachers";
+import AuthLayout from "../../../components/AuthLayout";
 
 const TeachersDashboard = () => {
 
   return (
-    <>
+    <AuthLayout>
       <Head>
         <title>Rava Teachers Dashboard</title>
         <meta name="description" content="Learner Dashboard - Rava Institute" />
@@ -14,7 +14,7 @@ const TeachersDashboard = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <TableTeachers />
-    </>
+    </AuthLayout>
   );
 };
 

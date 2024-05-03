@@ -19,6 +19,7 @@ import {
   travelAtom,
 } from "../../../../lib/store";
 import Heading from "../../../../components/Heading";
+import AuthLayout from "../../../../components/AuthLayout";
 
 const shasenem = localFont({ src: "../../../fonts/shasenem.ttf" });
 
@@ -153,7 +154,7 @@ const StudentEdit = () => {
   const checkboxInput = <div>{teacherCheckboxes}</div>;
 
   return (
-    <>
+    <AuthLayout>
       <DashCmp>
         <div dir="rtl" className="flex flex-col space-y-4 w-2/3">
           <InputCmp
@@ -231,7 +232,7 @@ const StudentEdit = () => {
           </button>
         </div>
       </DashCmp>
-    </>
+    </AuthLayout>
   );
 };
 

@@ -2,12 +2,13 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { supabase } from "../../../../lib/supabase";
 import FormPDF from "../../../../components/FormPDF";
+import AuthLayout from "../../../../components/AuthLayout";
 
 const PDFView = () => {
   const router = useRouter();
   const [student, setStudent] = useState(null);
-  const [teacherIds, setTeacherIds] = useState([])
-  const [teachers, setTeachers] = useState([])
+  const [teacherIds, setTeacherIds] = useState([]);
+  const [teachers, setTeachers] = useState([]);
   const { id } = router.query;
 
   const fetcher = async () => {
@@ -21,23 +22,26 @@ const PDFView = () => {
         throw error;
       }
       setStudent(student);
-      setTeacherIds(student.teacher)
+      setTeacherIds(student.teacher);
     } catch (error) {
       console.log(error.message);
     }
   };
-  const teacherFetcher = async() => {
+  const teacherFetcher = async () => {
     try {
-      const {data, error} = await supabase.from('teacher').select().in('id', teacherIds)
-      if(error) throw Error;
-      setTeachers(data)
-    } catch(e) {
-      console.log(e)
+      const { data, error } = await supabase
+        .from("teacher")
+        .select()
+        .in("id", teacherIds);
+      if (error) throw Error;
+      setTeachers(data);
+    } catch (e) {
+      console.log(e);
     }
-  }
+  };
   useEffect(() => {
-    teacherFetcher()
-  }, [teacherIds])
+    teacherFetcher();
+  }, [teacherIds]);
 
   useEffect(() => {
     fetcher();
@@ -45,9 +49,11 @@ const PDFView = () => {
   if (!student) {
     return <div></div>;
   }
-  return <>
-    <FormPDF student={student} teachers={teachers} />
-  </>;
+  return (
+    <AuthLayout>
+      <FormPDF student={student} teachers={teachers} />
+    </AuthLayout>
+  );
 };
 
 export default PDFView;

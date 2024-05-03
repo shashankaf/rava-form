@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { supabase } from "../lib/supabase";
+import Modal from "../components/Modal";
+import Heading from "./Heading";
 
 const Signup = () => {
 
@@ -19,7 +21,7 @@ const Signup = () => {
     if(error) {
       setErrorMsg("هەڵەیەک روویداوە")
     }
-    console.log(data)
+    return <Modal title="ئیمەیلێکت بەدەست گەیشت"><Heading text="تکایە پشتڕاستی خاوەندارێتی ئیمەیلەکەت بکەرەوە"></Modal>
   }
 
   return (

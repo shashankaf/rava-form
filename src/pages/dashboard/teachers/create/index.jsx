@@ -4,6 +4,7 @@ import { supabase } from "../../../../lib/supabase";
 import InputCmp from "../../../../components/InputCmp";
 import DashCmp from "../../../../components/DashCmp";
 import Title from "../../../../components/Title";
+import AuthLayout from "../../../../components/AuthLayout";
 
 const CreateTeacher = () => {
   const [name, setName] = useState("");
@@ -61,7 +62,7 @@ const CreateTeacher = () => {
   };
 
   return (
-    <>
+    <AuthLayout>
       <Title text="زیادکردنی مامۆستا" />
       <DashCmp>
         <InputCmp
@@ -105,7 +106,7 @@ const CreateTeacher = () => {
           Create Teacher
         </button>
       </DashCmp>
-    </>
+    </AuthLayout>
   );
 };
 
