@@ -33,10 +33,10 @@ const FormTable = ({student, teachers}) => {
             <td  className={`${goran.className} border px-4 py-2`}>ناونیشان</td>
           </tr>
           <tr className="bg-white text-right">
-            <td  className={`${goran.className} border px-4 py-2`}>{student.second_pay}</td>
-            <td  className={`${goran.className} border px-4 py-2`}>بڕی واسڵکراو \ ٢</td>
-            <td  className={`${goran.className} border px-4 py-2`}>{student?.first_pay}</td>
-            <td  className={`${goran.className} border px-4 py-2`}>بڕی واسڵکراو \ ١</td>
+            <td  className={`${goran.className} border px-4 py-2`}>{student.secondpay}</td>
+            <td  className={`${goran.className} border px-4 py-2`}>بڕی پارەی دووەم</td>
+            <td  className={`${goran.className} border px-4 py-2`}>{student?.pay}</td>
+            <td  className={`${goran.className} border px-4 py-2`}>بڕی پارەی یەکەم</td>
           </tr>
           <tr className="bg-white text-right">
             <td className={`${goran.className} border px-4 py-2`}>{teachers?.map((teacher) => (

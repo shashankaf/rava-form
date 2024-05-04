@@ -34,7 +34,7 @@ const Travel = () => {
   const blurEffect = () => {
     setTimeout(() => {
       setIsOpen(false)
-    }, 150)
+    }, 250)
   }
 
   return (

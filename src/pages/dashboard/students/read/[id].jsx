@@ -67,11 +67,11 @@ const ReadPage = () => {
             </div>
             <div>
               <h2 className="text-lg font-semibold mb-2">بڕی پارەی یەکەم</h2>
-              <p>{student?.first_pay}</p>
+              <p>{student?.pay}</p>
             </div>
             <div>
               <h2 className="text-lg font-semibold mb-2">بڕی پارەی دووەم</h2>
-              <p>{student?.second_pay}</p>
+              <p>{student?.secondpay}</p>
             </div>
             <div>
               <h2 className="text-lg font-semibold mb-2">خول</h2>

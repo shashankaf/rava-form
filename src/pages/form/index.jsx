@@ -36,6 +36,8 @@ export default function Home() {
   const [travel] = useAtom(travelAtom);
   const [ragaz] = useAtom(ragazAtom);
   const [clas] = useAtom(classAtom);
+  const [pay, setPay] = useState("");
+  const [secondpay, setSecondpay] = useState("");
   const [teacher] = useAtom(teacherAtom);
   const [errors, setErrors] = useState([]);
   const logo =
@@ -51,6 +53,8 @@ export default function Home() {
       school,
       blood: blood?.id,
       phone,
+      pay,
+      secondpay,
       second_phone: secondPhone,
       address,
       travel: travel?.id,
@@ -91,7 +95,10 @@ export default function Home() {
     );
   }
   if (success) {
-    setModalOpen(true);
+    setTimeout(() => {
+      setModalOpen(true);
+    }, 3000);
+    router.push("/")
   }
   return (
     <>

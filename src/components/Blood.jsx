@@ -33,7 +33,7 @@ const Blood = () => {
   const blurEffect = () => {
     setTimeout(() => {
       setIsOpen(false)
-    }, 100)
+    }, 250)
   }
 
   return (

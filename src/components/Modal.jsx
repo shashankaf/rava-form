@@ -21,10 +21,10 @@ const Modal = ({ title, children }) => {
               <div className="flex items-start justify-between p-5 border-b border-gray-200 rounded-t">
                 <h3 className={`${shasenem.className} text-lg font-semibold`}>{title}</h3>
                 <button
-                  className="p-1 bg-transparent border-0 text-black opacity-50 float-left text-3xl leading-none font-semibold outline-none focus:outline-none"
+                  className="p-1 hover:text-gray-900 text-gray-700 duration-400 bg-transparent border-0 text-black opacity-50 float-left text-3xl leading-none font-semibold outline-none"
                   onClick={closeModal}
                 >
-                  <span className="text-black h-6 w-6 text-2xl block outline-none focus:outline-none">×</span>
+                  ×
                 </button>
               </div>
               <div className="relative p-6">{children}</div>
@@ -35,7 +35,7 @@ const Modal = ({ title, children }) => {
       {modalOpen && (
         <div className="fixed inset-0 z-40 bg-black opacity-25"></div>
       )}
-    </>
+     </>
   );
 };
 

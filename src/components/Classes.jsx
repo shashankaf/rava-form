@@ -33,7 +33,7 @@ const Classes = () => {
   const blurEffect = () => {
     setTimeout(() => {
       setIsOpen(false)
-    }, 100)
+    }, 250)
   }
 
   return (

@@ -121,9 +121,6 @@ const DashboardCmp = () => {
                 <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">
                   تەلەفۆن
                 </th>
-                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">
-                  مامۆستایانی خوازراو
-                </th>
                 <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
                   بینین
                 </th>
@@ -152,11 +149,6 @@ const DashboardCmp = () => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                     {student.phone}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {student?.teachers?.map(
-                      (item) => `\[${item.name} - ${item.profession}]\ `,
-                    )}
                   </td>
                   <td
                     onClick={() => handleClick(student.id)}

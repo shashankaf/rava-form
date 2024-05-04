@@ -12,9 +12,7 @@ import { useAtom } from "jotai";
 import {
   bloodAtom,
   classAtom,
-  firstPayAtom,
   ragazAtom,
-  secondPayAtom,
   teacherAtom,
   travelAtom,
 } from "../../../../lib/store";
@@ -41,8 +39,8 @@ const StudentEdit = () => {
   const [travel, setTravel] = useAtom(travelAtom);
   const [ragaz, setRagaz] = useAtom(ragazAtom);
   const [clas, setClas] = useAtom(classAtom);
-  const [firstPay, setFirstPay] = useAtom(firstPayAtom);
-  const [secondPay, setSecondPay] = useAtom(secondPayAtom);
+  const [pay, setPay] = useState("");
+  const [secondpay, setSecondpay] = useState("");
   const [publish, setPublish] = useState(false);
   const [selectedTeachers, setSelectedTeachers] = useState([]);
 
@@ -68,8 +66,8 @@ const StudentEdit = () => {
       setTravel(student.travel || "");
       setRagaz(student.ragaz || "");
       setClas(student.class || "");
-      setFirstPay(student.first_pay || "");
-      setSecondPay(student.second_pay || "");
+      setPay(student.pay || "aa");
+      setSecondpay(student.secondpay || "");
       setPublish(student.publish || false);
     } catch (error) {
       console.log(error.message);
@@ -96,27 +94,28 @@ const StudentEdit = () => {
   const handleUpdate = async () => {
     const selected = selectedTeachers.map((item) => item.id);
     try {
-      const { data, error } = supabase
+      const { error } = await supabase
         .from("student")
         .update({
           name,
-          school,
-          phone,
-          second_phone: secondPhone,
-          address,
-          health,
-          blood: blood.id,
-          travel: travel.id,
-          ragaz: ragaz.id,
           class: clas.id,
-          first_pay: firstPay,
-          second_pay: secondPay,
+          school,
+          blood: blood.id,
+          phone,
+          address,
+          travel: travel.id,
+          health,
+          ragaz: ragaz.id,
           publish,
           teacher: selected,
+          second_phone: secondPhone,
+          cohort: null,
+          pay,
+          secondpay,
         })
         .eq("id", id);
       if (error) throw Error;
-      router.push("/");
+      router.push("/dashboard/students");
     } catch (e) {
       console.log(e);
     }
@@ -199,13 +198,13 @@ const StudentEdit = () => {
           />
           <InputCmp
             label="بڕی پارەی یەکەم"
-            state={firstPay}
-            setState={setFirstPay}
+            state={pay}
+            setState={setPay}
           />
           <InputCmp
             label="بڕی پارەی دووەم"
-            state={secondPay}
-            setState={setSecondPay}
+            state={secondpay}
+            setState={setSecondpay}
           />
           <label>بڵاوکراوەتەوە؟</label>
           <div className="flex justify-start items-center flex-row flex-wrap">
