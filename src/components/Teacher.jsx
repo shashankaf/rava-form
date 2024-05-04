@@ -24,13 +24,13 @@ const Teacher = ({image, specialty, name, onClick}) => {
               `url(${image})`,
           }}
         >
-          <div className="absolute inset-0 w-full h-full bg-gradient-to-t from-black/80 via-black/50"></div>
+          <div className="absolute inset-0 w-full h-full bg-gradient-to-t from-black/20 via-black/30"></div>
         </div>
-        <div className="relative p-6 px-6 py-14 md:px-12">
-          <h2 style={{fontFamily: shasenem.className}} className="mb-6 block text-4xl font-black leading-[1.5] tracking-normal text-white antialiased">
+        <div className="relative py-2 px-6  md:px-12">
+          <h2 style={{fontFamily: shasenem.className}} className="w-40 text-center bg-indigo-500 rounded-t-md px-4 text-left block text-2xl font-black leading-[1.5] tracking-normal text-white antialiased">
             {specialty}
           </h2>
-          <h5 style={{fontFamily: shasenem.className}} className="block mb-4text-xl antialiased leading-snug tracking-normal text-white shadow">
+          <h5 style={{fontFamily: shasenem.className}} className="w-40 bg-gray-900 text-center rounded-b-md px-2 py-1 block mb-4 text-xl antialiased leading-snug tracking-normal text-white shadow">
             {name}
           </h5>
         </div>
