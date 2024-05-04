@@ -34,7 +34,7 @@ function FormPDF({ student, teachers }) {
             بەڕێوەبەرایەتی گشتی پەروەردەی سلێمانی
           </h2>
           <h2 className={`${shasenem.className} text-xl font-bold`}>
-            بەڕێوەبەرایەتی گشتی پەروەردەی سلێمانی
+            بەڕێوەبەرێتی فێرکردنی پیشەیی
           </h2>
           <h2 className={`${shasenem.className} text-2xl font-black text-orange-800`}>
             پەیمانگای راڤە
