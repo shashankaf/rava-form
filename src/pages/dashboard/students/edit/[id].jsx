@@ -66,16 +66,18 @@ const StudentEdit = () => {
       setTravel(student.travel || "");
       setRagaz(student.ragaz || "");
       setClas(student.class || "");
-      setPay(student.pay || "aa");
+      setPay(student.pay || "");
       setSecondpay(student.secondpay || "");
       setPublish(student.publish || false);
     } catch (error) {
       console.log(error.message);
     }
   };
+
   useEffect(() => {
     fetcher();
   }, [id]);
+
   const teacherFetcher = async () => {
     try {
       const { data, error } = await supabase.from("teacher").select();
@@ -92,7 +94,7 @@ const StudentEdit = () => {
   }, [teacherIds]);
 
   const handleUpdate = async () => {
-    const selected = selectedTeachers.map((item) => item.id);
+    const selected = selectedTeachers.filter(item => item !== null)
     try {
       const { error } = await supabase
         .from("student")
