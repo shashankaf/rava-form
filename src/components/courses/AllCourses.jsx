@@ -46,7 +46,8 @@ const AllCourses = () => {
       if (error) {
         throw error;
       }
-      setIsDeleted(true); // Set state to indicate deletion is done
+      setIsDeleted(true);
+      router.push("../courses")
     } catch (error) {
       console.error("Error deleting teacher:", error.message);
     }

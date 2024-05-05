@@ -5,7 +5,6 @@ import AuthLayout from "../../../../components/AuthLayout";
 import DashCmp from "../../../../components/DashCmp";
 import DatePickerComponent from "../../../../components/DatePickerComponent";
 import localFont from "next/font/local";
-import { teacherAtom } from "../../../../lib/store";
 import { supabase } from "../../../../lib/supabase";
 import SelectComponent from "../../../../components/SelectComponent";
 import { useRouter } from "next/router";
