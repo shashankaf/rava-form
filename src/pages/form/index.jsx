@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import InputCmp from "../../components/InputCmp";
 import Classes from "../../components/Classes";
@@ -22,6 +22,7 @@ import localFont from "next/font/local";
 import Heading from "../../components/Heading";
 import Modal from "../../components/Modal";
 import Link from "next/link";
+import SelectComponent from "../../components/SelectComponent";
 
 const shasenem = localFont({ src: "../fonts/shasenem.ttf" });
 
@@ -32,6 +33,8 @@ export default function Home() {
   const [secondPhone, setSecondPhone] = useState("");
   const [address, setAddress] = useState("");
   const [health, setHealth] = useState("");
+  const [course, setCourse] = useState("")
+  const [courses, setCourses] = useState([])
   const [blood] = useAtom(bloodAtom);
   const [travel] = useAtom(travelAtom);
   const [ragaz] = useAtom(ragazAtom);
@@ -46,6 +49,21 @@ export default function Home() {
   const [success, setSuccess] = useState(false);
   const [modalOpen, setModalOpen] = useAtom(modalOpenAtom);
 
+  const fetchCourses = async() => {
+    try {
+      const {data, error} = await supabase.from('course').select()
+      if(error) throw Error;
+      setCourses(data)
+      setCourse(data[0].title)
+    } catch(e) {
+      console.log(e)
+    }
+  }
+
+  useEffect(() => {
+    fetchCourses()
+  }, [])
+
   const handleSave = async () => {
     const info = {
       name,
@@ -56,6 +74,7 @@ export default function Home() {
       pay,
       secondpay,
       second_phone: secondPhone,
+      course,
       address,
       travel: travel?.id,
       health,
@@ -165,6 +184,7 @@ export default function Home() {
               state={health}
               setState={setHealth}
             />
+            <SelectComponent label="خولێک هەڵبژێرە" item={course} setItem={setCourse} values={courses} />
             <Lectures />
             <button
               onClick={handleSave}

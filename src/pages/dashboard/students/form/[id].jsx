@@ -15,7 +15,7 @@ const PDFView = () => {
     try {
       let { data: student, error } = await supabase
         .from("student")
-        .select(`*, class(*), blood(*), travel(*), ragaz(*), cohort(*)`)
+        .select(`*, class(*), blood(*), travel(*), ragaz(*), course(*)`)
         .eq("id", id)
         .single();
       if (error) {

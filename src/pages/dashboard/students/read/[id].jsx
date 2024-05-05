@@ -14,7 +14,7 @@ const ReadPage = () => {
     try {
       let { data: student, error } = await supabase
         .from("student")
-        .select(`*, class(*), blood(*), travel(*), ragaz(*), cohort(*)`)
+        .select(`*, class(*), blood(*), travel(*), ragaz(*), course(*)`)
         .eq("id", id)
         .single();
       if (error) {
@@ -74,10 +74,6 @@ const ReadPage = () => {
               <p>{student?.secondpay}</p>
             </div>
             <div>
-              <h2 className="text-lg font-semibold mb-2">خول</h2>
-              <p>{student?.cohort?.title}</p>
-            </div>
-            <div>
               <h2 className="text-lg font-semibold mb-2">جۆری خوێن: </h2>
               <p>{student?.blood?.title}</p>
             </div>
@@ -100,6 +96,10 @@ const ReadPage = () => {
             <div>
               <h2 className="text-lg font-semibold mb-2">باری تەندروستی: </h2>
               <p>{student?.health}</p>
+            </div>
+            <div>
+              <h2 className="text-lg font-semibold mb-2">خولی هەڵبژێردراو</h2>
+              <p>{student?.course?.title}</p>
             </div>
           </div>
           <div className="mb-6">

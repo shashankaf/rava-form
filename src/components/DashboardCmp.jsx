@@ -35,7 +35,7 @@ const DashboardCmp = () => {
 
   const fetcher = async () => {
     try {
-      let { data: student, error } = await supabase.from("student").select("*");
+      let { data: student, error } = await supabase.from("student").select(`*, class(*)`);
       if (error) {
         throw error;
       }
@@ -142,7 +142,7 @@ const DashboardCmp = () => {
                     {student.name}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {student.class}
+                    {student.class.title}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                     {student.school}

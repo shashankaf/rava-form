@@ -12,7 +12,7 @@ const Classes = () => {
   const [classes, setClasses] = useState([]);
   const handleSelect = (option) => {
     setClas(option);
-    setIsOpen(false); // Close the dropdown after selecting an option
+    setIsOpen(false);
   };
   const fetcher = async () => {
     try {

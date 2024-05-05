@@ -18,6 +18,7 @@ import {
 } from "../../../../lib/store";
 import Heading from "../../../../components/Heading";
 import AuthLayout from "../../../../components/AuthLayout";
+import SelectComponent from "../../../../components/SelectComponent";
 
 const shasenem = localFont({ src: "../../../fonts/shasenem.ttf" });
 
@@ -48,7 +49,7 @@ const StudentEdit = () => {
     try {
       let { data: student, error } = await supabase
         .from("student")
-        .select(`*, class(*), blood(*), travel(*), ragaz(*), cohort(*)`)
+        .select(`*, class(*), blood(*), travel(*), ragaz(*)`)
         .eq("id", id)
         .single();
       if (error) {
@@ -111,7 +112,6 @@ const StudentEdit = () => {
           publish,
           teacher: selected,
           second_phone: secondPhone,
-          cohort: null,
           pay,
           secondpay,
         })
@@ -223,6 +223,7 @@ const StudentEdit = () => {
               نەخێر
             </p>
           </div>
+          {/* <SelectComponent label="خولی هەڵبژێردراو" values={courses} item={course} setItem={setCourse} /> */}
           <Heading text="مامۆستایانی هەڵبژێردراو" />
           {checkboxInput}
           <button
