@@ -50,13 +50,13 @@ const Dashboard = ({ children }) => {
         </Link>
         <Link
           className={`${shasenem.className} block py-4 px-6 hover:bg-gray-200 transition-400`}
-          href="/dashboard/cohorts"
+          href="/dashboard/courses"
         >
           خولەکان
         </Link>
         <Link
           className={`${shasenem.className} block py-4 px-6 hover:bg-gray-200 transition-400`}
-          href="/dashboard/expenses"
+          href="/dashboard/accounting"
         >
           سندوق
         </Link>
