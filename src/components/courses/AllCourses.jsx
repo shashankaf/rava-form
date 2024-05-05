@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { supabase } from "../../lib/supabase";
-import { useAtom } from "jotai";
-import { coursesAtom } from "../../lib/store";
 import CreatePlus from "../CreatePlus";
-import { courseType } from "../../lib/utility_functions";
+import { formatDate } from "../../lib/utility_functions"
 
 const AllCourses = () => {
-  const [courses, setCourses] = useAtom(coursesAtom);
+  const [courses, setCourses] = useState([]);
   const router = useRouter();
   const [isDeleted, setIsDeleted] = useState(false);
 
@@ -15,7 +13,7 @@ const AllCourses = () => {
     try {
       const { data, error } = await supabase
         .from("course")
-        .select(`*, teacher(*)`);
+        .select();
       if (error) throw Error;
       setCourses(data);
     } catch (e) {
@@ -47,7 +45,7 @@ const AllCourses = () => {
         throw error;
       }
       setIsDeleted(true);
-      router.push("../courses")
+      router.push("../dashboard/courses")
     } catch (error) {
       console.error("Error deleting teacher:", error.message);
     }
@@ -70,12 +68,11 @@ const AllCourses = () => {
               <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider ">
                 ناوی خول
               </th>
-              <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider ">
-                مامۆستا
+              <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">
+                دەستپێک
               </th>
-              <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider ">
-                جۆری خول{" "}
-              </th>
+              <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">
+                کۆتایی              </th>
               <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center">
                 بینین
               </th>
@@ -93,11 +90,11 @@ const AllCourses = () => {
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                   {course.title}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  {course?.teacher?.name}
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center">
+                  {formatDate(course.start)}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  { courseType(course.course_type) }
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center">
+                  {formatDate(course.end)}
                 </td>
                 <td
                   onClick={() => handleClick(course?.id)}
