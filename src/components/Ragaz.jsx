@@ -40,7 +40,7 @@ const Ragaz = () => {
         <button
           onClick={toggleDropdown}
           onBlur={blurEffect}
-          className="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring focus:ring-blue-400 min-w-48"
+          className="border-[1px] border-gray-100 px-2 py-1 rounded-md"
         >
           {ragaz.title ? ragaz.title : "رەگەزت چیە؟"}
         </button>

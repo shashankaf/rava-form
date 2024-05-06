@@ -44,7 +44,7 @@ const Filtering = () => {
   };
 
   return (
-    <div dir="rtl" className="flex justify-center gap-1 flex-wrap">
+    <div dir="rtl" className="flex justify-center items-center gap-1 flex-wrap">
       <Ragaz />
       <Travel />
       <Blood />

@@ -102,7 +102,6 @@ const DashboardCmp = () => {
           <Heading text="گەڕان" />
         </div>
         <div className="flex justify-center items-center">
-          <Heading text="فلتەرکردن" />
           <Filtering />
         </div>
         <div className="overflow-x-auto">
