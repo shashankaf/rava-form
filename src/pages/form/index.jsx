@@ -57,7 +57,7 @@ export default function Home() {
       const { data, error } = await supabase.from("course").select();
       if (error) throw Error;
       setCourses(data);
-      setCourse(data[0].title);
+      setCourse(data[0].id);
     } catch (e) {
       console.log(e);
     }
