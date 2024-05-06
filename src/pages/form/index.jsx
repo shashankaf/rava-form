@@ -23,6 +23,7 @@ import Heading from "../../components/Heading";
 import Modal from "../../components/Modal";
 import Link from "next/link";
 import SelectComponent from "../../components/SelectComponent";
+import { useRouter } from "next/router";
 
 const shasenem = localFont({ src: "../fonts/shasenem.ttf" });
 
@@ -33,8 +34,8 @@ export default function Home() {
   const [secondPhone, setSecondPhone] = useState("");
   const [address, setAddress] = useState("");
   const [health, setHealth] = useState("");
-  const [course, setCourse] = useState("")
-  const [courses, setCourses] = useState([])
+  const [course, setCourse] = useState("");
+  const [courses, setCourses] = useState([]);
   const [blood] = useAtom(bloodAtom);
   const [travel] = useAtom(travelAtom);
   const [ragaz] = useAtom(ragazAtom);
@@ -49,21 +50,23 @@ export default function Home() {
   const [success, setSuccess] = useState(false);
   const [modalOpen, setModalOpen] = useAtom(modalOpenAtom);
 
-  const fetchCourses = async() => {
+  const router = useRouter();
+
+  const fetchCourses = async () => {
     try {
-      const {data, error} = await supabase.from('course').select()
-      if(error) throw Error;
-      setCourses(data)
-      setCourse(data[0].title)
-    } catch(e) {
-      console.log(e)
+      const { data, error } = await supabase.from("course").select();
+      if (error) throw Error;
+      setCourses(data);
+      setCourse(data[0].title);
+    } catch (e) {
+      console.log(e);
     }
-  }
+  };
 
   useEffect(() => {
-    fetchCourses()
-  }, [])
-
+    fetchCourses();
+  }, []);
+  console.log("c", course);
   const handleSave = async () => {
     const info = {
       name,
@@ -114,10 +117,16 @@ export default function Home() {
     );
   }
   if (success) {
-    setTimeout(() => {
-      setModalOpen(true);
-    }, 3000);
-    router.push("/")
+    <div className="text-center py-8 bg-gray-100">
+      <p className="text-2xl text-gray-800">
+        سوپاس بۆ خۆ تۆمارکردنت، بەمزوانە پەیوەندیت پێوە دەکرێت
+      </p>
+      <Link href="/">
+        <a className="mt-4 inline-block px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300 ease-in-out">
+          ماڵەوە
+        </a>
+      </Link>
+    </div>;
   }
   return (
     <>
@@ -184,7 +193,12 @@ export default function Home() {
               state={health}
               setState={setHealth}
             />
-            <SelectComponent label="خولێک هەڵبژێرە" item={course} setItem={setCourse} values={courses} />
+            <SelectComponent
+              label="خولێک هەڵبژێرە"
+              item={course}
+              setItem={setCourse}
+              values={courses}
+            />
             <Lectures />
             <button
               onClick={handleSave}

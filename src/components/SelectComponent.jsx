@@ -6,8 +6,8 @@ const shasenem = localFont({ src: "../pages/fonts/shasenem.ttf" });
 function SelectComponent({ label, values, item, setItem }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleTypeChange = (value) => {
-    setItem(value);
+  const handleTypeChange = (id) => {
+    setItem(id); // Set the ID instead of the title
     setIsOpen(false); // Close the values pane when an option is selected
   };
 
@@ -17,9 +17,9 @@ function SelectComponent({ label, values, item, setItem }) {
 
   const blurEffect = () => {
     setTimeout(() => {
-      setIsOpen(false)
-    }, 250)
-  }
+      setIsOpen(false);
+    }, 250);
+  };
 
   return (
     <div dir="rtl" className={`${shasenem.className}`}>
@@ -32,14 +32,15 @@ function SelectComponent({ label, values, item, setItem }) {
           onBlur={blurEffect}
           className="bg-white text-gray-400 px-4 py-3 rounded-md border-[1px] border-gray-200 focus:outline-none focus:ring focus:ring-blue-400 min-w-48"
         >
-          {item}
+          {/* Show the title corresponding to the selected ID */}
+          {values.find((option) => option.id === item)?.title || ""}
         </button>
         {isOpen && (
           <div className="absolute top-full right-0 mt-1 bg-white border border-gray-300 shadow-lg rounded-md z-10 min-w-48">
             {values?.map((option) => (
               <div
                 key={option.id}
-                onClick={() => handleTypeChange(option.title)}
+                onClick={() => handleTypeChange(option.id)}
                 className="px-4 py-2 cursor-pointer hover:bg-gray-100 text-xl"
               >
                 <p className="text-center min-w-28">{option.title}</p>
@@ -48,19 +49,7 @@ function SelectComponent({ label, values, item, setItem }) {
           </div>
         )}
       </div>
-      {/* Hide the native select element */}
-      <select
-        id="hiddenSelect"
-        value={item}
-        onChange={() => {}}
-        style={{ display: "none" }}
-      >
-        {values?.map((option) => (
-          <option key={option.id} value={option.title}>
-            {option.title}
-          </option>
-        ))}
-      </select>
+      {/* Remove the hidden select element as it's not needed anymore */}
     </div>
   );
 }
