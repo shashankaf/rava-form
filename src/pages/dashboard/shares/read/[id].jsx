@@ -2,24 +2,23 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { supabase } from "../../../../lib/supabase";
 import AuthLayout from "../../../../components/AuthLayout";
-import {  formatDate } from "../../../../lib/utility_functions";
 
 const ReadPage = () => {
   const router = useRouter();
-  const [course, setCourse] = useState(null);
+  const [share, setShare] = useState(null);
   const { id } = router.query;
 
   const fetcher = async () => {
     try {
       let { data, error } = await supabase
-        .from("course")
-        .select()
+        .from("share")
+        .select(`*, course(*), teacher(*)`)
         .eq("id", id)
         .single();
       if (error) {
         throw error;
       }
-      setCourse(data);
+      setShare(data);
     } catch (error) {
       console.log(error.message);
     }
@@ -29,7 +28,7 @@ const ReadPage = () => {
     fetcher();
   }, [id]);
 
-  if (!course) {
+  if (!share) {
     return <div></div>;
   }
 
@@ -41,16 +40,16 @@ const ReadPage = () => {
       >
         <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
           <div className="p-6">
-            <h1 className="text-2xl font-semibold mb-4">{course?.title}</h1>
+            <h1 className="text-2xl font-semibold mb-4">{share?.teacher?.name}</h1>
             <div className="grid grid-cols-2 gap-4 mb-6">
               <div className="col-span-1">
                 <div>
-                  <h2 className="text-lg font-semibold mb-2">رۆژی دەستپێک</h2>
-                  <p>{formatDate(course?.start)}</p>
+                  <h2 className="text-lg font-semibold mb-2">خول</h2>
+                  <p>{share?.course?.title}</p>
                 </div>
                 <div>
-                  <h2 className="text-lg font-semibold mb-2">رۆژی کۆتایی</h2>
-                  <p>{formatDate(course?.end)}</p>
+                  <h2 className="text-lg font-semibold mb-2">پشکی مامۆستا</h2>
+                  <p>%{share?.percentage}</p>
                 </div>{" "}
               </div>
             </div>

@@ -56,6 +56,12 @@ const Dashboard = ({ children }) => {
         </Link>
         <Link
           className={`${shasenem.className} block py-4 px-6 hover:bg-gray-200 transition-400`}
+          href="/dashboard/shares"
+        >
+          پشکەکان
+        </Link>
+        <Link
+          className={`${shasenem.className} block py-4 px-6 hover:bg-gray-200 transition-400`}
           href="/dashboard/accounting"
         >
           سندوق

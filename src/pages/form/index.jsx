@@ -95,7 +95,7 @@ export default function Home() {
       setErrors([...errors, "تکایە مامۆستایەک یان زیاتر هەڵبژێرە"]);
     if (!ragaz.id) setErrors([...errors, "تکایە رەگەزت هەڵبژێرە"]);
     if (!name || !clas.id || !teacher.length || !ragaz.id) {
-      return; // Exit the function if validation fails
+      return;
     }
 
     const { error } = await supabase.from("student").insert(info);
