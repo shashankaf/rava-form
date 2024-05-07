@@ -117,7 +117,7 @@ export default function Home() {
     );
   }
   if (success) {
-    <div className="text-center py-8 bg-gray-100">
+    return (<div className="text-center py-8 bg-gray-100">
       <p className="text-2xl text-gray-800">
         سوپاس بۆ خۆ تۆمارکردنت، بەمزوانە پەیوەندیت پێوە دەکرێت
       </p>
@@ -126,7 +126,7 @@ export default function Home() {
           ماڵەوە
         </a>
       </Link>
-    </div>;
+    </div>);
   }
   return (
     <>
