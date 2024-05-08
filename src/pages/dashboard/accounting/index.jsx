@@ -56,7 +56,6 @@ const AccountingDashboard = () => {
           title={"داهات"}
           createRoute="/dashboard/accounting/income/create"
           editRoute="/dashboard/accounting/income/edit/"
-
           readRoute="/dashboard/accounting/income/read/"
           items={income}
           table="income"
@@ -64,9 +63,9 @@ const AccountingDashboard = () => {
         />
         <GeneralTable 
           title={"خەرجی"}
-          createRoute="/accounting/expense/create"
-          editRoute="/accounting/expense/edit"
-          readRoute="/accounting/expense/read/"
+          createRoute="/dashboard/accounting/expense/create/"
+          editRoute="/dashboard/accounting/expense/edit/"
+          readRoute="/dashboard/accounting/expense/read/"
           items={expense}
           table="expense"
           labels={expense_labels}
