@@ -81,7 +81,6 @@ const AccountingDashboard = () => {
         </CollapsibleSection>
         <CollapsibleSection title="خەرجی" state={false}>
         <GeneralTable
-          title={"خەرجی"}
           createRoute="/dashboard/accounting/expense/create/"
           editRoute="/dashboard/accounting/expense/edit/"
           readRoute="/dashboard/accounting/expense/read/"

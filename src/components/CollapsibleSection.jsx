@@ -26,7 +26,7 @@ const CollapsibleSection = ({ title, children, state }) => {
         </div>
       </div>
       {isExpanded && (
-        <div className="p-4 border-t border-gray-200">{children}</div>
+        <div className="border-t border-gray-200">{children}</div>
       )}
     </div>
   );

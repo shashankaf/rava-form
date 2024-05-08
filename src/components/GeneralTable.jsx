@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
-import Title from "./Title";
 import { useRouter } from "next/router";
 import { formatDate } from "../lib/utility_functions";
 
 const GeneralTable = ({
-  title,
   createRoute,
   editRoute,
   readRoute,
@@ -51,7 +49,6 @@ const GeneralTable = ({
 
   return (
     <>
-        <Title text={title} />
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200 text-right">
             <thead className="bg-gray-50">
