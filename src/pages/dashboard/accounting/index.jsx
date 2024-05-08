@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import {useRouter} from "next/navigation";
 import AuthLayout from "../../../components/AuthLayout";
 import DashCmp from "../../../components/DashCmp";
 import Head from "next/head";
@@ -7,43 +8,58 @@ import { supabase } from "../../../lib/supabase";
 import GeneralTable from "../../../components/GeneralTable";
 
 const AccountingDashboard = () => {
-  const [income, setIncome] = useState([])
-  const [expense, setExpense] = useState([])
-  
-  const incomeFetcher = async() => {
+  const [income, setIncome] = useState([]);
+  const [expense, setExpense] = useState([]);
+  const router = useRouter()
+
+  const incomeFetcher = async () => {
     try {
-      const {data, error} = await supabase.from('income').select(`*, student(*), course(*)`)
-      if(error) {
-        console.log(error)
+      const { data, error } = await supabase
+        .from("income")
+        .select(`*, student(*), course(*)`);
+      if (error) {
+        console.log(error);
       }
-      setIncome(data)
-    } catch(e) {
-      console.log(e)
+      setIncome(data);
+    } catch (e) {
+      console.log(e);
     }
-  }
+  };
 
   useEffect(() => {
-    incomeFetcher()
-  }, [])
+    incomeFetcher();
+  }, []);
 
-  const expenseFetcher = async() => {
+  const expenseFetcher = async () => {
     try {
-      const {data, error} = await supabase.from('expense').select()
-      if(error) {
-        console.log(error)
+      const { data, error } = await supabase.from("expense").select();
+      if (error) {
+        console.log(error);
       }
-      setExpense(data)
-    } catch(e) {
-      console.log(e)
+      setExpense(data);
+    } catch (e) {
+      console.log(e);
     }
-  }
+  };
 
   useEffect(() => {
-    expenseFetcher()
-  }, [])
+    expenseFetcher();
+  }, []);
 
-  const income_labels = [{id:1, title: "بڕ"}, {id: 2, title: "خوێندکار"}, {id: 3, title: "خول"}]
-  const expense_labels = [{id:1, title: "بڕ"}, {id: 2, title: "جۆر"}, {id: 3, title: "رێکەوت"}]
+  const income_labels = [
+    { id: 1, title: "بڕ" },
+    { id: 2, title: "خوێندکار" },
+    { id: 3, title: "خول" },
+  ];
+  const expense_labels = [
+    { id: 1, title: "بڕ" },
+    { id: 2, title: "جۆر" },
+    { id: 3, title: "رێکەوت" },
+  ];
+
+  const goCreate = () => {
+    router.push("/dashboard/accounting/expense/create")
+  };
 
   return (
     <AuthLayout>
@@ -52,7 +68,7 @@ const AccountingDashboard = () => {
       </Head>
       <DashCmp>
         <AllAccounting />
-        <GeneralTable 
+        <GeneralTable
           title={"داهات"}
           createRoute="/dashboard/accounting/income/create"
           editRoute="/dashboard/accounting/income/edit/"
@@ -61,7 +77,15 @@ const AccountingDashboard = () => {
           table="income"
           labels={income_labels}
         />
-        <GeneralTable 
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white 
+                     font-bold py-2 px-4 rounded focus:outline-none 
+                     focus:ring focus:ring-blue-400"
+          onClick={goCreate}
+        >
+          تۆمارکردنی خەرجی{" "}
+        </button>
+        <GeneralTable
           title={"خەرجی"}
           createRoute="/dashboard/accounting/expense/create/"
           editRoute="/dashboard/accounting/expense/edit/"
