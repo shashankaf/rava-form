@@ -48,7 +48,7 @@ const EditIncome = () => {
         .eq("id", id);
       if (error) throw Error;
       console.log(data);
-      router.push("../");
+      router.push("../../");
     } catch (e) {
       console.log(e);
     }
