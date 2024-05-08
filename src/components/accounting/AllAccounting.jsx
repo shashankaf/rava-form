@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../../lib/supabase";
+import localFont from 'next/font/local';
+
+const shasenem = localFont({src: '../../pages/fonts/shasenem.ttf'})
 
 const AllAccounting = () => {
   const [income, setIncome] = useState(0);
@@ -8,55 +11,49 @@ const AllAccounting = () => {
   const incomeFetcher = async () => {
     try {
       const { data, error } = await supabase.rpc("get_total_income");
-      if(error) {
-        console.log(error)
+      if (error) {
+        console.log(error);
       }
-      setIncome(data)
+      setIncome(data);
     } catch (e) {
       console.log(e);
     }
   };
 
   useEffect(() => {
-    incomeFetcher()
-  }, [])
+    incomeFetcher();
+  }, []);
 
   const expenseFetcher = async () => {
     try {
       const { data, error } = await supabase.rpc("get_total_expense");
-      if(error) {
-        console.log(error)
+      if (error) {
+        console.log(error);
       }
-      setExpense(data)
+      setExpense(data);
     } catch (e) {
       console.log(e);
     }
   };
 
   useEffect(() => {
-    expenseFetcher()
-  }, [])
+    expenseFetcher();
+  }, []);
 
   return (
     <>
-      <div className="bg-gray-100 rounded-lg p-4 shadow-md flex justify-between items-center">
-        <div>
-          <h3 className="text-lg font-semibold text-green-600 text-center">کۆی داهات</h3>
-          <p className="text-xl font-bold text-green-800 text-center">
-            ${income}
-          </p>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 bg-gradient-to-r from-gray-700 to-black p-6 shadow-md py-8">
+        <div className="bg-indigo-500 rounded-lg p-4 text-center text-white font-semibold">
+          <h3 className={`${shasenem.className} text-2xl text-blue-100`}>داهات</h3>
+          <p className="text-3xl mt-2">${income}</p>
         </div>
-        <div>
-          <h3 className="text-lg font-semibold text-red-600 text-center">کۆی خەرجی</h3>
-          <p className="text-xl font-bold text-red-800 text-center">
-            ${expense}
-          </p>
+        <div className="bg-red-500 rounded-lg p-4 text-center text-white font-semibold mt-4 md:mt-0">
+          <h3 className={`${shasenem.className} text-2xl text-red-100`}>خەرجی</h3>
+          <p className="text-3xl mt-2">${expense}</p>
         </div>
-        <div>
-          <h3 className="text-lg font-semibold text-green-600 text-center">پوختەی داهات</h3>
-          <p className="text-xl font-bold text-green-800 text-center">
-            ${income - expense}
-          </p>
+        <div className="bg-green-500 rounded-lg p-4 text-center text-white font-semibold mt-4 md:mt-0">
+          <h3 className={`${shasenem.className} text-2xl text-green-100`}>دەستمایە</h3>
+          <p className="text-3xl mt-2">${income - expense}</p>
         </div>
       </div>
     </>
