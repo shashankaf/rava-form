@@ -11,20 +11,42 @@ const shasenem = localFont({ src: "../pages/fonts/shasenem.ttf" });
 const goran = localFont({ src: "../pages/fonts/goran.ttf" });
 
 function FormPDF({ student, teachers }) {
-  const [students, setStudents] = useAtom(studentsAtom)
+  const [students, setStudents] = useAtom(studentsAtom);
   const today = new Date();
   const formattedDate = `${today.getFullYear()}/${today.getMonth() + 1}/${today.getDate()}`;
   const pdfJSX = () => {
     return (
-      <div className={`${shasenem.className} p-2`} style={{backgroundImage: `url(/dots.jpg)`, backgroundRepeat: "no-repeat", backgroundPosition: "top left"}}>
+      <div
+        className={`${shasenem.className} p-2`}
+        style={{
+          backgroundImage: `url(/dots.jpg)`,
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "top left",
+        }}
+      >
         <div className="flex flex-row justify-around">
-          <Image src="/krg.png" height={100} width={100} alt="KRG Logo" />
-          <Image
-            src="/rava.png"
-            height={100}
-            width={100}
-            alt="Rava Institute Logo"
-          />
+          <div className="flex justify-around w-screen">
+            <div
+              className="logo-container"
+              style={{
+                backgroundImage: `url(/krg.png)`, // Relative path to KRG logo image
+                backgroundSize: "cover",
+                width: "100px",
+                height: "100px",
+              }}
+            >
+            </div>
+            <div
+              className="logo-container"
+              style={{
+                backgroundImage: `url(/rava.png)`, // Relative path to Rava Institute logo image
+                backgroundSize: "cover",
+                width: "100px",
+                height: "100px",
+              }}
+            >
+            </div>
+          </div>
         </div>
         <div className="flex flex-col items-center my-6">
           <h1 className={`${shasenem.className} text-2xl font-bold`}>
@@ -36,13 +58,17 @@ function FormPDF({ student, teachers }) {
           <h2 className={`${shasenem.className} text-xl font-bold`}>
             بەڕێوەبەرێتی فێرکردنی پیشەیی
           </h2>
-          <h2 className={`${shasenem.className} text-2xl font-black text-orange-800`}>
+          <h2
+            className={`${shasenem.className} text-2xl font-black text-orange-800`}
+          >
             پەیمانگای راڤە
           </h2>
         </div>
         <div className="flex flex-row justify-between w-2/3 m-auto">
           <p className={`${goran.className}`}>بەروار - {formattedDate}</p>
-          <p className={`${goran.className}`}>ژمارە - {students.length + 100}</p>
+          <p className={`${goran.className}`}>
+            ژمارە - {students.length + 100}
+          </p>
         </div>
         <div>
           <h1
@@ -76,7 +102,7 @@ function FormPDF({ student, teachers }) {
       >
         خەزنکردنی فۆرم
       </button>
-      </div>
+    </div>
   );
 }
 
