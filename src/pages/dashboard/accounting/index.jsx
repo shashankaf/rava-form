@@ -6,6 +6,7 @@ import Head from "next/head";
 import AllAccounting from "../../../components/accounting/AllAccounting";
 import { supabase } from "../../../lib/supabase";
 import GeneralTable from "../../../components/GeneralTable";
+import CollapsibleSection from "../../../components/CollapsibleSection";
 
 const AccountingDashboard = () => {
   const [income, setIncome] = useState([]);
@@ -68,8 +69,8 @@ const AccountingDashboard = () => {
       </Head>
       <DashCmp>
         <AllAccounting />
+        <CollapsibleSection title="داهات" state={true}>
         <GeneralTable
-          title={"داهات"}
           createRoute="/dashboard/accounting/income/create"
           editRoute="/dashboard/accounting/income/edit/"
           readRoute="/dashboard/accounting/income/read/"
@@ -77,14 +78,8 @@ const AccountingDashboard = () => {
           table="income"
           labels={income_labels}
         />
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white 
-                     font-bold py-2 px-4 rounded focus:outline-none 
-                     focus:ring focus:ring-blue-400"
-          onClick={goCreate}
-        >
-          تۆمارکردنی خەرجی{" "}
-        </button>
+        </CollapsibleSection>
+        <CollapsibleSection title="خەرجی" state={false}>
         <GeneralTable
           title={"خەرجی"}
           createRoute="/dashboard/accounting/expense/create/"
@@ -94,6 +89,7 @@ const AccountingDashboard = () => {
           table="expense"
           labels={expense_labels}
         />
+        </CollapsibleSection>
       </DashCmp>
     </AuthLayout>
   );
