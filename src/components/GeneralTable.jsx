@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
 import Title from "./Title";
 import { useRouter } from "next/router";
+import { formatDate } from "../lib/utility_functions";
 
 const GeneralTable = ({
   title,
@@ -83,16 +84,16 @@ const GeneralTable = ({
               {items.map((item) => (
                 <tr key={item.id}>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    ${item.income}
+                    ${item.amount}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {item.student.name}
+                    {table === 'income' ? item.student.name : item.expense_type}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {item.course.title}
+                    {table === 'income' ? item.course.title : formatDate(item.created_at)}
                   </td>
                   <td
-                    onClick={() => handleRead(student.id)}
+                    onClick={() => handleRead(item.id)}
                     className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 cursor-pointer hover:bg-gray-200 transition-300"
                   >
                     <svg
