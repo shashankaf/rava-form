@@ -88,7 +88,7 @@ export default function Home() {
     if (!teacher.length)
       setErrors([...errors, "تکایە مامۆستایەک یان زیاتر هەڵبژێرە"]);
     if (!ragaz.id) setErrors([...errors, "تکایە رەگەزت هەڵبژێرە"]);
-    if(!course.id) setErrors([...errors, "تکایە خولێک هەڵبژێرە"])
+    if (!course.id) setErrors([...errors, "تکایە خولێک هەڵبژێرە"]);
     if (!name || !clas.id || !teacher.length || !ragaz.id) {
       return;
     }
@@ -112,16 +112,22 @@ export default function Home() {
     );
   }
   if (success) {
-    return (<div className="text-center py-8 bg-gray-100">
-      <p className="text-2xl text-gray-800">
-        سوپاس بۆ خۆ تۆمارکردنت، بەمزوانە پەیوەندیت پێوە دەکرێت
-      </p>
-      <Link href="/">
-        <a className="mt-4 inline-block px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300 ease-in-out">
-          ماڵەوە
-        </a>
-      </Link>
-    </div>);
+    return (
+      <div className="text-center py-8 bg-gray-100">
+        <p className="text-2xl text-gray-800">
+          سوپاس بۆ خۆ تۆمارکردنت، بەمزوانە پەیوەندیت پێوە دەکرێت
+        </p>
+        <Link href="/">
+          <a
+            className="mt-4 inline-block px-6 py-2 bg-blue-500 text-white 
+                      rounded-md hover:bg-blue-600 transition duration-300 
+                      ease-in-out"
+          >
+            ماڵەوە
+          </a>
+        </Link>
+      </div>
+    );
   }
   return (
     <>
@@ -191,7 +197,9 @@ export default function Home() {
             <Lectures />
             <button
               onClick={handleSave}
-              className={`${shasenem.className} m-auto bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 border border-blue-700 rounded text-xl`}
+              className={`${shasenem.className} m-auto bg-blue-500 
+                         hover:bg-blue-700 text-white font-bold py-2 
+                         px-6 border border-blue-700 rounded text-xl`}
             >
               تۆمارکردن
             </button>

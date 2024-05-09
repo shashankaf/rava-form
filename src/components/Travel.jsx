@@ -3,6 +3,7 @@ import { useAtom } from "jotai";
 import { travelAtom } from "../lib/store";
 import { supabase } from "@/lib/supabase";
 import localFont from "next/font/local";
+import { ArrowDown, ArrowRight } from "./Arrow";
 
 const shasenem = localFont({ src: "../pages/fonts/shasenem.ttf" });
 
@@ -46,14 +47,10 @@ const Travel = () => {
         <button
           onClick={toggleDropdown}
           onBlur={blurEffect}
-          className="border-[1px] border-gray-100 px-2 py-1 rounded-md w-full text-right"
+          className="border-[1px] border-gray-100 px-2 py-1 rounded-md w-full text-right flex flex-row gap-4"
         >
           {travel.title ? travel.title : "جۆری هاتووچۆکردن"}
-          {isOpen ? (
-            <span className="mr-6 my-auto">⇨</span>
-          ) : (
-            <span className="mr-6 my-auto">⇩</span>
-          )}
+          {isOpen ? <ArrowRight /> : <ArrowDown />}
         </button>
         {isOpen && (
           <div className="absolute top-full right-0 mt-1 bg-white border border-gray-300 shadow-lg rounded-md z-10">

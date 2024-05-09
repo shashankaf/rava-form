@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import localFont from "next/font/local";
+import { ArrowDown, ArrowRight } from "./Arrow";
 
 const shasenem = localFont({ src: "../pages/fonts/shasenem.ttf" });
 
@@ -23,17 +24,15 @@ function SelectComponent({ label, values, item, setItem }) {
 
   return (
     <div dir="rtl" className={`${shasenem.className}  text-xl relative w-full`}>
-      <label htmlFor="typeSelect">
-        {label}
-      </label>
+      <label htmlFor="typeSelect">{label}</label>
       <div className="relative w-full">
         <button
           onClick={toggleValuesPane}
           onBlur={blurEffect}
-          className="w-full text-xl bg-white px-4 py-2 rounded-md border-[1px] border-gray-200 text-right text-lg"
+          className="w-full text-xl bg-white px-4 py-2 rounded-md border-[1px] border-gray-200 text-right text-lg flex flex-row gap-4"
         >
           {values.find((option) => option.id === item)?.title || ""}
-          {isOpen ? <span className="mr-6 my-auto">⇨</span> : <span className="mr-6 my-auto">⇩</span> }
+          {isOpen ? <ArrowRight /> : <ArrowDown />}
         </button>
         {isOpen && (
           <div className="absolute top-full right-0 mt-1 bg-white border border-gray-300 shadow-lg rounded-md z-10 min-w-48">

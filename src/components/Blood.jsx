@@ -3,6 +3,7 @@ import { useAtom } from "jotai";
 import { bloodAtom } from "../lib/store";
 import { supabase } from "@/lib/supabase";
 import localFont from "next/font/local";
+import { ArrowDown, ArrowRight } from "./Arrow";
 
 const shasenem = localFont({ src: "../pages/fonts/shasenem.ttf" });
 
@@ -38,18 +39,17 @@ const Blood = () => {
 
   return (
     <>
-      <div dir="rtl" className={`${shasenem.className} text-xl relative w-full`}>
+      <div
+        dir="rtl"
+        className={`${shasenem.className} text-xl relative w-full`}
+      >
         <button
           onClick={toggleDropdown}
           onBlur={blurEffect}
-          className="border-[1px] border-gray-100 px-2 py-1 rounded-md text-right"
+          className="border-[1px] border-gray-100 px-2 py-1 rounded-md text-right flex flex-row gap-4"
         >
           {blood.title ? blood.title : "جۆری خوێنەکەت چیە؟"}
-          {isOpen ? (
-            <span className="mr-6 my-auto">⇨</span>
-          ) : (
-            <span className="mr-6 my-auto">⇩</span>
-          )}
+          {isOpen ? <ArrowRight /> : <ArrowDown />}
         </button>
         {isOpen && (
           <div className="absolute top-full right-0 mt-1 bg-white border border-gray-300 shadow-lg rounded-md z-10">
