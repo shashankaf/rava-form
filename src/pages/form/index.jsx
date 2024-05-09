@@ -11,7 +11,6 @@ import { useAtom } from "jotai";
 import {
   bloodAtom,
   classAtom,
-  modalOpenAtom,
   ragazAtom,
   teacherAtom,
   travelAtom,
@@ -23,7 +22,6 @@ import Heading from "../../components/Heading";
 import Modal from "../../components/Modal";
 import Link from "next/link";
 import SelectComponent from "../../components/SelectComponent";
-import { useRouter } from "next/router";
 
 const shasenem = localFont({ src: "../fonts/shasenem.ttf" });
 
@@ -48,9 +46,6 @@ export default function Home() {
     "https://grocviikgcjxaxnkdvrv.supabase.co/storage/v1/object/public/general/paimangai_rava.jpg";
   const [errorSubmit, setErrorSubmit] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [modalOpen, setModalOpen] = useAtom(modalOpenAtom);
-
-  const router = useRouter();
 
   const fetchCourses = async () => {
     try {
@@ -85,7 +80,6 @@ export default function Home() {
       teacher: teacher,
     };
 
-    // Push error messages into the errors array
     if (!name || name.length < 2 || name.length > 50)
       setErrors([...errors, "تکایە ناوێکی گونجاو هەڵبژێرە"]);
     if (!clas.id) setErrors([...errors, "تکایە پۆلەکەت هەڵبژێرە"]);
@@ -94,6 +88,7 @@ export default function Home() {
     if (!teacher.length)
       setErrors([...errors, "تکایە مامۆستایەک یان زیاتر هەڵبژێرە"]);
     if (!ragaz.id) setErrors([...errors, "تکایە رەگەزت هەڵبژێرە"]);
+    if(!course.id) setErrors([...errors, "تکایە خولێک هەڵبژێرە"])
     if (!name || !clas.id || !teacher.length || !ragaz.id) {
       return;
     }
@@ -131,19 +126,13 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Rava Registeration Form</title>
-        <meta
-          name="description"
-          content="Register Yourself in Rava Institute"
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <title>فۆرمی پەیمانگای راڤە</title>
       </Head>
       <Modal title="فۆرمەکەت گەیشت">
         <Heading text="سوپاس، بە زووترین کات وەڵامت دەدرێتەوە" />
       </Modal>
-      <main className="flex items-center justify-center mb-12">
-        <div className="w-full max-w-2xl px-4 py-8 bg-white shadow-lg rounded-lg">
+      <main className="bg-white border rounded-lg px-8 py-6 mx-auto my-8 max-w-2xl">
+        <div className="">
           <Image
             src={logo}
             alt={`Rava Institute`}

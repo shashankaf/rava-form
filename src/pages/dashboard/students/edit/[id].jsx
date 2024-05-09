@@ -19,6 +19,9 @@ import {
 import Heading from "../../../../components/Heading";
 import AuthLayout from "../../../../components/AuthLayout";
 import SelectComponent from "../../../../components/SelectComponent";
+import Button from "../../../../components/Button";
+import Head from "next/head";
+import Title from "../../../../components/Title";
 
 const shasenem = localFont({ src: "../../../fonts/shasenem.ttf" });
 
@@ -29,7 +32,6 @@ const StudentEdit = () => {
   const [allTeachers, setAllTeachers] = useState([]);
   const { id } = router.query;
 
-  // STUDENT UPDATE
   const [name, setName] = useState("");
   const [school, setSchool] = useState("");
   const [phone, setPhone] = useState("");
@@ -44,6 +46,25 @@ const StudentEdit = () => {
   const [secondpay, setSecondpay] = useState("");
   const [publish, setPublish] = useState(false);
   const [selectedTeachers, setSelectedTeachers] = useState([]);
+  const [course, setCourse] = useState("");
+  const [courses, setCourses] = useState([]);
+  const [incomeErr, setIncomeErr] = useState(false);
+  const [incomeMsg, setIncomeMsg] = useState(false);
+
+  const fetchCourses = async () => {
+    try {
+      const { data, error } = await supabase.from("course").select();
+      if (error) throw Error;
+      setCourses(data);
+      setCourse(data[0].id);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    fetchCourses();
+  }, []);
 
   const fetcher = async () => {
     try {
@@ -95,7 +116,7 @@ const StudentEdit = () => {
   }, [teacherIds]);
 
   const handleUpdate = async () => {
-    const selected = selectedTeachers.filter(item => item !== null)
+    const selected = selectedTeachers.filter((item) => item !== null);
     try {
       const { error } = await supabase
         .from("student")
@@ -109,7 +130,7 @@ const StudentEdit = () => {
           travel: travel.id,
           health,
           ragaz: ragaz.id,
-          publish,
+          course,
           teacher: selected,
           second_phone: secondPhone,
           pay,
@@ -117,13 +138,44 @@ const StudentEdit = () => {
         })
         .eq("id", id);
       if (error) throw Error;
+      setIncomeErr(false);
+      setIncomeMsg(false);
       router.push("/dashboard/students");
     } catch (e) {
       console.log(e);
     }
   };
 
-  // Function to handle selection changes
+  const handleIncome = async () => {
+    if (pay.length > 0) {
+      setIncomeErr(true);
+    }
+    const amount = parseInt(pay) + parseInt(secondpay);
+    const { error } = await supabase.from("income").insert({
+      amount,
+      course,
+      teacher: selected,
+      student: id,
+    });
+    if (error) {
+      setIncomeErr(true);
+    } else {
+      const total = parseInt(pay) + parseInt(secondpay);
+      teacherIds.map(async (item) => {
+        const { error } = await supabase.rpc("insert_expense", {
+          teacher_id: item,
+          course_id: course,
+          student_id: id,
+          amount: total,
+        });
+        if (error) {
+          console.log(error);
+        }
+      });
+      setIncomeMsg(true);
+    }
+  };
+
   const handleTeacherSelect = (teacherId) => {
     setSelectedTeachers((prevSelected) => {
       if (prevSelected.includes(teacherId)) {
@@ -134,7 +186,6 @@ const StudentEdit = () => {
     });
   };
 
-  // Function to check if a teacher is selected
   const isTeacherSelected = (teacherId) => {
     return selectedTeachers.includes(teacherId);
   };
@@ -156,8 +207,12 @@ const StudentEdit = () => {
 
   return (
     <AuthLayout>
+      <Head>
+        <title>فۆرمی پەیمانگای راڤە</title>
+      </Head>
       <DashCmp>
         <div dir="rtl" className="flex flex-col space-y-4 w-2/3">
+          <Title text="نوێکردنەوەی فۆرمی خوێندکار" />
           <InputCmp
             label="ناوی بەشداربوو"
             placeholder="ناوی سیانییت بنووسە"
@@ -198,40 +253,46 @@ const StudentEdit = () => {
             state={health}
             setState={setHealth}
           />
-          <InputCmp
-            label="بڕی پارەی یەکەم"
-            state={pay}
-            setState={setPay}
-          />
+          <InputCmp label="بڕی پارەی یەکەم" state={pay} setState={setPay} />
           <InputCmp
             label="بڕی پارەی دووەم"
             state={secondpay}
             setState={setSecondpay}
           />
+          <SelectComponent
+            label="خولێک هەڵبژێرە"
+            item={course}
+            setItem={setCourse}
+            values={courses}
+          />
+          <div className="flex flex-wrap"></div>
           <label>بڵاوکراوەتەوە؟</label>
-          <div className="flex justify-start items-center flex-row flex-wrap">
-            <p
-              onClick={() => setPublish(true)}
-              className={`${publish === true ? "bg-indigo-600" : "bg-gray-400"} ${shasenem.className} hover:bg-indigo-400 transition-400 cursor-pointer text-white py-1 px-6 rounded-lg rounded-tl-none rounded-bl-none text-2xl`}
-            >
-              بەڵێ
-            </p>
-            <p
-              onClick={() => setPublish(false)}
-              className={`${publish === false ? "bg-indigo-600" : "bg-gray-400"} ${shasenem.className} hover:bg-indigo-400 transition-400 cursor-pointer text-white py-1 px-6 rounded-lg rounded-tr-none rounded-br-none text-2xl`}
-            >
-              نەخێر
-            </p>
-          </div>
-          {/* <SelectComponent label="خولی هەڵبژێردراو" values={courses} item={course} setItem={setCourse} /> */}
           <Heading text="مامۆستایانی هەڵبژێردراو" />
           {checkboxInput}
-          <button
-            onClick={handleUpdate}
-            className={`${shasenem.className} m-auto bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 border border-blue-700 rounded text-xl`}
-          >
-            نوێکردنەوە
-          </button>
+          <div>
+            {incomeErr === true ? (
+              <p className="text-red-500 font-bold text-lg">
+                داهاتی خوێندکار بنووسە
+              </p>
+            ) : (
+              ""
+            )}
+            {incomeMsg === true ? (
+              <p className="text-red-500 font-bold text-lg">
+                داهات و خەرجی تۆمارکرا
+              </p>
+            ) : (
+              ""
+            )}
+          </div>
+          <div className="flex flex-wrap justify-around">
+            <Button
+              bg="green"
+              text={"تۆمارکردنی داهات و خەرجی"}
+              handleClick={handleIncome}
+            />
+            <Button text={"نوێکردنەوەی فۆرم"} handleClick={handleUpdate} />
+          </div>
         </div>
       </DashCmp>
     </AuthLayout>

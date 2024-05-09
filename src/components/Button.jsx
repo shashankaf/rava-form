@@ -1,10 +1,13 @@
 import React from "react";
+import localFont from 'next/font/local';
 
-function Button({ text, handleClick }) {
+const shasenem = localFont({src: '../pages/fonts/shasenem.ttf'})
+
+function Button({ text, handleClick, bg = "indigo" }) {
   return (
     <button
       onClick={handleClick}
-      className="px-4 py-2 bg-indigo-500 hover:bg-indigo-800 text-white rounded-md outline-none"
+      className={`${shasenem.className} px-4 py-2 bg-${bg}-500 hover:bg-${bg}-800 text-white rounded-md outline-none text-xl`}
     >
       {text}
     </button>

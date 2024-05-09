@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useAtom } from "jotai";
 import { classAtom, isOpenClass } from "../lib/store";
 import { supabase } from "@/lib/supabase";
-import localFont from 'next/font/local';
+import localFont from "next/font/local";
 
-const shasenem = localFont({src: '../pages/fonts/shasenem.ttf'})
+const shasenem = localFont({ src: "../pages/fonts/shasenem.ttf" });
 
 const Classes = () => {
   const [clas, setClas] = useAtom(classAtom);
@@ -32,19 +32,27 @@ const Classes = () => {
 
   const blurEffect = () => {
     setTimeout(() => {
-      setIsOpen(false)
-    }, 250)
-  }
+      setIsOpen(false);
+    }, 250);
+  };
 
   return (
     <>
-      <div className={`${shasenem.className} relative text-xl`} >
+      <div
+        dir="rtl"
+        className={`${shasenem.className} text-xl relative w-full`}
+      >
         <button
           onClick={toggleDropdown}
           onBlur={blurEffect}
-          className="border-[1px] border-gray-100 px-2 py-1 rounded-md"
+          className="border-[1px] border-gray-100 px-2 py-1 rounded-md w-full text-right"
         >
           {clas.title ? clas.title : "لە پۆلی چەندیت؟"}
+          {isOpen ? (
+            <span className="mr-6 my-auto">⇨</span>
+          ) : (
+            <span className="mr-6 my-auto">⇩</span>
+          )}
         </button>
         {isOpen && (
           <div className="absolute top-full right-0 mt-1 bg-white border border-gray-300 shadow-lg rounded-md z-10">

@@ -1,13 +1,13 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useAtom } from "jotai";
 import { travelAtom } from "../lib/store";
 import { supabase } from "@/lib/supabase";
-import localFont from 'next/font/local';
+import localFont from "next/font/local";
 
-const shasenem = localFont({src: '../pages/fonts/shasenem.ttf'})
+const shasenem = localFont({ src: "../pages/fonts/shasenem.ttf" });
 
 const Travel = () => {
-  const [travel, setTravel] = useAtom(travelAtom)
+  const [travel, setTravel] = useAtom(travelAtom);
   const [isOpen, setIsOpen] = useState(false);
   const [travels, setTravels] = useState([]);
   const handleSelect = (option) => {
@@ -33,19 +33,27 @@ const Travel = () => {
 
   const blurEffect = () => {
     setTimeout(() => {
-      setIsOpen(false)
-    }, 250)
-  }
+      setIsOpen(false);
+    }, 250);
+  };
 
   return (
     <>
-      <div className={`${shasenem.className} text-xl relative`}>
+      <div
+        dir="rtl"
+        className={`${shasenem.className} text-xl relative w-full`}
+      >
         <button
           onClick={toggleDropdown}
           onBlur={blurEffect}
-          className="border-[1px] border-gray-100 px-2 py-1 rounded-md"
+          className="border-[1px] border-gray-100 px-2 py-1 rounded-md w-full text-right"
         >
           {travel.title ? travel.title : "جۆری هاتووچۆکردن"}
+          {isOpen ? (
+            <span className="mr-6 my-auto">⇨</span>
+          ) : (
+            <span className="mr-6 my-auto">⇩</span>
+          )}
         </button>
         {isOpen && (
           <div className="absolute top-full right-0 mt-1 bg-white border border-gray-300 shadow-lg rounded-md z-10">
