@@ -117,14 +117,12 @@ export default function Home() {
         <p className="text-2xl text-gray-800">
           سوپاس بۆ خۆ تۆمارکردنت، بەمزوانە پەیوەندیت پێوە دەکرێت
         </p>
-        <Link href="/">
-          <a
+        <Link href="/"
             className="mt-4 inline-block px-6 py-2 bg-blue-500 text-white 
                       rounded-md hover:bg-blue-600 transition duration-300 
                       ease-in-out"
           >
             ماڵەوە
-          </a>
         </Link>
       </div>
     );

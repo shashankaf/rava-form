@@ -8,8 +8,8 @@ function SelectComponent({ label, values, item, setItem }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleTypeChange = (id) => {
-    setItem(id); // Set the ID instead of the title
-    setIsOpen(false); // Close the values pane when an option is selected
+    setItem(id);
+    setIsOpen(false);
   };
 
   const toggleValuesPane = () => {

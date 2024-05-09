@@ -88,8 +88,8 @@ const StudentEdit = () => {
       setTravel(student.travel || "");
       setRagaz(student.ragaz || "");
       setClas(student.class || "");
-      setPay(student.pay || "");
-      setSecondpay(student.secondpay || "");
+      setPay(student.pay || "0");
+      setSecondpay(student.secondpay || "0");
       setPublish(student.publish || false);
     } catch (error) {
       console.log(error.message);
@@ -116,7 +116,7 @@ const StudentEdit = () => {
   }, [teacherIds]);
 
   const handleUpdate = async () => {
-    const selected = selectedTeachers.filter((item) => item !== null);
+    const selected = selectedTeachers.filter((item) => item.id !== null);
     try {
       const { error } = await supabase
         .from("student")
@@ -140,6 +140,7 @@ const StudentEdit = () => {
       if (error) throw Error;
       setIncomeErr(false);
       setIncomeMsg(false);
+      await handleIncome()
       router.push("/dashboard/students");
     } catch (e) {
       console.log(e);
@@ -147,33 +148,20 @@ const StudentEdit = () => {
   };
 
   const handleIncome = async () => {
-    if (pay.length > 0) {
+    if (pay.length === 0) {
       setIncomeErr(true);
     }
-    const amount = parseInt(pay) + parseInt(secondpay);
+    const amount = Number(pay) + Number(0);
     const { error } = await supabase.from("income").insert({
       amount,
       course,
-      teacher: selected,
+      teacher: teacherIds,
       student: id,
     });
     if (error) {
       setIncomeErr(true);
-    } else {
-      const total = parseInt(pay) + parseInt(secondpay);
-      teacherIds.map(async (item) => {
-        const { error } = await supabase.rpc("insert_expense", {
-          teacher_id: item,
-          course_id: course,
-          student_id: id,
-          amount: total,
-        });
-        if (error) {
-          console.log(error);
-        }
-      });
-      setIncomeMsg(true);
-    }
+    } 
+    setIncomeMsg(true)
   };
 
   const handleTeacherSelect = (teacherId) => {
@@ -286,11 +274,6 @@ const StudentEdit = () => {
             )}
           </div>
           <div className="flex flex-wrap justify-around">
-            <Button
-              bg="green"
-              text={"تۆمارکردنی داهات و خەرجی"}
-              handleClick={handleIncome}
-            />
             <Button text={"نوێکردنەوەی فۆرم"} handleClick={handleUpdate} />
           </div>
         </div>
