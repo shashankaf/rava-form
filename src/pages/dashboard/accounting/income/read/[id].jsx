@@ -9,7 +9,7 @@ import ExpenseCalc from "../../../../../components/accounting/ExpenseCalc";
 const ReadPage = () => {
   const router = useRouter();
   const [income, setIncome] = useState(null);
-  const [teacherIds, setTeacherIds] = useState([])
+  const [teacherIds, setTeacherIds] = useState([]);
   const [teachers, setTeachers] = useState([]);
   const { id } = router.query;
 
@@ -24,7 +24,7 @@ const ReadPage = () => {
         throw error;
       }
       setIncome(data);
-      setTeacherIds(data.teacher)
+      setTeacherIds(data.teacher);
     } catch (error) {
       console.log(error.message);
     }
@@ -39,7 +39,7 @@ const ReadPage = () => {
       let { data, error } = await supabase
         .from("teacher")
         .select()
-        .in("id", teacherIds)
+        .in("id", teacherIds);
       if (error) {
         throw error;
       }
@@ -53,8 +53,8 @@ const ReadPage = () => {
     teacherFetcher();
   }, [id, teacherIds]);
 
-  console.log(teacherIds)
-  console.log(teachers)
+  console.log(teacherIds);
+  console.log(teachers);
   if (!income) {
     return <div></div>;
   }
@@ -71,7 +71,9 @@ const ReadPage = () => {
         <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
           <div className="p-6">
             <h2 className="text-lg font-semibold mb-2">بڕی داهات</h2>
-            <h1 className="text-2xl font-semibold mb-4">IQD {income?.amount}</h1>
+            <h1 className="text-2xl font-semibold mb-4">
+              IQD {income?.amount}
+            </h1>
             <div className="grid grid-cols-2 gap-4 mb-6">
               <div className="col-span-1">
                 <div>
@@ -91,12 +93,21 @@ const ReadPage = () => {
                     مامۆستایانی هەڵبژێردراو
                   </h2>
                   <ul className="flex flex-col w-full">
-                  {teachers?.map((item) => {
-                    return <div key={item.id}  className="flex flex-row justify-between items-center gap-x-4">
-                      <li className="w-full">{item?.name}</li>
-                      <ExpenseCalc income={income} item={item} />
-                    </div>;
-                  })}{" "}
+                    {teachers?.map((item) => {
+                      return (
+                        <div
+                          key={item.id}
+                          className="flex flex-row justify-between items-center gap-x-4"
+                        >
+                          <li className="w-full">{item?.name}</li>
+                          {income.spent_shares?.includes(item.id) ? (
+                            <p>پشکی {item.name} دراوە</p>
+                          ) : (
+                            <ExpenseCalc item={item} income={income} />
+                          )}
+                        </div>
+                      );
+                    })}{" "}
                   </ul>
                 </div>
               </div>
