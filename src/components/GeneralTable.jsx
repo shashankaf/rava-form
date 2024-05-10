@@ -81,7 +81,7 @@ const GeneralTable = ({
               {items.map((item) => (
                 <tr key={item.id}>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    ${item.amount}
+                    IQD {item.amount}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                     {table === 'income' ? item.student.name : item.expense_type}

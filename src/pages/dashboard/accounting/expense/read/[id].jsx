@@ -43,7 +43,7 @@ const ReadPage = () => {
         <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
           <div className="p-6">
             <h2 className="text-lg font-semibold mb-2">بڕی خەرجی</h2>
-            <h1 className="text-2xl font-semibold mb-4">${expense?.amount}</h1>
+            <h1 className="text-2xl font-semibold mb-4">IQD {expense?.amount}</h1>
             <div className="grid grid-cols-2 gap-4 mb-6">
               <div className="col-span-1">
                 <ReadItem label="جۆر" value={expense.expense_type} />

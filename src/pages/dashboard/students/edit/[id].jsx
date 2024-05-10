@@ -131,7 +131,7 @@ const StudentEdit = () => {
           health,
           ragaz: ragaz.id,
           course,
-          teacher: selected,
+          teacher: teacherIds,
           second_phone: secondPhone,
           pay,
           secondpay,
