@@ -136,18 +136,18 @@ const DashboardCmp = () => {
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {students.map((student) => (
-                <tr key={student.id}>
+                <tr key={student?.id}>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {student.name}
+                    {student?.name}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {student.class.title}
+                    {student?.class?.title}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {student.school}
+                    {student?.school}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {student.phone}
+                    {student?.phone}
                   </td>
                   <td
                     onClick={() => handleClick(student.id)}
